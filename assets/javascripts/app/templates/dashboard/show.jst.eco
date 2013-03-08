@@ -1,0 +1,10 @@
+<table class="table table-nodes">
+  <% for node in @nodes.models: %>
+    <tr>
+      <td>
+        <%= @linkTo node %>
+      </td>
+      <td><%= node.reportAt() %></td>
+    </tr>
+  <% end %>
+</table>

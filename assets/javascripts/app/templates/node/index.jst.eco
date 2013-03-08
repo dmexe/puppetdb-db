@@ -1,0 +1,8 @@
+<table class="table table-node-facts">
+  <% for fact in @node.facts.models: %>
+    <tr>
+      <td><%= fact.name %></td>
+      <td><%= fact.value %></td>
+    </tr>
+  <% end %>
+</table>

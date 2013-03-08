@@ -1,0 +1,10 @@
+<table class="table table-node-reports">
+  <% for report in @node.reports.models: %>
+    <tr>
+      <td><%= report.startAt() %></td>
+      <td><%= report.version %></td>
+      <td><%= @linkTo report.hash, report.link %></td>
+      <td><%= report.duration() %></td>
+    </tr>
+  <% end %>
+</table>

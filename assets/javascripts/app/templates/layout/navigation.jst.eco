@@ -1,0 +1,7 @@
+<ul class="navigation">
+  <% for value in @values: %>
+    <li class="<%= "active" if value.link == @values.active %>">
+      <%= @linkTo value.name, value.link %>
+    </li>
+  <% end %>
+</ul>

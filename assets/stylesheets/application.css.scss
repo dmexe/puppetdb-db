@@ -1,0 +1,76 @@
+//= require vendor/bootstrap
+//= require vendor/bootstrap-responsive
+
+body {
+  color: white;
+  background: #F0ECDD url(/assets/noisy.png);
+  font-family: 'PT Sans', Arial, sans-serif;
+
+  > .container {
+    color: #666;
+    background-color: white;
+    min-height: 40em;
+    margin-top: 3em;
+    margin-bottom: 3em;
+    border-radius: 5px;
+    padding: 0;
+    box-shadow: 0px 1px 15px -1px #aaa;
+  }
+
+  .content {
+    padding: 2em 0 1em 0;
+    margin: 1em 2em;
+
+    // nodes
+
+    table.table-nodes {
+      tr:first-child td {
+        border: none;
+      }
+    }
+
+    table.table-node-facts {
+      tr:first-child td {
+        border: none;
+      }
+    }
+
+    table.table-node-reports {
+      tr:first-child td {
+        border: none;
+      }
+    }
+  }
+
+  .header {
+    > .navigation {
+      border-bottom: 1px solid #ccc;
+      margin: 1em 2em;
+      padding: 0;
+
+      li {
+        display: inline-block;
+        padding: .8em .5em .5em .5em;
+        margin: 0 .5em 0 0;
+        border-bottom: 1px solid white;
+
+        &.active {
+          border-bottom: 4px solid #ccc;
+
+          a:hover {
+            opacity: 1;
+          }
+        }
+        a {
+          color: #666;
+          font-size: 1.2em;
+
+          &:hover {
+            text-decoration: none;
+            opacity: .8;
+          }
+        }
+      }
+    }
+  }
+}

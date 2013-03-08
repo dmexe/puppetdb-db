@@ -1,0 +1,3 @@
+#!/bin/sh
+
+exec ssh -v -N -L 8080:localhost:8080 dmexe@ci.evrone.ru

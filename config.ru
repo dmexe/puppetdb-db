@@ -1,23 +1,10 @@
-$:.unshift File.expand_path("../", __FILE__)
-require 'compass'
-require 'sinatra'
-require 'haml'
-require 'sass'
-require 'sprockets'
-require 'uglifier'
-require "yui/compressor"
-
-require "./lib/api"
-require "application"
-
-Sass::Engine::DEFAULT_OPTIONS[:load_paths].tap do |load_paths|
-  load_paths << "#{Gem.loaded_specs['compass'].full_gem_path}/frameworks/compass/stylesheets"
-end
+require './boot'
 
 map '/assets' do
   environment = Sprockets::Environment.new
-  environment.append_path 'assets/javascripts'
-  environment.append_path 'assets/stylesheets'
+  environment.append_path     'assets/javascripts'
+  environment.append_path     'assets/stylesheets'
+  environment.append_path     'assets/images'
   # environment.js_compressor = Uglifier.new(:copyright => false)
   # environment.css_compressor = YUI::CssCompressor.new
   run environment
@@ -28,6 +15,6 @@ map '/api' do
 end
 
 map '/' do
-  run Application::App
+  run Application::Home
 end
 
