@@ -12,8 +12,10 @@ window.App.NavView = Backbone.View.extend
     else if options.node
       val.push options.node
       val.push options.node.reports
-      if options.reports
-        val.active = options.node.reports.link
-      else
-        val.active = options.node.link
+      if options.report
+        val.push options.report
+
+      val.active = options.report.link if options.report
+      val.active = options.node.reports.link if options.reports
+      val.active ||= options.node.link
     val

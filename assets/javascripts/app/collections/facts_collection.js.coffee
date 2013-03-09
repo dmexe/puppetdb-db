@@ -9,3 +9,6 @@ window.App.FactsCollection = Backbone.Collection.extend
 
   comparator: (fact) ->
     fact.name
+
+  findByName: (name) ->
+    @where(name: name)[0]

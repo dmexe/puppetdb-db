@@ -18,6 +18,10 @@ module Application
       json client.reports(node)
     end
 
+    get '/nodes/:node/reports/summary' do |node|
+      json client.reports_summary(node)
+    end
+
     get '/nodes/:node/reports/:report' do |node, report|
       json client.report(report)
     end

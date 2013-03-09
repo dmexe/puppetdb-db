@@ -7,6 +7,7 @@ gem 'haml'
 gem 'faraday'
 gem 'faraday_middleware'
 gem 'puma'
+gem 'redis-namespace'
 
 group :assets do
   gem 'sprockets'

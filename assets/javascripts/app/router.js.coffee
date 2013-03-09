@@ -1,10 +1,11 @@
 window.App.Router = Backbone.Router.extend
 
   routes:
-    ""                    : "dashboard"
-    "/"                   : "dashboard"
-    "nodes/:node"        : "node"
-    "nodes/:node/reports": "nodeReports"
+    ""                         : "dashboard"
+    "/"                        : "dashboard"
+    "nodes/:node"              : "node"
+    "nodes/:node/reports"      : "nodeReports"
+    "nodes/:node/reports/:hash": "nodeEvents"
 
   initialize:(options) ->
     @nodes   = options.nodes
@@ -14,6 +15,7 @@ window.App.Router = Backbone.Router.extend
     @dashboardView     = new App.DashboardView(nodes: @nodes)
     @nodeView          = new App.NodeView()
     @nodeReportsView   = new App.NodeReportsView()
+    @nodeEventsView    = new App.NodeEventsView()
 
   dashboard: ->
     @navView.render()
@@ -28,6 +30,11 @@ window.App.Router = Backbone.Router.extend
     node = @nodes.findByName(nodeName)
     @navView.render(node: node, reports: true)
     @nodeReportsView.activate(node)
+
+  nodeEvents: (nodeName, hash) ->
+    node = @nodes.findByName(nodeName)
+    @nodeEventsView.activate(node, hash, @navView)
+
 
 $(document).ready ->
   nodes = new App.NodesCollection()

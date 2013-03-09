@@ -11,3 +11,6 @@ window.App.ReportsCollection = Backbone.Collection.extend
 
   comparator: (report) ->
     report.startAtTimestamp() * -1
+
+  findByHash: (hash) ->
+    @where(hash: hash)[0]

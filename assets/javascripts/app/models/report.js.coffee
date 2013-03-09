@@ -4,6 +4,7 @@ window.App.Report = Backbone.Model.extend
     @version = @get "configuration-version"
     @link    = "#{@collection.link}/#{@hash}"
     @name    = @hash.substring(0,6)
+    @events  = new App.EventsCollection([], report: @)
 
   startAtTimestamp: ->
     Date.parse(@get "start-time")
@@ -15,4 +16,7 @@ window.App.Report = Backbone.Model.extend
     new Date(@startAtTimestamp()).toLocaleString()
 
   duration: ->
-    @endAtTimestamp() - @startAtTimestamp()
+    (@endAtTimestamp() - @startAtTimestamp()) / 1000
+
+  summary: ->
+    @get "summary"

@@ -15,15 +15,37 @@ module PuppetDB
     end
 
     def facts(node)
-      get "nodes/#{node}/facts"
+      Application.cache "puppetdb:#{node}:facts" do
+        get "nodes/#{node}/facts"
+      end
     end
 
     def reports(name)
-      query "reports", "=", 'certname', name
+      Application.cache "puppetdb:#{name}:reports" do
+        query "reports", "=", 'certname', name
+      end
     end
 
     def report(report_id)
-      query "events", "=", 'report', report_id
+      Application.cache "puppetdb:report:#{report_id}", ttl: 0 do
+        query "events", "=", 'report', report_id
+      end
+    end
+
+    def reports_summary(name)
+      reports = reports(name)
+      reports.map! do |report|
+        events  = report(report["hash"])
+        summary = events.inject({}) do |ac, it|
+          ac[it["status"]] ||= 0
+          ac[it["status"]] += 1
+          ac
+        end
+        summary["hash"] = report["hash"]
+        summary["duration"] = Time.parse(report['end-time']).to_i - Time.parse(report["start-time"]).to_i
+        summary["timestamp"] = Time.parse(report["start-time"]).to_i * 1000
+        summary
+      end
     end
 
     private

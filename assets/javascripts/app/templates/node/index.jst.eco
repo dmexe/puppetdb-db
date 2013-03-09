@@ -1,8 +1,30 @@
+<div class="node-facts-info">
+  <div class="node-info node-host-info">
+    <strong><%= @node.fact("fqdn") %></strong>
+    <strong><%= @node.fact("ipaddress_eth0") %></strong>
+    <small>Agent version <%= @node.fact("clientversion") %></small>
+    <small><%= @node.fact("virtual") %></small>
+  </div>
+
+  <div class="node-info node-cpu-info">
+    <strong><%= @node.fact("physicalprocessorcount") %> x <%= @node.fact("processorcount") %> CPU(s)</strong>
+    <strong><%= @node.fact("memorytotal") %> RAM</strong>
+    <small><%= @truncate @node.fact("processor0"), 50 %></small>
+    <small><%= @node.fact("architecture") %></small>
+  </div>
+
+  <div class="node-info node-kernel-info node-kernel-<%= @node.fact("kernel") %>-info">
+    <strong><%= @node.fact("lsbdistdescription") %></strong>
+    <small><%= @node.fact("kernel") %> <%= @node.fact("kernelrelease") %></small>
+    <small>Uptime <%= @node.fact("uptime") %></small>
+  </div>
+</div>
+
 <table class="table table-node-facts">
   <% for fact in @node.facts.models: %>
     <tr>
       <td><%= fact.name %></td>
-      <td><%= fact.value %></td>
+      <td><%= @truncate(fact.value, 60) %></td>
     </tr>
   <% end %>
 </table>

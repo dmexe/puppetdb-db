@@ -1,4 +1,10 @@
+<div id="node-reports-summary-chart"></div>
+
 <table class="table table-nodes">
+  <thead>
+    <th>Name</th>
+    <th>Last report</th>
+  </thead>
   <% for node in @nodes.models: %>
     <tr>
       <td>
