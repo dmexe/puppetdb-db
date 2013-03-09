@@ -1,5 +1,3 @@
-require 'json'
-
 module Application
   class Api < Application::Base
 
@@ -9,6 +7,14 @@ module Application
 
     get '/metrics' do
       json client.metrics
+    end
+
+    get '/stats/monthly' do
+      json MonthlyReport.stats
+    end
+
+    get '/nodes/:node/stats/monthly' do |node|
+      json MonthlyReport.stats(node: node)
     end
 
     get '/nodes' do

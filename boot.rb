@@ -48,9 +48,11 @@ module Application
 end
 
 autoload :PuppetDB,          Application.root.join("lib", "puppetdb")
+
 autoload :NodeReport,        Application.root.join("lib", "models", "node_report")
 autoload :Report,            Application.root.join("lib", "models", "report")
 autoload :ReportSummary,     Application.root.join("lib", "models", "report_summary")
+autoload :MonthlyReport,     Application.root.join("lib", "models", "monthly_report")
 
 autoload :NodeReportsWorker, Application.root.join("lib", "workers", "node_reports_worker")
 autoload :ReportWorker,      Application.root.join("lib", "workers", "report_worker")

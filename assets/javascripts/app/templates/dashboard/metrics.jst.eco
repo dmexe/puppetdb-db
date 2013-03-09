@@ -1,0 +1,11 @@
+<li>
+  Num nodes: <%= @metrics.numNodes() %>
+</li>
+
+<li>
+  Num resources: <%= @metrics.numResources() %>
+</li>
+
+<li>
+  Avg resources per node: <%= @metrics.avgResourcesPerNode() %>
+</li>

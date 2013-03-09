@@ -3,13 +3,14 @@ window.App.DashboardView = Backbone.View.extend
 
   initialize: ->
     @nodes   = @options.nodes
+    @stats   = new App.MonthlyStats
     @metrics = new App.Metrics
     @metrics.on "sync", @addMetrics, @
+    @stats.on   "sync", @addStats, @
 
   activate: ->
-    $.when.apply(null, @nodes.map((i) -> i.reportsSummary.fetch() )).done =>
-      @addSummary()
     @metrics.fetch()
+    @stats.fetch()
     @render()
 
   render: ->
@@ -19,22 +20,9 @@ window.App.DashboardView = Backbone.View.extend
     metrics = new App.MetricsView model: @metrics
     $(".table-nodes", $(@el)).before metrics.render().el
 
-  addSummary: ->
-    data = {}
-    @nodes.each (it, n_idx) =>
-      d = it.reportsSummary.forChart()
-      data.days ||= d.days
-      _.each data.days, (unused, idx) =>
-        data.success       ||= []
-        data.failed        ||= []
-        data.requests      ||= []
-        data.success[idx]  ||= 0
-        data.failed[idx]   ||= 0
-        data.requests[idx] ||= 0
-
-        data.success[idx]  += d.success[idx]
-        data.failed[idx]   += d.failed[idx]
-        data.requests[idx] += d.success[idx] + d.failed[idx] + d.skipped[idx]
+  addStats: ->
+    data = @stats.forChart()
+    console.log(data)
     chart = new App.SummaryChart(data, 'node-reports-summary-chart')
 
 window.App.MetricsView = Backbone.View.extend
