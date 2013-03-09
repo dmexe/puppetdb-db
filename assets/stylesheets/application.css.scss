@@ -104,6 +104,17 @@ body {
             opacity: .8;
           }
         }
+
+        &.search {
+          margin: .3em 0 0 0;
+          padding: 0;
+          float: right;
+          input {
+            &:focus {
+              width: 25em;
+            }
+          }
+        }
       }
     }
   }
@@ -151,4 +162,10 @@ body {
 
 span.label {
   font-weight: normal !important;
+}
+
+.well {
+  background-color: Ivory;
+  border: 0;
+  box-shadow: 0px 1px 5px -1px #aaa;
 }

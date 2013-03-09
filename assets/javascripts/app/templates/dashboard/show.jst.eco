@@ -2,8 +2,8 @@
 
 <table class="table table-nodes">
   <thead>
-    <th>Name</th>
-    <th>Last report</th>
+    <th>Node</th>
+    <th>Last report at</th>
   </thead>
   <% for node in @nodes.models: %>
     <tr>

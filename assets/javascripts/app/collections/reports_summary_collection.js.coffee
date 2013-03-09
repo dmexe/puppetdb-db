@@ -17,7 +17,7 @@ window.App.ReportsSummaryCollection = Backbone.Collection.extend
     end   = moment().endOf("day")
     begin = moment(end).subtract("day", 30).startOf("day")
 
-    rs = { "days": [], "success": [], "failed": [], "duration": [] }
+    rs = { "days": [], "success": [], "failed": [], "duration": [], "skipped": [] }
 
     while(begin.valueOf() < end.valueOf())
 
@@ -27,10 +27,12 @@ window.App.ReportsSummaryCollection = Backbone.Collection.extend
         it.tm >= begin.valueOf() && it.tm < nextDay.valueOf()
 
       fun = (a,i) -> a + i
-      success = _.map(daily, (i) -> i.success || 0)
-      success = _.reduce(success, fun, 0)
-      failed = _.map(daily, (i) -> i.failed || 0)
-      failed = _.reduce(failed, fun, 0)
+      success  = _.map(daily, (i) -> i.success || 0)
+      success  = _.reduce(success, fun, 0)
+      failed   = _.map(daily, (i) -> i.failed || 0)
+      failed   = _.reduce(failed, fun, 0)
+      skipped  = _.map(daily, (i) -> i.skipped || 0)
+      skipped  = _.reduce(skipped, fun, 0)
       duration = _.map(daily, (i) -> i.duration || 0)
       if _.isEmpty(duration)
         duration = 0.0
@@ -40,6 +42,7 @@ window.App.ReportsSummaryCollection = Backbone.Collection.extend
       rs["days"].push     begin.format("D MMM")
       rs["success"].push  success
       rs["failed"].push   failed
+      rs["skipped"].push  skipped
       rs["duration"].push duration
 
       begin = nextDay

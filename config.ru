@@ -1,4 +1,9 @@
 require './boot'
+require 'sidekiq/web'
+require 'sprockets'
+require 'sass'
+require 'coffee_script'
+require 'eco'
 
 map '/assets' do
   environment = Sprockets::Environment.new
@@ -8,6 +13,10 @@ map '/assets' do
   # environment.js_compressor = Uglifier.new(:copyright => false)
   # environment.css_compressor = YUI::CssCompressor.new
   run environment
+end
+
+map '/sidekiq' do
+  run Sidekiq::Web
 end
 
 map '/api' do

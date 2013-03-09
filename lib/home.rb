@@ -1,3 +1,5 @@
+require 'slim'
+
 module Application
   class Home < Application::Base
     get '/' do
@@ -5,11 +7,11 @@ module Application
     end
 
     get '/ui' do
-      haml :index
+      slim :index
     end
 
     get '/ui/*' do
-      haml :index
+      slim :index
     end
   end
 end

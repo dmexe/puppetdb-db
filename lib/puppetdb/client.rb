@@ -48,6 +48,20 @@ module PuppetDB
       end
     end
 
+    def metrics
+      Application.cache "puppetdb:metrics" do
+        num_nodes = metric("com.puppetlabs.puppetdb.query.population:type=default,name=num-nodes")
+        num_resources = metric("com.puppetlabs.puppetdb.query.population:type=default,name=num-resources")
+        avg_resources_per_node = metric("com.puppetlabs.puppetdb.query.population:type=default,name=avg-resources-per-node")
+        {
+          "num_nodes" => num_nodes,
+          "num_resources" => num_resources,
+          "avg_resources_per_node" => avg_resources_per_node
+        }
+
+      end
+    end
+
     private
       def conn
         @conn ||= begin
@@ -73,6 +87,10 @@ module PuppetDB
       def query(url, *q)
         q = %{query=["#{q[0]}","#{q[1]}","#{q[2]}"] }
         conn.get("/experimental/#{url}?" + URI.encode(q)).body
+      end
+
+      def metric(name)
+        conn.get("/metrics/mbean/#{name}").body["Value"]
       end
   end
 end

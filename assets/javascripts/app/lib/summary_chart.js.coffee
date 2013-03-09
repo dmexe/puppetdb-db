@@ -14,10 +14,14 @@ class App.SummaryChart
       series.push duration
       yAxis.push { title: {text: "duration sec."}, opposite: true }
 
+    if data.requests
+      requests = { name: "requests", data: data.requests, type: "spline", yAxis: 1, color: "Gainsboro", lineWidth: 1, marker: { enabled: false} }
+      series.push requests
+      yAxis.push { title: {text: "num requests"}, opposite: true }
 
     chart = new Highcharts.Chart
       chart:
-        renderTo: target,
+        renderTo: target
 
       title:
         text: 'last 30 days'
@@ -39,3 +43,4 @@ class App.SummaryChart
         y: -4
         floating: true
         borderWidth: 0
+

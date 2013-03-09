@@ -1,6 +1,5 @@
 require 'rubygems'
 require 'bundler'
-require 'json'
 
 module Application
   class << self
@@ -13,6 +12,7 @@ module Application
     end
 
     def redis
+      require 'redis-namespace'
       @redis ||= begin
         url = ENV['REDIS_URL'] || "localhost:6379/0"
         redis = Redis.new url: "redis://#{url}"
@@ -21,6 +21,7 @@ module Application
     end
 
     def cache(key, options = {}, &block)
+      require 'json'
       if value = redis.get(key)
         puts "[cache] HIT '#{key}'"
         JSON.parse(value)
@@ -38,10 +39,18 @@ module Application
   end
 end
 
-Bundler.require(:default, :assets, Application.env)
+Bundler.setup(:default, :assets, Application.env)
 
-require './lib/application'
-require './lib/home'
-require './lib/api'
-require './lib/puppetdb/client'
+module Application
+  autoload :Base, Application.root.join('lib', 'application')
+  autoload :Home, Application.root.join('lib', 'home')
+  autoload :Api,  Application.root.join('lib', 'api')
+end
 
+autoload :PuppetDB,          Application.root.join("lib", "puppetdb")
+autoload :NodeReport,        Application.root.join("lib", "models", "node_report")
+autoload :Report,            Application.root.join("lib", "models", "report")
+autoload :ReportSummary,     Application.root.join("lib", "models", "report_summary")
+
+autoload :NodeReportsWorker, Application.root.join("lib", "workers", "node_reports_worker")
+autoload :ReportWorker,      Application.root.join("lib", "workers", "report_worker")

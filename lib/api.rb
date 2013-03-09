@@ -1,10 +1,15 @@
 require 'json'
-require "sinatra/json"
 
 module Application
   class Api < Application::Base
-    helpers Sinatra::JSON
-    set :json_encoder, :to_json
+
+    before do
+      content_type 'application/json'
+    end
+
+    get '/metrics' do
+      json client.metrics
+    end
 
     get '/nodes' do
       json client.nodes
@@ -27,6 +32,10 @@ module Application
     end
 
     private
+      def json(body)
+        body.to_json
+      end
+
       def client
         PuppetDB::Client.inst
       end

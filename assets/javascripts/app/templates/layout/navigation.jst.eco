@@ -4,4 +4,7 @@
       <%= @linkTo value.name, value.link %>
     </li>
   <% end %>
+  <li class="search">
+    <input type="text" name="query" value="" class="input-small search-query" placeholder="Search" />
+  </li>
 </ul>

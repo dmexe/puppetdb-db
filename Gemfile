@@ -1,21 +1,22 @@
 source 'http://rubygems.org'
 
 gem 'sinatra'
-gem 'sinatra-contrib', require: false
 gem 'json'
-gem 'haml'
 gem 'faraday'
 gem 'faraday_middleware'
 gem 'puma'
 gem 'redis-namespace'
+gem 'sidekiq'
+gem 'slim'
+gem 'rake'
 
 group :assets do
   gem 'sprockets'
   gem 'sass'
   gem 'coffee-script', require: "coffee_script"
-  gem 'uglifier', require: false
+  gem 'uglifier'
   gem 'yui-compressor', require: "yui/compressor"
-  gem 'execjs', require: false
+  gem 'execjs'
   gem 'eco'
 end
 
