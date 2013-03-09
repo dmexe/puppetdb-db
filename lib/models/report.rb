@@ -29,6 +29,10 @@ class Report
       reports
     end
 
+    def first(hash)
+      find([hash]).first
+    end
+
     def redis
       Application.redis
     end

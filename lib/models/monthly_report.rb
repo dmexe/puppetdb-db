@@ -7,7 +7,7 @@ class MonthlyReport
     end
 
     def last_node_hashes(node, from = nil)
-      NodeReport.find_keys_by_node(node, from).map{|i| i.split(":").last }
+      NodeReport.find_keys_by_node(node, from: from).map{|i| i.split(":").last }
     end
 
     def last_summaries(hashes)

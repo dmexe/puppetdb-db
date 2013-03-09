@@ -1,9 +1,4 @@
-<td>
-  <% if @report.summary(): %>
-    <%= @reportSummary @report.summary() %>
-  <% end %>
-</td>
-
+<td><%= @reportSummary @report.summary() %></td>
 <td><%= @report.startAt() %></td>
 <td><%= @report.version %></td>
 <td><%= @linkTo @truncate(@report.hash, 20), @report.link %></td>

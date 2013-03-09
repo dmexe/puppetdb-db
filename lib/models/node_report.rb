@@ -8,17 +8,33 @@ class NodeReport
       end
     end
 
-    def find_keys_by_node(node_name, fromTime = nil)
+    def find_keys_by_node(node_name, options = {})
+      from = options[:from]
+      params = {}
+      if options[:limit]
+        params[:limit] = [options[:offset] || 0, options[:limit]]
+      end
       from ||= Time.at(Time.now.to_i - i30_days)
       to = Time.now
-      redis.zrangebyscore index_key(node_name), from.to_i, to.to_i
+      redis.zrevrangebyscore index_key(node_name), to.to_i, from.to_i, params
     end
 
-    def find_by_node(node_name, fromTime = nil)
-      find_keys_by_node(node_name, fromTime)
+    def find_by_node(node_name, options = {})
+      keys = find_keys_by_node(node_name, options)
       return [] if keys.empty?
       reports = redis.mget(keys)
       populate reports
+    end
+
+    def find_by_node_with_summary(node_name, options = {})
+      node_reports = find_by_node(node_name, options)
+      hashes = node_reports.map{|i| i.hash }
+      summaries = ReportSummary.find(hashes)
+      node_reports.each do |node_report|
+        sum = summaries.find{|i| i.hash == node_report.hash }
+        node_report.attrs["_summary"] = sum.attrs
+      end
+      node_reports
     end
 
     def key(node_name, hash)
@@ -72,8 +88,8 @@ class NodeReport
     end_time.to_i - start_time.to_i
   end
 
-  def to_json
-    @attrs.to_json
+  def to_json(*args)
+    @attrs.to_json(*args)
   end
 
   def key

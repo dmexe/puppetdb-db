@@ -11,45 +11,29 @@ module PuppetDB
     end
 
     def nodes
-      get "nodes"
+      Application.cache "cache:nodes", ttl: 60 * 5  do
+        get "nodes"
+      end
     end
 
     def facts(node)
-      Application.cache "puppetdb:#{node}:facts" do
+      Application.cache "cache:#{node}:facts" do
         get "nodes/#{node}/facts"
       end
     end
 
     def reports(name)
-      Application.cache "puppetdb:#{name}:reports" do
-        query "reports", "=", 'certname', name
-      end
+      query "reports", "=", 'certname', name
     end
 
     def report(report_id)
-      Application.cache "puppetdb:report:#{report_id}", ttl: 0 do
+      Application.cache "cache:report:#{report_id}", ttl: 0 do
         query "events", "=", 'report', report_id
       end
     end
 
-    def reports_summary(name)
-      reports = reports(name)
-      reports.map! do |report|
-        events  = report(report["hash"])
-        summary = events.inject({}) do |ac, it|
-          ac[it["status"]] ||= 0
-          ac[it["status"]] += 1
-          ac
-        end
-        summary["hash"] = report["hash"]
-        summary["duration"] = Time.parse(report['end-time']).to_i - Time.parse(report["start-time"]).to_i
-        summary["timestamp"] = Time.parse(report["start-time"]).to_i * 1000
-        summary
-      end
-    end
-
     def metrics
-      Application.cache "puppetdb:metrics" do
+      Application.cache "cache:metrics" do
         num_nodes = metric("com.puppetlabs.puppetdb.query.population:type=default,name=num-nodes")
         num_resources = metric("com.puppetlabs.puppetdb.query.population:type=default,name=num-resources")
         avg_resources_per_node = metric("com.puppetlabs.puppetdb.query.population:type=default,name=avg-resources-per-node")

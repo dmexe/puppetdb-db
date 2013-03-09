@@ -7,25 +7,17 @@ window.App.NodeReportsView = Backbone.View.extend
     @node  = node
     @stats = new App.NodeMonthlyStats({}, {node: @node})
     @node.reports.once        "sync", @render, @
-    @node.reportsSummary.once "sync", @addSummary, @
     @stats.once               "sync", @addChart, @
     @node.reports.fetch()
 
   render: ->
     @html 'reports/index', node: @node
     @node.reports.each(@addOneReport)
-    @node.reportsSummary.fetch()
     @stats.fetch()
 
   addOneReport: (report) =>
     view = new App.NodeReportView(model: report)
     $("table tbody", @el).append view.render().el
-
-  addSummary: ->
-
-    @node.reports.each (report) =>
-      sum = @node.reportsSummary.findByHash(report.hash)
-      report.set("summary", sum)
 
   addChart: ->
     new App.SummaryChart(@stats.forChart(), 'node-reports-summary-chart')

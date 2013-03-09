@@ -4,7 +4,6 @@ window.App.Node = Backbone.Model.extend
     @link           = "/nodes/#{@name}"
     @facts          = new App.FactsCollection([], node: @)
     @reports        = new App.ReportsCollection([], node: @)
-    @reportsSummary = new App.ReportsSummaryCollection([], node: @)
 
   reportAtTimestamp: ->
     Date.parse(@get "report_timestamp")
@@ -14,3 +13,4 @@ window.App.Node = Backbone.Model.extend
 
   fact: (name) ->
     @facts.findByName(name).value
+

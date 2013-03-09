@@ -9,13 +9,14 @@ gem 'redis-namespace'
 gem 'sidekiq'
 gem 'slim'
 gem 'rake'
+gem 'foreman'
 
 group :assets do
   gem 'sprockets'
   gem 'sass'
   gem 'coffee-script', require: "coffee_script"
-  gem 'uglifier'
-  gem 'yui-compressor', require: "yui/compressor"
+  #gem 'uglifier'
+  #gem 'yui-compressor', require: "yui/compressor"
   gem 'execjs'
   gem 'eco'
 end

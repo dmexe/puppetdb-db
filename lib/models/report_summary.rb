@@ -39,6 +39,8 @@ class ReportSummary
       end
   end
 
+  attr_reader :attrs
+
   def initialize(json, options = {})
     if json.is_a?(String)
       json = JSON.parse(json)

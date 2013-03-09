@@ -1,4 +1,5 @@
 require './boot'
+require 'sidekiq'
 require 'sidekiq/web'
 require 'sprockets'
 require 'sass'

@@ -13,12 +13,12 @@ module Application
       json MonthlyReport.stats
     end
 
-    get '/nodes/:node/stats/monthly' do |node|
-      json MonthlyReport.stats(node: node)
-    end
-
     get '/nodes' do
       json client.nodes
+    end
+
+    get '/nodes/:node/stats/monthly' do |node|
+      json MonthlyReport.stats(node: node)
     end
 
     get '/nodes/:node/facts' do |node|
@@ -26,15 +26,11 @@ module Application
     end
 
     get '/nodes/:node/reports' do |node|
-      json client.reports(node)
-    end
-
-    get '/nodes/:node/reports/summary' do |node|
-      json client.reports_summary(node)
+      json NodeReport.find_by_node_with_summary(node, limit: 100)
     end
 
     get '/nodes/:node/reports/:report' do |node, report|
-      json client.report(report)
+      json Report.first(report)
     end
 
     private
