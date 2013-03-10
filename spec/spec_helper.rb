@@ -5,4 +5,5 @@ require File.join(File.dirname(__FILE__), '..', 'spec', 'support', 'redis')
 
 RSpec.configure do |config|
   config.include RedisSpecHelper
+  config.mock_with :rr
 end

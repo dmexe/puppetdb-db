@@ -2,18 +2,6 @@ require 'json'
 
 class MonthlyReport
   class << self
-    def last_hashes(from = nil)
-      Report.find_keys(from).map{|i| i.split(":").last }
-    end
-
-    def last_node_hashes(node, from = nil)
-      NodeReport.find_keys_by_node(node, from: from).map{|i| i.split(":").last }
-    end
-
-    def last_summaries(hashes)
-      ReportSummary.find hashes
-    end
-
     def stats(options = {})
       from = options[:from]
       node = options[:node]
@@ -34,6 +22,18 @@ class MonthlyReport
     end
 
     private
+      def last_hashes(from = nil)
+        Report.find_keys(from).map{|i| i.split(":").last }
+      end
+
+      def last_node_hashes(node, from = nil)
+        NodeReport.find_keys_by_node(node, from: from).map{|i| i.split(":").last }
+      end
+
+      def last_summaries(hashes)
+        ReportSummary.find hashes
+      end
+
       def fill_data
         rs = {}
 

@@ -102,7 +102,26 @@ describe NodeReport do
       end
     end
 
-    it ".find_by_node_with_summary"
+    context ".find_by_node_with_summary" do
+      let(:s_attrs) { {
+        "hash"      => "abcd",
+        "timestamp" => Time.now.to_i,
+        "duration"  => 10,
+        "success"   => 10,
+        "failed"    => 2,
+        "skipped"   => 1
+      } }
+      let(:summary) { ReportSummary.new s_attrs }
+
+      subject { find_by_node_with_summary }
+      before { summary.save }
+
+      it { should eq [attrs2, attrs.merge("_summary" => s_attrs)] }
+
+      def find_by_node_with_summary(options = {})
+        NodeReport.find_by_node_with_summary(node, options).map{|i| i.attrs }
+      end
+    end
   end
 
   context "(class methods)" do

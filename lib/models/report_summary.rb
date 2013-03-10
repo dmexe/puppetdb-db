@@ -24,7 +24,7 @@ class ReportSummary
       return [] if hashes.empty?
       reports = redis.mget hashes.map{|i| key(i) }
       reports.map! do |report|
-        populate report
+        populate report if report
       end
       reports
     end
@@ -42,6 +42,7 @@ class ReportSummary
   attr_reader :attrs
 
   def initialize(json, options = {})
+    raise ArgumentError unless json
     if json.is_a?(String)
       json = JSON.parse(json)
     end
@@ -77,6 +78,10 @@ class ReportSummary
   def save
     redis.set key, to_json
     self
+  end
+
+  def exists?
+    redis.exists key
   end
 
   def hash

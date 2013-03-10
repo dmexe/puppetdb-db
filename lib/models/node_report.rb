@@ -33,7 +33,7 @@ class NodeReport
       summaries = ReportSummary.find(hashes)
       node_reports.each do |node_report|
         sum = summaries.find{|i| i.hash == node_report.hash }
-        node_report.attrs["_summary"] = sum.attrs
+        node_report.attrs["_summary"] = sum.attrs if sum
       end
       node_reports
     end

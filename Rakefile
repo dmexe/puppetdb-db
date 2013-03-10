@@ -11,6 +11,7 @@ task :environment do
 end
 
 namespace :cron do
+  desc "Touch NodeReportsWorker"
   task :reports => :environment do
     PuppetDB::Client.inst.nodes.each do |n|
       NodeReportsWorker.perform_async(n['name'])
