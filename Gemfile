@@ -21,7 +21,11 @@ group :assets do
   gem 'eco'
 end
 
-group :development do
+group :development, :test do
   gem 'pry'
   gem 'pry-doc'
+
+  gem 'webmock'
+  gem 'rspec'
+  gem 'rr'
 end

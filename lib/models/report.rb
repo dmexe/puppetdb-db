@@ -1,4 +1,5 @@
 require 'json'
+require 'time'
 
 class Report
   class << self
@@ -17,7 +18,7 @@ class Report
     def find_keys(from = nil)
       from ||= Time.at(Time.now.to_i - i30_days)
       to = Time.now
-      redis.zrangebyscore index_key, from.to_i, to.to_i
+      redis.zrevrangebyscore index_key, to.to_i, from.to_i
     end
 
     def find(hashes)

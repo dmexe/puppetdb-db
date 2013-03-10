@@ -1,4 +1,5 @@
 require 'json'
+require 'time'
 
 class NodeReport
   class << self
