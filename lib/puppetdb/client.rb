@@ -1,6 +1,7 @@
 require 'faraday'
 require 'faraday_middleware'
 require 'uri'
+require 'cgi'
 
 module PuppetDB
   class Client
@@ -46,6 +47,15 @@ module PuppetDB
       end
     end
 
+    def search_facts(params)
+      op = params[:operator] || '='
+      field = params[:field] || 'name'
+      q = params[:query]
+      query = %{["#{op}", "#{field}", "#{q}"]}
+      puts query
+      get 'facts?query=' + CGI.escape(query)
+    end
+
     private
       def conn
         @conn ||= begin
@@ -65,6 +75,7 @@ module PuppetDB
       end
 
       def get(url, options = {})
+        puts options.inspect
         conn.get("/v2/#{url}", options).body
       end
 

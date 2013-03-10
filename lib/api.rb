@@ -17,6 +17,9 @@ module Application
       json client.nodes
     end
 
+    get '/search/facts' do
+    end
+
     get '/nodes/:node/stats/monthly' do |node|
       json MonthlyReport.stats(node: node)
     end
@@ -26,7 +29,7 @@ module Application
     end
 
     get '/nodes/:node/reports' do |node|
-      json NodeReport.find_by_node_with_summary(node, limit: 100)
+      json NodeReport.find_by_node_with_summary(node, limit: 30)
     end
 
     get '/nodes/:node/reports/:report' do |node, report|
@@ -40,6 +43,10 @@ module Application
 
       def client
         PuppetDB::Client.inst
+      end
+
+      def params
+        @params ||= request.env['rack.request.query_hash']
       end
   end
 end

@@ -22,9 +22,10 @@ class App.SummaryChart
     chart = new Highcharts.Chart
       chart:
         renderTo: target
+        animation: false
 
       title:
-        text: 'last 30 days'
+        text: 'Reports in last 30 days'
 
       xAxis:
         categories:
@@ -36,6 +37,10 @@ class App.SummaryChart
       plotOptions:
         column:
           stacking: 'normal'
+        line:
+          animation: false
+        series:
+          animation: false
 
       legend:
         align: 'right'

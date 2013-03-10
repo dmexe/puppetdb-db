@@ -20,7 +20,7 @@
   </div>
 </div>
 
-<table class="table table-node-facts">
+<table class="table table-striped table-node-facts">
   <% for fact in @node.facts.models: %>
     <tr>
       <td><%= fact.name %></td>

@@ -7,5 +7,5 @@
 </li>
 
 <li>
-  Avg resources per node: <%= @metrics.avgResourcesPerNode() %>
+  Avg resources per node: <%= @metrics.avgNumResources() %>
 </li>

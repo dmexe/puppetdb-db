@@ -5,7 +5,7 @@ window.App.DashboardView = Backbone.View.extend
     @nodes   = @options.nodes
     @stats   = new App.MonthlyStats
     @metrics = new App.Metrics
-    @metrics.on "sync", @addMetrics, @
+    #@metrics.on "sync", @addMetrics, @
     @stats.on   "sync", @addStats, @
 
   activate: ->
@@ -22,7 +22,6 @@ window.App.DashboardView = Backbone.View.extend
 
   addStats: ->
     data = @stats.forChart()
-    console.log(data)
     chart = new App.SummaryChart(data, 'node-reports-summary-chart')
 
 window.App.MetricsView = Backbone.View.extend

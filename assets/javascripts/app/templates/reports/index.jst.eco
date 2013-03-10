@@ -1,4 +1,4 @@
-<div id="node-reports-summary-chart"></div>
+<div id="node-reports-summary-chart" class=""></div>
 
 <table class="table table-striped table-node-reports">
   <thead>
