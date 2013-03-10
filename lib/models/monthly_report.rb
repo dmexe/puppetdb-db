@@ -10,6 +10,7 @@ class MonthlyReport
       hashes = node ? last_node_hashes(node, from) : last_hashes(from)
 
       last_summaries(hashes).each do |summary|
+        next unless summary
         tm = summary.timestamp
         tm = Time.utc(tm.year, tm.month, tm.day)
         rs[tm][:success]  += summary.success

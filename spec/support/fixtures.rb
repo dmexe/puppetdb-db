@@ -8,7 +8,7 @@ module FixturesSpecHelper
   end
 
   def node_report_attrs(options = {})
-    node = 'example.com'
+    node = options.delete("certname") || 'example.com'
     tm = options.delete("start-time") || Time.now
     {
       "hash"       => "abcd",
