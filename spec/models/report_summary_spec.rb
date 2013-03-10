@@ -1,15 +1,8 @@
 require 'spec_helper'
 
 describe ReportSummary do
-  let(:tm) { (Time.now - 10).utc }
-  let(:attrs) { {
-    "hash"      => "abcd",
-    "timestamp" => tm.to_i,
-    "duration"  => 10,
-    "success"   => 10,
-    "failed"    => 2,
-    "skipped"   => 1
-  } }
+  let(:tm)             { (Time.now - 10).utc }
+  let(:attrs)          { report_summary_attrs "timestamp" => tm }
   let(:key)            { "db:reports:abcd:summary" }
   let(:json)           { attrs.to_json }
   let(:report_summary) { ReportSummary.new attrs }

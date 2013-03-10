@@ -1,14 +1,9 @@
 require 'spec_helper'
 
 describe NodeReport do
-  let(:tm) { Time.now.utc - 10 }
-  let(:node) { "example.com" }
-  let(:attrs) { {
-    "hash"       => "abcd",
-    "certname"   => node,
-    "start-time" => tm.to_s,
-    "end-time"   => (tm + 10).to_s
-  } }
+  let(:tm)          { Time.now.utc - 10 }
+  let(:node)        { "example.com" }
+  let(:attrs)       { node_report_attrs "certname" => node, "start-time" => tm }
   let(:key)         { "db:node:example.com:reports:abcd" }
   let(:index_key)   { "db:node:example.com:reports" }
   let(:node_report) { NodeReport.new attrs }
@@ -103,14 +98,7 @@ describe NodeReport do
     end
 
     context ".find_by_node_with_summary" do
-      let(:s_attrs) { {
-        "hash"      => "abcd",
-        "timestamp" => Time.now.to_i,
-        "duration"  => 10,
-        "success"   => 10,
-        "failed"    => 2,
-        "skipped"   => 1
-      } }
+      let(:s_attrs) { report_summary_attrs "hash" => "abcd" }
       let(:summary) { ReportSummary.new s_attrs }
 
       subject { find_by_node_with_summary }

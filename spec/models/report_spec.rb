@@ -1,11 +1,8 @@
 require 'spec_helper'
 
 describe Report do
-  let(:tm) { (Time.now - 10).utc }
-  let(:attrs) { {
-    "report"    => "abcd",
-    "timestamp" => tm.to_s
-  } }
+  let(:tm)        { (Time.now - 10).utc }
+  let(:attrs)     { report_attrs("timestamp" => tm) }
   let(:key)       { "db:reports:abcd" }
   let(:index_key) { "db:reports" }
   let(:json)      { [attrs].to_json }
