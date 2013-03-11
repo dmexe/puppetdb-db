@@ -29,4 +29,29 @@ module FixturesSpecHelper
       "skipped"   => 1
     }.merge(options)
   end
+
+  def json_fixture(name)
+    File.read File.expand_path(__FILE__ + "/../../fixtures/#{name}.json")
+  end
+
+
+  def mock_puppetdb_reports_request(node_name)
+    stub_request(:get, "http://localhost:8080/experimental/reports?query=%5B%22=%22,%22certname%22,%22#{node_name}%22%5D%20").
+      with(:headers => {'Accept'=>'application/json' }).
+      to_return(:status => 200,
+                :body => json_fixture('puppetdb/reports'),
+                :headers => {
+                  'Content-Type' => 'application/json;charset=ISO-8859-1'
+                })
+  end
+
+  def mock_puppetdb_events_request(hash)
+    stub_request(:get, "http://localhost:8080/experimental/events?query=%5B%22=%22,%22report%22,%22#{hash}%22%5D%20").
+      with(:headers => {'Accept'=>'application/json'}).
+      to_return(:status => 200,
+                :body => json_fixture('puppetdb/events'),
+                :headers => {
+                  'Content-Type' => 'application/json;charset=ISO-8859-1'
+                })
+  end
 end

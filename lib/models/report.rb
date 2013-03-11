@@ -18,12 +18,15 @@ class Report
     def find_keys(from = nil)
       from ||= Time.at(Time.now.to_i - i30_days)
       to = Time.now
+      puts from.inspect
+      puts to.inspect
       redis.zrevrangebyscore index_key, to.to_i, from.to_i
     end
 
     def find(hashes)
       hashes = [hashes] unless hashes.is_a?(Array)
       reports = redis.mget hashes.map{|i| key(i) }
+      reports.compact!
       reports.map! do |report|
         populate report
       end

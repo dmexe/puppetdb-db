@@ -61,7 +61,7 @@ module PuppetDB
         @conn ||= begin
           _conn = Faraday.new host do |c|
             c.use FaradayMiddleware::ParseJson, content_type: 'application/json'
-            c.use Faraday::Response::Logger
+            c.use Faraday::Response::Logger if %w{ development }.include?(Application.env)
             c.use Faraday::Response::RaiseError
             c.use Faraday::Adapter::NetHttp
           end
