@@ -27,21 +27,26 @@ App.Helpers =
     if text.length < length
       text
     else
-      text.toString().substring(0,length) + tail
+      cut = text.toString().substring(0,length) + tail
+      @safe "<span class=\"truncated-text\" title=\"#{@h text.toString()}\">#{@h cut}</span>"
 
   eventStatusLabel: (status) ->
     h = "skipped": "", "success": "label-success", "failure": "label-important"
     l = h[status]
-    label = "<span class=\"label #{l}\">" + escape(status) + "</span>"
+    label = "<span class=\"label #{l}\">" + @h(status) + "</span>"
     @safe(label)
 
   reportSummary: (summary) ->
     h = "skipped": "", "success": "badge-success"
     h = []
-    h.push "<span class=\"label label-success\">#{summary.success}</span>" if summary.success
-    h.push "<span class=\"label label-important\">#{summary.failure}</span>" if summary.failure
-    h.push "<span class=\"label\">#{summary.skipped}</span>" if summary.skipped
+    h.push "<span class=\"label label-success\">#{@h summary.success}</span>" if summary.success
+    h.push "<span class=\"label label-important\">#{@h summary.failure}</span>" if summary.failure
+    h.push "<span class=\"label\">#{@h summary.skipped}</span>" if summary.skipped
     @safe h.join("&nbsp;")
+
+  h: (text) ->
+    text.toString().replace /\W/g, (chr) ->
+      '&#' + chr.charCodeAt(0) + ';'
 
 Backbone.View.prototype.jst = (name, context) ->
   context ||= {}
