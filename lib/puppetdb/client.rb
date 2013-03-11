@@ -12,9 +12,7 @@ module PuppetDB
     end
 
     def nodes
-      Application.cache "cache:nodes", ttl: 60 * 5  do
-        get "nodes"
-      end
+      get "nodes"
     end
 
     def facts(node)

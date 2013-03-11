@@ -27,7 +27,7 @@ App.Helpers =
     if text.length < length
       text
     else
-      text.substring(0,length) + tail
+      text.toString().substring(0,length) + tail
 
   eventStatusLabel: (status) ->
     h = "skipped": "", "success": "label-success", "failure": "label-important"
