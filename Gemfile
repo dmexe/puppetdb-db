@@ -10,6 +10,7 @@ gem 'sidekiq'
 gem 'slim'
 gem 'rake'
 gem 'foreman'
+gem 'rake'
 
 group :assets do
   gem 'sprockets'
