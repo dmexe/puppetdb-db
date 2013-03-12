@@ -72,7 +72,6 @@ module PuppetDB
       end
 
       def get(url, options = {})
-        puts options.inspect
         conn.get("/v2/#{url}", options).body
       end
 

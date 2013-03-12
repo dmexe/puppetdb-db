@@ -1,4 +1,3 @@
-<%- console.log @report.events %>
 <table class="table table-striped table-node-events">
   <thead>
     <tr>
