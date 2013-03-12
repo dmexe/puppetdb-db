@@ -44,12 +44,13 @@ window.App.Router = Backbone.Router.extend
 
 
 $(document).ready ->
-  nodes = new App.NodesCollection()
-  nodes.fetch().success ->
-    window.appRouter = new App.Router(nodes: nodes)
-    Backbone.history.start(pushState: true, root: "/ui/")
+  unless window.jasmine
+    nodes = new App.NodesCollection()
+    nodes.fetch().success ->
+      window.appRouter = new App.Router(nodes: nodes)
+      Backbone.history.start(pushState: true, root: "/ui/")
 
-  $("body").on "click", "a", (ev) ->
-    el = $(ev.currentTarget)
-    window.appRouter.navigate(el.attr("href"), trigger: true)
-    false
+    $("body").on "click", "a", (ev) ->
+      el = $(ev.currentTarget)
+      window.appRouter.navigate(el.attr("href"), trigger: true)
+      false

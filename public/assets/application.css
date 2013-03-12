@@ -1,0 +1,133 @@
+@import url(http://fonts.googleapis.com/css?family=Ubuntu);
+body {
+  color: white;
+  background: #f2e9d9;
+  font-family: Helvetica, sans-serif;
+  font-size: 14px; }
+  body > .container {
+    color: #666;
+    background-color: white;
+    min-height: 40em;
+    margin-top: 3em;
+    margin-bottom: 1em;
+    border-radius: 5px;
+    padding: 0;
+    box-shadow: 0px 1px 15px -1px #aaa; }
+  body .content {
+    padding: 1em 0 1em 0;
+    margin: 2em 2em; }
+    body .content table.table th {
+      font-weight: bold;
+      color: #3E576F;
+      font-size: 16px; }
+    body .content #node-reports-summary-chart {
+      height: 250px;
+      margin-bottom: 2em; }
+    body .content table.table-node-facts tr:first-child td {
+      border: none; }
+    body .content table.table-node-reports td:first-child {
+      width: 4em; }
+    body .content table.table-node-events {
+      width: 100%;
+      table-layout: fixed; }
+      body .content table.table-node-events th:first-child {
+        width: 4em; }
+      body .content table.table-node-events th:nth-child(2) {
+        width: 12em; }
+      body .content table.table-node-events th:last-child {
+        width: 6em; }
+    body .content table.table-query-resources td:first-child {
+      width: 15em; }
+  body .header {
+    border-radius: 5px;
+    background: #f5f5f5; }
+    body .header > .navigation {
+      border-bottom: 1px solid #ddd;
+      margin: 0em 0em 2em;
+      padding: 1.6em 2em 0; }
+      body .header > .navigation li {
+        display: inline-block;
+        padding: .8em .5em .8em .5em;
+        margin: 0 1em 0 0; }
+        body .header > .navigation li:first-child a, body .header > .navigation li:first-child span {
+          font-size: 1.3em; }
+        body .header > .navigation li.active {
+          border-bottom: 4px solid #999; }
+          body .header > .navigation li.active a:hover, body .header > .navigation li.active span:hover {
+            opacity: 1; }
+        body .header > .navigation li a, body .header > .navigation li span {
+          color: #333;
+          font-size: 1.2em;
+          text-shadow: 1px 1px 1px #ddd;
+          -webkit-transition-property: opacity;
+          -webkit-transition-duration: 0.5s;
+          -webkit-transition-timing-function: ease; }
+          body .header > .navigation li a:hover, body .header > .navigation li span:hover {
+            text-decoration: none;
+            opacity: .8; }
+        body .header > .navigation li.search {
+          margin: .3em 0 0 0;
+          padding: 0;
+          float: right; }
+          body .header > .navigation li.search input {
+            font-size: 13px;
+            line-height: 15px;
+            padding: .3em .5em .2em;
+            -webkit-transition-property: width;
+            -webkit-transition-duration: 0.5s;
+            -webkit-transition-timing-function: ease; }
+            body .header > .navigation li.search input:focus {
+              width: 25em; }
+
+.node-facts-info {
+  height: 5em;
+  margin-bottom: 3em; }
+  .node-facts-info .node-info {
+    float: left;
+    margin-right: 2em; }
+    .node-facts-info .node-info strong {
+      display: block;
+      font-weight: normal;
+      color: #111; }
+    .node-facts-info .node-info small {
+      color: #999;
+      display: block; }
+    .node-facts-info .node-info.node-cpu-info {
+      padding-left: 40px;
+      background: url(/assets/cpu-icon.png) no-repeat left 5px; }
+    .node-facts-info .node-info.node-kernel-Linux-info {
+      padding-left: 40px;
+      background: url(/assets/Linux-icon.png) no-repeat left 5px; }
+    .node-facts-info .node-info.node-host-info {
+      padding-left: 40px;
+      background: url(/assets/Server.png?1) no-repeat left 5px;
+      margin-right: 4em; }
+
+span.label {
+  font-weight: normal !important; }
+
+.well {
+  background-color: #fff;
+  border: 0;
+  box-shadow: 0px 1px 5px 0px #aaa; }
+
+.salient {
+  box-shadow: 0px 1px 5px 0px #aaa; }
+
+.truncated-text {
+  cursor: help; }
+
+a .truncated-text {
+  cursor: pointer !important; }
+
+h3 {
+  font-weight: normal;
+  font-size: 1.3em;
+  margin-left: .3em;
+  margin-top: 0; }
+
+table.table th {
+  font-weight: normal !important;
+  font-size: 17px; }
+table.table td {
+  border: none; }

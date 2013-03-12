@@ -13,5 +13,9 @@ module Application
     get '/ui/*' do
       slim :index
     end
+
+    get '/tests' do
+      slim :tests
+    end
   end
 end

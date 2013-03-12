@@ -1,12 +1,9 @@
 //= require fonts
-//= require vendor/bootstrap
-//= require vendor/bootstrap-responsive
 
 body {
   color: white;
-  background: #F3f2E3 url(/assets/noisy.png);
-  //font-family: 'PT Sans', Arial, sans-serif;
-  font-family:  'PT Sans', sans-serif;
+  background: #f2e9d9;
+  font-family:  Helvetica, sans-serif;
   font-size: 14px;
 
   > .container {
@@ -27,7 +24,9 @@ body {
     table.table {
       th {
         font-weight: bold;
-        color: #111;
+        color: #3E576F;
+        font-size: 16px;
+
       }
     }
 
@@ -74,6 +73,7 @@ body {
 
   .header {
     border-radius: 5px;
+    background: #f5f5f5;
 
     > .navigation {
       border-bottom: 1px solid #ddd;

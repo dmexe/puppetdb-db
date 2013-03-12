@@ -36,6 +36,20 @@ module Application
         value
       end
     end
+
+    def assets
+      require 'sprockets'
+      require 'sass'
+      require 'coffee_script'
+      require 'eco'
+      environment = Sprockets::Environment.new
+      environment.append_path     'assets/javascripts'
+      environment.append_path     'assets/stylesheets'
+      environment.append_path     'assets/images'
+      # environment.js_compressor = Uglifier.new(:copyright => false)
+      # environment.css_compressor = YUI::CssCompressor.new
+      environment
+    end
   end
 end
 
