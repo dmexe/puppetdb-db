@@ -4,12 +4,14 @@ window.App.NodeEventsView = Backbone.View.extend
   initialize: ->
 
   activate: (node, hash, nav) ->
+    @hash = hash
     @node = node
-    @node.reports.fetch().success =>
-      @report = node.reports.findByHash(hash)
+    @nav  = nav
+    @node.reports.fetch().then =>
+      @report = @node.reports.findByHash(@hash)
       @report.events.once "sync", @render, @
       @report.events.fetch()
-      nav.render(node: @node, report: @report)
+      @nav.render(node: @node, report: @report)
 
   render: ->
     @html 'events/index', report: @report

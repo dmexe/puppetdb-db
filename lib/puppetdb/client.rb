@@ -50,7 +50,6 @@ module PuppetDB
       field = params[:field] || 'name'
       q = params[:query]
       query = %{["#{op}", "#{field}", "#{q}"]}
-      puts query
       get 'facts?query=' + CGI.escape(query)
     end
 
