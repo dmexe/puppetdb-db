@@ -6,12 +6,14 @@ window.App.Router = Backbone.Router.extend
     "nodes/:node"              : "node"
     "nodes/:node/reports"      : "nodeReports"
     "nodes/:node/reports/:hash": "nodeEvents"
+    "query/*q"                 : "query"
 
   initialize:(options) ->
-    @nodes   = options.nodes
-    @navView = new App.NavView()
+    @nodes      = options.nodes
+    @navView    = new App.NavView()
     @navView.render()
 
+    @searchView        = new App.SearchView
     @dashboardView     = new App.DashboardView(nodes: @nodes)
     @nodeView          = new App.NodeView()
     @nodeReportsView   = new App.NodeReportsView()
@@ -34,6 +36,11 @@ window.App.Router = Backbone.Router.extend
   nodeEvents: (nodeName, hash) ->
     node = @nodes.findByName(nodeName)
     @nodeEventsView.activate(node, hash, @navView)
+
+  query: (q) ->
+    console.log q
+    @navView.render query: q
+    @searchView.activate(q)
 
 
 $(document).ready ->

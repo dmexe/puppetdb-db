@@ -9,6 +9,9 @@ window.App.NavView = Backbone.View.extend
     val = _.clone(@defaultValues)
     if _.isEmpty(options)
       val.active = "/"
+    else if options.query
+      val.push({name: "Query: #{options.query}", link: '/query' })
+      val.active = '/query'
     else if options.node
       val.push options.node
       val.push options.node.reports

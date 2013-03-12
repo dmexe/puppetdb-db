@@ -11,6 +11,14 @@ module PuppetDB
       end
     end
 
+    def query_resource(name, title = nil)
+      if title
+        get("resources/#{name}/#{title}")
+      else
+        get("resources/#{name}")
+      end
+    end
+
     def nodes
       get "nodes"
     end
@@ -72,6 +80,7 @@ module PuppetDB
       end
 
       def get(url, options = {})
+        puts url.inspect
         conn.get("/v2/#{url}", options).body
       end
 

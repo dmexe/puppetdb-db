@@ -6,15 +6,15 @@ body {
   color: white;
   background: #F3f2E3 url(/assets/noisy.png);
   //font-family: 'PT Sans', Arial, sans-serif;
-  font-family:  'PT Sans Narrow', sans-serif;
-  font-size: 16px;
+  font-family:  'PT Sans', sans-serif;
+  font-size: 14px;
 
   > .container {
     color: #666;
     background-color: white;
     min-height: 40em;
     margin-top: 3em;
-    margin-bottom: 3em;
+    margin-bottom: 1em;
     border-radius: 5px;
     padding: 0;
     box-shadow: 0px 1px 15px -1px #aaa;
@@ -62,6 +62,12 @@ body {
 
       th:last-child {
         width: 6em;
+      }
+    }
+
+    table.table-query-resources {
+      td:first-child {
+        width: 15em;
       }
     }
   }
@@ -129,7 +135,7 @@ body {
 // dashboard
 .node-facts-info {
   height: 5em;
-  margin-bottom: 2em;
+  margin-bottom: 3em;
 
   .node-info {
     float: left;
@@ -186,6 +192,13 @@ span.label {
 
 a .truncated-text {
   cursor: pointer !important;
+}
+
+h3 {
+  font-weight: normal;
+  font-size: 1.3em;
+  margin-left: .3em;
+  margin-top: 0;
 }
 
 

@@ -1,0 +1,12 @@
+<% groupped = @collection.groupBy((i) -> i.node) %>
+<% for node in _.keys(groupped): %>
+  <h3><%=@linkTo node, "/nodes/#{node}" %></h3>
+  <table class="table table-striped table-query-resources">
+    <% for resource in groupped[node]: %>
+      <tr>
+        <td><%=@truncate resource.name %></td>
+        <td><%=@truncate JSON.stringify(resource.parameters), 100 %></td>
+      </tr>
+    <% end %>
+  </table>
+<% end %>

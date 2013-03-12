@@ -1393,7 +1393,7 @@ defaultOptions = {
 		spacingBottom: 15,
 		spacingLeft: 10,
 		style: {
-      fontFamily: '"PT Sans Narrow", sans-serif', //fontFamily: '"Lucida Grande", "Lucida Sans Unicode", Verdana, Arial, Helvetica, sans-serif', // default font
+      fontFamily: '"PT Sans", sans-serif', //fontFamily: '"Lucida Grande", "Lucida Sans Unicode", Verdana, Arial, Helvetica, sans-serif', // default font
 			fontSize: '12px'
 		},
 		backgroundColor: '#FFFFFF',

@@ -17,9 +17,6 @@ module Application
       json client.nodes
     end
 
-    get '/search/facts' do
-    end
-
     get '/nodes/:node/stats/monthly' do |node|
       json MonthlyReport.stats(node: node)
     end
@@ -35,6 +32,16 @@ module Application
     get '/nodes/:node/reports/:report' do |node, report|
       json Report.first(report)
     end
+
+    get '/query' do
+      if res = params['resource']
+        re = /^([^\[]+)(\[(.*)\])?/
+        if m  = res.match(re)
+          json client.query_resource(m[1], m[3])
+        end
+      end
+    end
+
 
     private
       def json(body)

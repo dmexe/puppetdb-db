@@ -9,6 +9,8 @@
     </li>
   <% end %>
   <li class="search">
-    <input type="text" name="query" value="" class="" placeholder="Search" />
+    <form>
+      <input type="text" name="query" value="" class="" placeholder="Search" />
+    </form>
   </li>
 </ul>
