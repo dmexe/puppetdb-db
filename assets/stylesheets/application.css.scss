@@ -23,10 +23,9 @@ body {
 
     table.table {
       th {
-        font-weight: bold;
-        color: #3E576F;
-        font-size: 16px;
-
+        color: #000;
+        font-size: 15px;
+        padding: 1em .5em;
       }
     }
 
@@ -84,10 +83,6 @@ body {
         display: inline-block;
         padding: .8em .5em .8em .5em;
         margin: 0 1em 0 0;
-
-        &:first-child a, &:first-child span {
-          font-size: 1.3em;
-        }
 
         &.active {
           border-bottom: 4px solid #999;

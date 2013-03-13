@@ -3,10 +3,11 @@ require 'spec_helper'
 describe NodeReport do
   let(:tm)               { Time.now.utc - 10 }
   let(:node)             { "example.com" }
-  let(:attrs)            { node_report_attrs "certname" => node, "start-time" => tm }
+  let(:attrs)            { node_report_attrs "certname" => node, "start-time" => tm, "_stats" => {} }
   let(:key)              { "db:node:example.com:reports:abcd" }
   let(:index_key)        { "db:index:node:example.com:reports:all" }
   let(:index_active_key) { "db:index:node:example.com:reports:active" }
+  let(:nodeless_index_key) { "db:index:node_reports:all" }
   let(:node_report)      { NodeReport.new attrs }
   let(:json)             { attrs.to_json }
   subject                { node_report }
@@ -23,18 +24,26 @@ describe NodeReport do
     its(:duration)         { should eq 10 }
     its(:attrs)            { should eq attrs }
     its(:to_json)          { should eq attrs.to_json }
-    its(:index_key)        { should eq index_key }
-    its(:index_active_key) { should eq index_active_key }
     its(:key)              { should eq key }
     its(:exists?)          { should_not be }
 
     it "should build from string" do
       expect(NodeReport.new(json).attrs).to eq attrs
     end
+    it "should has index" do
+      expect(node_report.index(:all)).to eq index_key
+    end
+
+    it "should has nodeless_index" do
+      expect(node_report.nodeless_index(:all)).to eq nodeless_index_key
+    end
   end
 
   context "#save" do
-    subject { ->{ node_report.save(is_active: true); node_report } }
+    subject { ->{ node_report.save; node_report } }
+    before do
+      mock(node_report).stats.mock!.active? { true }
+    end
 
     it "should store in the index" do
       should change{ r_zrange index_key }.from([]).to([[key, tm.to_i.to_f]])
@@ -42,6 +51,10 @@ describe NodeReport do
 
     it "should store in the active index" do
       should change{ r_zrange index_active_key }.from([]).to([[key, tm.to_i.to_f]])
+    end
+
+    it "should store in the nodeless index" do
+      should change{ r_zrange nodeless_index_key}.from([]).to([[key, tm.to_i.to_f]])
     end
 
     it "should store a node report" do
@@ -60,69 +73,64 @@ describe NodeReport do
     let(:json2)  { attrs2.to_json }
 
     before do
-      NodeReport.populate([json, json2]).map{|i| i.save }
+      NodeReport.create(json, '[]')
+      NodeReport.create(json2, events_attrs)
     end
 
-    context ".find_keys_by_node" do
-      subject { find_keys_by_node }
+    context ".latest_keys" do
+      subject { latest_keys }
 
       it { should eq [key2, key] }
 
       context "with limit" do
-        subject { find_keys_by_node :limit => 1 }
+        subject { latest_keys :limit => 1 }
         it { should eq [key2] }
       end
 
       context "with limit and offset" do
-        subject { find_keys_by_node :limit => 1, :offset => 1 }
+        subject { latest_keys :limit => 1, :offset => 1 }
         it { should eq [key] }
       end
 
       context "active only" do
-        subject { find_keys_by_node :active => true }
-        let(:key3)  { "db:node:example.com:reports:123" }
-        let(:json3) { attrs2.merge("hash" => "123") }
+        subject { latest_keys :active => true }
 
-        before { NodeReport.populate([json3]).map{|i| i.save(:is_active => true) } }
-        it { should eq [key3]}
+        it { should eq [key2]}
       end
 
-      def find_keys_by_node(options = {})
-        NodeReport.find_keys_by_node(node, options)
+      context "without node" do
+        subject { NodeReport.latest_keys }
+        it { should eq [key2, key] }
+      end
+
+      def latest_keys(options = {})
+        NodeReport.latest_keys(node, options)
       end
     end
 
-    context ".find_by_node" do
-      subject { find_by_node }
+    context ".latest" do
+      subject { latest }
+      let(:stats) { { "_stats" => { "success" => 1, "failure" => 1} } }
 
-      it { should eq [attrs2, attrs] }
+      it { should eq [attrs2.merge(stats), attrs] }
 
       context "with limit" do
-        subject { find_by_node :limit => 1 }
-        it { should eq [attrs2] }
+        subject { latest :limit => 1 }
+        it { should eq [attrs2.merge(stats)] }
       end
 
       context "with limit and offset" do
-        subject { find_by_node :limit => 1, :offset => 1 }
+        subject { latest :limit => 1, :offset => 1 }
         it { should eq [attrs] }
       end
 
-      def find_by_node(options = {})
-        NodeReport.find_by_node(node, options).map{|i| i.attrs }
+      context "without node" do
+        subject { NodeReport.latest.map{|i| i.attrs} }
+        it { should eq [attrs2.merge(stats), attrs] }
       end
-    end
 
-    context ".find_by_node_with_summary" do
-      let(:s_attrs) { report_summary_attrs "hash" => "abcd" }
-      let(:summary) { ReportStats.new s_attrs }
-
-      subject { find_by_node_with_summary }
-      before { summary.save }
-
-      it { should eq [attrs2, attrs.merge("_summary" => s_attrs)] }
-
-      def find_by_node_with_summary(options = {})
-        NodeReport.find_by_node_with_summary(node, options).map{|i| i.attrs }
+      def latest(options = {})
+        NodeReport.latest(node, options).map{|i| i.attrs }
       end
     end
   end
@@ -136,12 +144,8 @@ describe NodeReport do
       expect(subject.key 'host', 'qwerty').to eq 'db:node:host:reports:qwerty'
     end
 
-    it ".index_key" do
-      expect(subject.index_key 'host').to eq 'db:index:node:host:reports:all'
-    end
-
-    it ".index_active_key" do
-      expect(subject.index_active_key 'host').to eq 'db:index:node:host:reports:active'
+    it ".index" do
+      expect(subject.index 'host', 'all').to eq 'db:index:node:host:reports:all'
     end
 
     it ".exists?" do
@@ -152,11 +156,11 @@ describe NodeReport do
       }.from(false).to(true)
     end
 
-    context ".populate" do
-      subject { NodeReport.populate [json] }
-      its(:size)         { should eq 1 }
-      its(:first)        { should be_an_instance_of NodeReport }
-      its("first.attrs") { should eq attrs }
+    context ".create" do
+      let(:events) { events_attrs.to_json }
+      subject { NodeReport.create json, events }
+      it { should be_an_instance_of NodeReport }
+      its(:attrs) { should eq attrs.merge("_stats" => {"success" => 1, "failure" => 1}) }
     end
   end
 end

@@ -3,13 +3,15 @@ require 'time'
 
 class NodeReport
   class << self
-    def populate(json)
-      json.map! do |it|
-        NodeReport.new it
-      end
+    def create(json, events)
+      stats = ReportStats.build(events)
+      NodeReport.new(json, :stats => stats.attrs).save
     end
 
-    def find_keys_by_node(node_name, options = {})
+    def latest_keys(*args)
+      options = args.pop if args.last.is_a?(Hash)
+      options ||= {}
+      node_name = args.first
       from = options[:from]
       params = {}
       if options[:limit]
@@ -17,42 +19,36 @@ class NodeReport
       end
       from ||= Time.at(Time.now.to_i - i30_days)
       to = Time.now
-      key = options[:active] ? index_active_key(node_name) : index_key(node_name)
+      key = nil
+      if node_name
+        key = options[:active] ? index(node_name, :active) : index(node_name, :all)
+      else
+        key = index(nil, :all)
+      end
       redis.zrevrangebyscore key, to.to_i, from.to_i, params
     end
 
-    def find_by_node(node_name, options = {})
-      keys = find_keys_by_node(node_name, options)
+    def latest(*args)
+      keys = latest_keys(*args)
       return [] if keys.empty?
       reports = redis.mget(keys)
-      populate reports
-    end
-
-    def find_by_node_with_summary(node_name, options = {})
-      node_reports = find_by_node(node_name, options)
-      hashes = node_reports.map{|i| i.hash }
-      summaries = ReportStats.find(hashes)
-      node_reports.each do |node_report|
-        sum = summaries.find{|i| i.hash == node_report.hash }
-        node_report.attrs["_summary"] = sum.attrs if sum
-      end
-      node_reports
+      reports.map!{|i| NodeReport.new i }
     end
 
     def key(node_name, hash)
       "db:node:#{node_name}:reports:#{hash}"
     end
 
-    def index_key(node_name)
-      "db:index:node:#{node_name}:reports:all"
-    end
-
-    def index_active_key(node_name)
-      "db:index:node:#{node_name}:reports:active"
+    def index(node_name, idx)
+      if node_name == nil
+        "db:index:node_reports:#{idx}"
+      else
+        "db:index:node:#{node_name}:reports:#{idx}"
+      end
     end
 
     def exists?(node_name, hash)
-      !!redis.zrank(index_key(node_name), key(node_name, hash))
+      !!redis.zrank(index(node_name, :all), key(node_name, hash))
     end
 
     def redis
@@ -67,11 +63,10 @@ class NodeReport
 
   attr_reader :attrs
 
-  def initialize(attrs)
-    if attrs.is_a?(String)
-      attrs = JSON.parse(attrs)
-    end
+  def initialize(attrs, options = {})
+    attrs = JSON.parse(attrs) if attrs.is_a?(String)
     @attrs = attrs
+    @attrs.merge!("_stats" => options[:stats]) if options[:stats]
   end
 
   def hash
@@ -102,22 +97,28 @@ class NodeReport
     self.class.key(certname, hash)
   end
 
-  def index_key
-    self.class.index_key(certname)
+  def index(name)
+    self.class.index(certname, name)
   end
 
-  def index_active_key
-    self.class.index_active_key(certname)
+  def nodeless_index(name)
+    self.class.index(nil, name)
   end
 
   def exists?
     self.class.exists?(certname, hash)
   end
 
-  def save(options = {})
-    redis.zadd index_key, start_time.to_i, key
-    redis.zadd index_active_key, start_time.to_i, key if options[:is_active] == true
+  def stats
+    @stats ||= ReportStats.new(@attrs["_stats"])
+  end
+
+  def save
+    redis.zadd index(:all), start_time.to_i, key
+    redis.zadd nodeless_index(:all), start_time.to_i, key
+    redis.zadd index(:active), start_time.to_i, key if stats.active?
     redis.set key, to_json
+    self
   end
 
   private

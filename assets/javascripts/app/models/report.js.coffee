@@ -19,4 +19,4 @@ window.App.Report = Backbone.Model.extend
     (@endAtTimestamp() - @startAtTimestamp()) / 1000
 
   summary: ->
-    @get "_summary"
+    @get "_stats"

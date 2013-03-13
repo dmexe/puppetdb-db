@@ -18,16 +18,39 @@ module FixturesSpecHelper
     }.merge(options)
   end
 
-  def report_summary_attrs(options = {})
-    tm = options.delete("timestamp") || Time.now
+  def report_stats_attrs(options = {})
     {
-      "hash"      => "abcd",
-      "timestamp" => tm.to_i,
-      "duration"  => 10,
       "success"   => 10,
       "failure"   => 2,
       "skipped"   => 1
     }.merge(options)
+  end
+
+  def events_attrs(options = {})
+    [
+      {
+        "message"        => "a message",
+        "new-value"      => "a new value",
+        "old-value"      => 'a old value',
+        "property"       => "ensure",
+        "report"         => "abcd",
+        "resource-title" => "/etc",
+        "resource-type"  => "File",
+        "status"         => "success",
+        "timestamp"      => "2012-10-30T19:01:05.000Z"
+      }.merge(options),
+      {
+        "message"        => "a message",
+        "new-value"      => "a new value",
+        "old-value"      => 'a old value',
+        "property"       => "ensure",
+        "report"         => "abcd",
+        "resource-title" => "/etc",
+        "resource-type"  => "File",
+        "status"         => "failure",
+        "timestamp"      => "2012-10-30T19:01:05.000Z"
+      }.merge(options)
+    ]
   end
 
   def json_fixture(name)

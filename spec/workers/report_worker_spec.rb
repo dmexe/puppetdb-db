@@ -20,9 +20,8 @@ describe ReportWorker do
 
     it "should create report summary" do
       should change{
-        f = ReportStats.find(hash).first
-        f.hash if f
-      }.from(nil).to(hash)
+        f = NodeReport.latest.map(&:attrs)
+      }.from([]).to([attrs])
     end
   end
 end

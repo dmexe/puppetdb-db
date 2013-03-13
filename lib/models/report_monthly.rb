@@ -7,32 +7,22 @@ class ReportMonthly
       node = options[:node]
       rs = fill_data
 
-      hashes = node ? last_node_hashes(node, from) : last_hashes(from)
-
-      last_summaries(hashes).each do |summary|
-        next unless summary
-        tm = summary.timestamp
+      latest(node, from).each do |report|
+        next unless report
+        tm = report.start_time
         tm = Time.utc(tm.year, tm.month, tm.day)
-        rs[tm][:success]  += summary.success
-        rs[tm][:failure]  += summary.failure
-        rs[tm][:skipped]  += summary.skipped
-        rs[tm][:duration] += summary.duration
+        rs[tm][:success]  += report.stats.success
+        rs[tm][:failure]  += report.stats.failure
+        rs[tm][:skipped]  += report.stats.skipped
+        rs[tm][:duration] += report.duration
         rs[tm][:requests] += 1
       end
       rs.to_a
     end
 
     private
-      def last_hashes(from = nil)
-        Report.find_keys(from).map{|i| i.split(":").last }
-      end
-
-      def last_node_hashes(node, from = nil)
-        NodeReport.find_keys_by_node(node, from: from).map{|i| i.split(":").last }
-      end
-
-      def last_summaries(hashes)
-        ReportStats.find hashes
+      def latest(node, from)
+        NodeReport.latest(node, from: from)
       end
 
       def fill_data

@@ -6,12 +6,10 @@ class ReportWorker
   sidekiq_options :queue => :puppetdb_reports
 
   def perform(hash, node_report)
-    report       = client.report hash
-    report       = Report.new report
-    node_report  = NodeReport.new node_report
-    report_stats = ReportStats.create report, node_report
-    report.save
-    node_report.save(:is_active => report_stats.active?)
+    events       = client.report hash
+    node_report  = NodeReport.create node_report, events
+    report       = Report.new(events).save
+    report
   end
 
   private

@@ -7,7 +7,7 @@ class NodeReportsWorker
 
   def perform(node_name)
     reports = client.reports(node_name)
-    reports = NodeReport.populate reports
+    reports.map!{|i| NodeReport.new i }
     not_exists = reports.select do |report|
       not report.exists?
     end
