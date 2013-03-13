@@ -1,5 +1,5 @@
 module App
-  class Api < App::Base
+  class Api < App::Web
 
     before do
       content_type 'application/json'
@@ -49,7 +49,7 @@ module App
       end
 
       def client
-        PuppetDB::Client.inst
+        App.puppetdb
       end
 
       def params

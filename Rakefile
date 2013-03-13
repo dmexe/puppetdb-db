@@ -5,7 +5,6 @@ task :default => :spec
 desc "Run all specs in spec directory"
 RSpec::Core::RakeTask.new(:spec)
 
-
 task :environment do
   require './boot'
 end
@@ -13,7 +12,7 @@ end
 namespace :cron do
   desc "Touch NodeReportsWorker"
   task :nodes => :environment do
-    PuppetDB::Client.inst.nodes.each do |n|
+    App.puppetdb.nodes.each do |n|
       NodeReportsWorker.perform_async(n['name'])
     end
   end
@@ -26,10 +25,10 @@ namespace :assets do
 
   desc 'compile javascript assets'
   task :compile_js => :environment do
-    sprockets = Application.assets
+    sprockets = App.assets
     %w{ application.js vendor.js spec.js }.each do |a|
       asset     = sprockets[a]
-      outpath   = Application.root.join("public/assets")
+      outpath   = App.root.join("public/assets")
       outfile   = Pathname.new(outpath).join("#{a}") # may want to use the digest in the future?
       FileUtils.mkdir_p outfile.dirname
       asset.write_to(outfile)
@@ -39,10 +38,10 @@ namespace :assets do
 
   desc 'compile css assets'
   task :compile_css => :environment do
-    sprockets = Application.assets
+    sprockets = App.assets
     %w{ application.css vendor.css vendor/jasmine.css }.each do |a|
       asset     = sprockets[a]
-      outpath   = Application.root.join("public/assets")
+      outpath   = App.root.join("public/assets")
       outfile   = Pathname.new(outpath).join(a) # may want to use the digest in the future?
       FileUtils.mkdir_p outfile.dirname
       asset.write_to(outfile)

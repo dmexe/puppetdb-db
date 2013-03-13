@@ -18,6 +18,6 @@ class NodeReportsWorker
 
   private
     def client
-      PuppetDB::Client.inst
+      App.puppetdb
     end
 end

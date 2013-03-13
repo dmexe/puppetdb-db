@@ -3,7 +3,7 @@ require 'spec_helper'
 describe ReportStats do
   let(:tm)             { (Time.now - 10).utc }
   let(:attrs)          { report_summary_attrs "timestamp" => tm }
-  let(:key)            { "db:reports:abcd:summary" }
+  let(:key)            { "db:reports:abcd:stats" }
   let(:json)           { attrs.to_json }
   let(:report_summary) { ReportStats.new attrs }
   subject { report_summary }
@@ -55,7 +55,7 @@ describe ReportStats do
     its(:redis)     { should be }
 
     it ".key" do
-      expect(subject.key "xzy").to eq 'db:reports:xzy:summary'
+      expect(subject.key "xzy").to eq 'db:reports:xzy:stats'
     end
 
     context ".create" do

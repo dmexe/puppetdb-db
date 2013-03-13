@@ -3,7 +3,7 @@ require 'json'
 class ReportStats
   class << self
     def key(hash)
-      "db:reports:#{hash}:summary"
+      "db:reports:#{hash}:stats"
     end
 
     def create(report, node_report)

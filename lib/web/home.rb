@@ -1,7 +1,7 @@
 require 'slim'
 
 module App
-  class Home < App::Base
+  class Home < App::Web
     get '/' do
       redirect '/ui'
     end
