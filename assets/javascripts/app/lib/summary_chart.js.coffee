@@ -1,21 +1,16 @@
 class App.SummaryChart
   constructor: (data, target) ->
     series = [
-      { name: "success",  data: data.success, type: "column", yAxis: 0, color: "SeaGreen" }
-      { name: "failure",   data: data.failure, type: "column", yAxis: 0, color: "Maroon" }
+      { name: "success",  data: data.success, type: "areaspline", yAxis: 0, color: "#4688cc" }
+      { name: "failed",   data: data.failure, type: "areaspline", yAxis: 0, color: "Maroon" }
     ]
 
     yAxis = [
       { title: { text: "resources" }}
     ]
 
-    if data.duration
-      duration = { name: "duration", data: data.duration, type: "spline", yAxis: 1, color: "SteelBlue", lineWidth: 1, marker: { enabled: false} }
-      series.push duration
-      yAxis.push { title: {text: "duration sec."}, opposite: true }
-
     if data.requests
-      requests = { name: "requests", data: data.requests, type: "spline", yAxis: 1, color: "Gainsboro", lineWidth: 1, marker: { enabled: false} }
+      requests = { name: "num requests", data: data.requests, type: "spline", yAxis: 1, color: "Gainsboro", lineWidth: 1, marker: { enabled: false} }
       series.push requests
       yAxis.push { title: {text: "num requests"}, opposite: true }
 

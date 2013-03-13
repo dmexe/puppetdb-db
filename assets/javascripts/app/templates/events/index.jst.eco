@@ -3,7 +3,6 @@
     <tr>
       <th>Status</th>
       <th>Resource</th>
-      <th>Value</th>
       <th>Message</th>
       <th>At</th>
     </tr>
@@ -12,9 +11,8 @@
     <% for event in @report.events.models: %>
       <tr>
         <td><%= @eventStatusLabel event.status %></td>
-        <td><%= @truncate(event.resource) %></td>
-        <td><%= @truncate(event.newVal) %></td>
-        <td><%= @truncate(event.message) %></td>
+        <td><%= @truncate(event.resource, 35) %></td>
+        <td><%= @truncate(event.message, 45) %></td>
         <td><%= event.timeAt %></td>
       </tr>
     <% end %>

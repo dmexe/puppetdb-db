@@ -42,7 +42,11 @@ body {
 
     table.table-node-reports {
       td:first-child {
-        width: 4em;
+        width: 6em;
+      }
+
+      td:nth-child(2) {
+
       }
     }
 
@@ -55,7 +59,7 @@ body {
       }
 
       th:nth-child(2) {
-        width: 12em;
+        width: 20em;
       }
 
       th:last-child {
@@ -169,6 +173,14 @@ body {
 
 span.label {
   font-weight: normal !important;
+}
+
+.badge-info {
+  background-color: #4688cc;
+}
+
+.label-info {
+  background-color: #4688cc;
 }
 
 .well {

@@ -1,6 +1,6 @@
 <td><%= @reportSummary @report.summary() %></td>
-<td><%= @report.startAt() %></td>
+<td><%= @linkTo @report.startAt(), @report.link %></td>
 <td><%= @report.version %></td>
-<td><%= @linkTo @truncate(@report.hash, 20), @report.link %></td>
+<td><%= @truncate @report.hash, 30 %></td>
 <td><%= @report.duration() %> sec</td>
 

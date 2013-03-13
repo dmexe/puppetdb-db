@@ -25,14 +25,14 @@ App.Helpers =
       @safe "<span class=\"truncated-text\" title=\"#{@h text.toString()}\">#{@h cut}</span>"
 
   eventStatusLabel: (status) ->
-    h = "skipped": "", "success": "label-success", "failure": "label-important"
+    h = "skipped": "", "success": "label-info", "failure": "label-important"
     l = h[status]
     label = "<span class=\"label #{l}\">" + @h(status) + "</span>"
     @safe(label)
 
   reportSummary: (summary) ->
     h = []
-    h.push "<span class=\"label label-success\">#{@h summary.success}</span>" if summary.success
+    h.push "<span class=\"label label-info\">#{@h summary.success}</span>" if summary.success
     h.push "<span class=\"label label-important\">#{@h summary.failure}</span>" if summary.failure
     h.push "<span class=\"label\">#{@h summary.skipped}</span>" if summary.skipped
     @safe h.join("&nbsp;")
