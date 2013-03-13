@@ -1,6 +1,6 @@
 require 'json'
 
-class MonthlyReport
+class ReportMonthly
   class << self
     def stats(options = {})
       from = options[:from]
@@ -14,7 +14,7 @@ class MonthlyReport
         tm = summary.timestamp
         tm = Time.utc(tm.year, tm.month, tm.day)
         rs[tm][:success]  += summary.success
-        rs[tm][:failed]   += summary.failed
+        rs[tm][:failure]  += summary.failure
         rs[tm][:skipped]  += summary.skipped
         rs[tm][:duration] += summary.duration
         rs[tm][:requests] += 1
@@ -32,7 +32,7 @@ class MonthlyReport
       end
 
       def last_summaries(hashes)
-        ReportSummary.find hashes
+        ReportStats.find hashes
       end
 
       def fill_data
@@ -44,13 +44,12 @@ class MonthlyReport
           tm = Time.utc(start.year, start.month, start.day)
           rs[tm] ||= {}
           rs[tm][:success]  ||= 0
-          rs[tm][:failed]   ||= 0
+          rs[tm][:failure]  ||= 0
           rs[tm][:skipped]  ||= 0
           rs[tm][:duration] ||= 0
           rs[tm][:requests] ||= 0
           start = start + 60 * 60 * 24
         end
-
         rs
       end
   end

@@ -31,7 +31,6 @@ App.Helpers =
     @safe(label)
 
   reportSummary: (summary) ->
-    h = "skipped": "", "success": "badge-success"
     h = []
     h.push "<span class=\"label label-success\">#{@h summary.success}</span>" if summary.success
     h.push "<span class=\"label label-important\">#{@h summary.failure}</span>" if summary.failure

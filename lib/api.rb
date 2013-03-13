@@ -1,5 +1,5 @@
-module Application
-  class Api < Application::Base
+module App
+  class Api < App::Base
 
     before do
       content_type 'application/json'
@@ -10,7 +10,7 @@ module Application
     end
 
     get '/stats/monthly' do
-      json MonthlyReport.stats
+      json ReportMonthly.stats
     end
 
     get '/nodes' do
@@ -18,7 +18,7 @@ module Application
     end
 
     get '/nodes/:node/stats/monthly' do |node|
-      json MonthlyReport.stats(node: node)
+      json ReportMonthly.stats(node: node)
     end
 
     get '/nodes/:node/facts' do |node|

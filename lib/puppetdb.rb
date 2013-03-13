@@ -1,3 +1,3 @@
 module PuppetDB
-  autoload :Client, Application.root.join("lib", "puppetdb", "client")
+  autoload :Client, App.root.join("lib", "puppetdb", "client")
 end

@@ -1,7 +1,7 @@
 require 'rubygems'
 require 'bundler'
 
-module Application
+module App
   class << self
     def root
       @root ||= Pathname.new(File.expand_path(__FILE__ + "/../"))
@@ -53,20 +53,20 @@ module Application
   end
 end
 
-Bundler.setup(:default, :assets, Application.env)
+Bundler.setup(:default, :assets, App.env)
 
-module Application
-  autoload :Base, Application.root.join('lib', 'application')
-  autoload :Home, Application.root.join('lib', 'home')
-  autoload :Api,  Application.root.join('lib', 'api')
+module App
+  autoload :Base, App.root.join('lib', 'application')
+  autoload :Home, App.root.join('lib', 'home')
+  autoload :Api,  App.root.join('lib', 'api')
 end
 
-autoload :PuppetDB,          Application.root.join("lib", "puppetdb")
+autoload :PuppetDB,          App.root.join("lib", "puppetdb")
 
-autoload :NodeReport,        Application.root.join("lib", "models", "node_report")
-autoload :Report,            Application.root.join("lib", "models", "report")
-autoload :ReportSummary,     Application.root.join("lib", "models", "report_summary")
-autoload :MonthlyReport,     Application.root.join("lib", "models", "monthly_report")
+autoload :NodeReport,        App.root.join("lib", "models", "node_report")
+autoload :Report,            App.root.join("lib", "models", "report")
+autoload :ReportStats,       App.root.join("lib", "models", "report_stats")
+autoload :ReportMonthly,     App.root.join("lib", "models", "report_monthly")
 
-autoload :NodeReportsWorker, Application.root.join("lib", "workers", "node_reports_worker")
-autoload :ReportWorker,      Application.root.join("lib", "workers", "report_worker")
+autoload :NodeReportsWorker, App.root.join("lib", "workers", "node_reports_worker")
+autoload :ReportWorker,      App.root.join("lib", "workers", "report_worker")

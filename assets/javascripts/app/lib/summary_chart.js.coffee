@@ -2,7 +2,7 @@ class App.SummaryChart
   constructor: (data, target) ->
     series = [
       { name: "success",  data: data.success, type: "column", yAxis: 0, color: "SeaGreen" }
-      { name: "failed",   data: data.failed, type: "column", yAxis: 0, color: "Maroon" }
+      { name: "failure",   data: data.failure, type: "column", yAxis: 0, color: "Maroon" }
     ]
 
     yAxis = [
@@ -35,8 +35,6 @@ class App.SummaryChart
       series: series
 
       plotOptions:
-        column:
-          stacking: 'normal'
         line:
           animation: false
         series:

@@ -99,7 +99,7 @@ describe NodeReport do
 
     context ".find_by_node_with_summary" do
       let(:s_attrs) { report_summary_attrs "hash" => "abcd" }
-      let(:summary) { ReportSummary.new s_attrs }
+      let(:summary) { ReportStats.new s_attrs }
 
       subject { find_by_node_with_summary }
       before { summary.save }

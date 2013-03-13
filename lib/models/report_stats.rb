@@ -1,6 +1,6 @@
 require 'json'
 
-class ReportSummary
+class ReportStats
   class << self
     def key(hash)
       "db:reports:#{hash}:summary"
@@ -31,12 +31,12 @@ class ReportSummary
     end
 
     def redis
-      Application.redis
+      App.redis
     end
 
     private
       def populate(json, options = {})
-        ReportSummary.new json, options
+        ReportStats.new json, options
       end
   end
 
@@ -60,8 +60,8 @@ class ReportSummary
     @attrs["success"] || 0
   end
 
-  def failed
-    @attrs["failed"] || 0
+  def failure
+    @attrs["failure"] || 0
   end
 
   def duration

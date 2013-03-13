@@ -30,7 +30,7 @@ class NodeReport
     def find_by_node_with_summary(node_name, options = {})
       node_reports = find_by_node(node_name, options)
       hashes = node_reports.map{|i| i.hash }
-      summaries = ReportSummary.find(hashes)
+      summaries = ReportStats.find(hashes)
       node_reports.each do |node_report|
         sum = summaries.find{|i| i.hash == node_report.hash }
         node_report.attrs["_summary"] = sum.attrs if sum
@@ -51,7 +51,7 @@ class NodeReport
     end
 
     def redis
-      Application.redis
+      App.redis
     end
 
     private

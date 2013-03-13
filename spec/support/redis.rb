@@ -4,7 +4,7 @@ module RedisSpecHelper
   end
 
   def redis
-    Application.redis
+    App.redis
   end
 
   def r_get(*args)

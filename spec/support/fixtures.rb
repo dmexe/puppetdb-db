@@ -25,7 +25,7 @@ module FixturesSpecHelper
       "timestamp" => tm.to_i,
       "duration"  => 10,
       "success"   => 10,
-      "failed"    => 2,
+      "failure"   => 2,
       "skipped"   => 1
     }.merge(options)
   end

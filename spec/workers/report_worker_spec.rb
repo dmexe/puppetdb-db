@@ -20,7 +20,7 @@ describe ReportWorker do
 
     it "should create report summary" do
       should change{
-        f = ReportSummary.find(hash).first
+        f = ReportStats.find(hash).first
         f.hash if f
       }.from(nil).to(hash)
     end

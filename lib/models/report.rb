@@ -36,7 +36,7 @@ class Report
     end
 
     def redis
-      Application.redis
+      App.redis
     end
 
     private

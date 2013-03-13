@@ -9,7 +9,7 @@ class ReportWorker
     report      = client.report hash
     report      = Report.new report
     node_report = NodeReport.new node_report
-    ReportSummary.create report, node_report
+    ReportStats.create report, node_report
     report.save
     node_report.save
   end

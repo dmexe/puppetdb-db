@@ -5,14 +5,14 @@ window.App.MonthlyStats = Backbone.Model.extend
     '/api/stats/monthly'
 
   forChart: ->
-    rs = { "days": [], "success": [], "failed": [], "requests": [] }
+    rs = { "days": [], "success": [], "failure": [], "requests": [] }
 
     _.each @attributes, (day) ->
       tm = moment(day[0]).format("D MMM")
       rs.days.push tm
       it = day[1]
       rs.success.push  it.success
-      rs.failed.push   it.failed
+      rs.failure.push  it.failure
       rs.requests.push it.requests
     rs
 
@@ -24,16 +24,13 @@ window.App.NodeMonthlyStats = Backbone.Model.extend
     "/api/nodes/#{@node.name}/stats/monthly"
 
   forChart: ->
-    rs = { "days": [], "success": [], "failed": [], "duration": [] }
+    rs = { "days": [], "success": [], "failure": [], "requests": [] }
 
     _.each @attributes, (day) ->
       tm = moment(day[0]).format("D MMM")
       rs.days.push tm
       it = day[1]
       rs.success.push  it.success
-      rs.failed.push   it.failed
-      if it.requests == 0
-        rs.duration.push 0
-      else
-        rs.duration.push(it.duration / it.requests)
+      rs.failure.push  it.failure
+      rs.requests.push it.requests
     rs
