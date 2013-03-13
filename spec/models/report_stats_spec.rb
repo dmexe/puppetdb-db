@@ -35,6 +35,24 @@ describe ReportStats do
     it "should build from string" do
       expect(ReportStats.new(json).attrs).to eq attrs
     end
+
+    context ".active?" do
+      it "should be if has success reports" do
+        attrs.merge!("success" => 1, "failure" => 0)
+        report = ReportStats.new attrs
+        expect(report).to be_active
+      end
+      it "should be if has failed reports" do
+        attrs.merge!("success" => 0, "failure" => 1)
+        report = ReportStats.new attrs
+        expect(report).to be_active
+      end
+      it "should not be if no failed and success reports" do
+        attrs.merge!("success" => 0, "failure" => 0)
+        report = ReportStats.new attrs
+        expect(report).to_not be_active
+      end
+    end
   end
 
   context "#save" do

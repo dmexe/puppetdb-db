@@ -12,7 +12,7 @@ class Report
     end
 
     def index_key
-      "db:reports"
+      "db:index:reports"
     end
 
     def find_keys(from = nil)

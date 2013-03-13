@@ -4,7 +4,7 @@ describe Report do
   let(:tm)        { (Time.now - 10).utc }
   let(:attrs)     { report_attrs("timestamp" => tm) }
   let(:key)       { "db:reports:abcd" }
-  let(:index_key) { "db:reports" }
+  let(:index_key) { "db:index:reports" }
   let(:json)      { [attrs].to_json }
   let(:report)    { Report.new [attrs] }
   subject { report }
@@ -49,7 +49,7 @@ describe Report do
   context "(class methods)" do
     subject { Report }
 
-    its(:index_key) { should eq 'db:reports' }
+    its(:index_key) { should eq 'db:index:reports' }
     its(:redis)     { should be }
 
     it ".key" do

@@ -81,6 +81,10 @@ class ReportStats
     self
   end
 
+  def active?
+    (success + failure) > 0
+  end
+
   def exists?
     redis.exists key
   end

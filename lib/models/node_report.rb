@@ -17,7 +17,8 @@ class NodeReport
       end
       from ||= Time.at(Time.now.to_i - i30_days)
       to = Time.now
-      redis.zrevrangebyscore index_key(node_name), to.to_i, from.to_i, params
+      key = options[:active] ? index_active_key(node_name) : index_key(node_name)
+      redis.zrevrangebyscore key, to.to_i, from.to_i, params
     end
 
     def find_by_node(node_name, options = {})
@@ -43,7 +44,11 @@ class NodeReport
     end
 
     def index_key(node_name)
-      "db:node:#{node_name}:reports"
+      "db:index:node:#{node_name}:reports:all"
+    end
+
+    def index_active_key(node_name)
+      "db:index:node:#{node_name}:reports:active"
     end
 
     def exists?(node_name, hash)
@@ -101,13 +106,18 @@ class NodeReport
     self.class.index_key(certname)
   end
 
+  def index_active_key
+    self.class.index_active_key(certname)
+  end
+
   def exists?
     self.class.exists?(certname, hash)
   end
 
-  def save
-    redis.set key, to_json
+  def save(options = {})
     redis.zadd index_key, start_time.to_i, key
+    redis.zadd index_active_key, start_time.to_i, key if options[:is_active] == true
+    redis.set key, to_json
   end
 
   private

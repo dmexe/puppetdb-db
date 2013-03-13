@@ -1,14 +1,15 @@
 require 'spec_helper'
 
 describe NodeReport do
-  let(:tm)          { Time.now.utc - 10 }
-  let(:node)        { "example.com" }
-  let(:attrs)       { node_report_attrs "certname" => node, "start-time" => tm }
-  let(:key)         { "db:node:example.com:reports:abcd" }
-  let(:index_key)   { "db:node:example.com:reports" }
-  let(:node_report) { NodeReport.new attrs }
-  let(:json)        { attrs.to_json }
-  subject { node_report }
+  let(:tm)               { Time.now.utc - 10 }
+  let(:node)             { "example.com" }
+  let(:attrs)            { node_report_attrs "certname" => node, "start-time" => tm }
+  let(:key)              { "db:node:example.com:reports:abcd" }
+  let(:index_key)        { "db:index:node:example.com:reports:all" }
+  let(:index_active_key) { "db:index:node:example.com:reports:active" }
+  let(:node_report)      { NodeReport.new attrs }
+  let(:json)             { attrs.to_json }
+  subject                { node_report }
 
   cleanup_redis!
 
@@ -23,6 +24,7 @@ describe NodeReport do
     its(:attrs)            { should eq attrs }
     its(:to_json)          { should eq attrs.to_json }
     its(:index_key)        { should eq index_key }
+    its(:index_active_key) { should eq index_active_key }
     its(:key)              { should eq key }
     its(:exists?)          { should_not be }
 
@@ -32,14 +34,18 @@ describe NodeReport do
   end
 
   context "#save" do
-    subject { ->{ node_report.save; node_report } }
+    subject { ->{ node_report.save(is_active: true); node_report } }
 
-    it "should store the index" do
-      should change{ r_get key }.from(nil).to(json)
+    it "should store in the index" do
+      should change{ r_zrange index_key }.from([]).to([[key, tm.to_i.to_f]])
+    end
+
+    it "should store in the active index" do
+      should change{ r_zrange index_active_key }.from([]).to([[key, tm.to_i.to_f]])
     end
 
     it "should store a node report" do
-      should change{ r_zrange index_key }.from([]).to([[key, tm.to_i.to_f]])
+      should change{ r_get key }.from(nil).to(json)
     end
 
     it do
@@ -70,6 +76,15 @@ describe NodeReport do
       context "with limit and offset" do
         subject { find_keys_by_node :limit => 1, :offset => 1 }
         it { should eq [key] }
+      end
+
+      context "active only" do
+        subject { find_keys_by_node :active => true }
+        let(:key3)  { "db:node:example.com:reports:123" }
+        let(:json3) { attrs2.merge("hash" => "123") }
+
+        before { NodeReport.populate([json3]).map{|i| i.save(:is_active => true) } }
+        it { should eq [key3]}
       end
 
       def find_keys_by_node(options = {})
@@ -122,7 +137,11 @@ describe NodeReport do
     end
 
     it ".index_key" do
-      expect(subject.index_key 'host').to eq 'db:node:host:reports'
+      expect(subject.index_key 'host').to eq 'db:index:node:host:reports:all'
+    end
+
+    it ".index_active_key" do
+      expect(subject.index_active_key 'host').to eq 'db:index:node:host:reports:active'
     end
 
     it ".exists?" do
