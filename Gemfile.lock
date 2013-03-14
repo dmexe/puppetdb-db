@@ -1,3 +1,10 @@
+GIT
+  remote: git://github.com/puma/puma.git
+  revision: 2e2440024623e91bc4f3eb9052b27164627a60f3
+  specs:
+    puma (2.0.0.b6)
+      rack (>= 1.1, < 2.0)
+
 GEM
   remote: http://rubygems.org/
   specs:
@@ -39,8 +46,6 @@ GEM
     pry-doc (0.4.4)
       pry (>= 0.9.9.6)
       yard (~> 0.8.1)
-    puma (1.6.3)
-      rack (~> 1.2)
     rack (1.5.2)
     rack-protection (1.4.0)
       rack
@@ -102,7 +107,7 @@ DEPENDENCIES
   json
   pry
   pry-doc
-  puma
+  puma!
   rack-test
   rake
   redis-namespace
