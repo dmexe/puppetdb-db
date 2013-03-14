@@ -8,28 +8,12 @@ class NodeReport
       NodeReport.new(json, :stats => stats.attrs).save
     end
 
-    def latest_keys(*args)
-      options = args.pop if args.last.is_a?(Hash)
-      options ||= {}
-      node_name = args.first
-      from = options[:from]
-      params = {}
-      if options[:limit]
-        params[:limit] = [options[:offset] || 0, options[:limit]]
-      end
-      from ||= Time.at(Time.now.to_i - i30_days)
-      to = Time.now
-      key = nil
-      if node_name
-        key = options[:active] ? index(node_name, :active) : index(node_name, :all)
-      else
-        key = index(nil, :all)
-      end
-      redis.zrevrangebyscore key, to.to_i, from.to_i, params
-    end
-
     def latest(*args)
-      keys = latest_keys(*args)
+      options   = args.pop if args.last.is_a?(Hash)
+      options ||= {}
+      scope     = args.shift
+      node_name = args.shift
+      keys = index(node_name, scope).all(*(args << options))
       return [] if keys.empty?
       reports = redis.mget(keys)
       reports.map!{|i| NodeReport.new i }
@@ -39,26 +23,21 @@ class NodeReport
       "db:node:#{node_name}:reports:#{hash}"
     end
 
-    def index(node_name, idx)
+    def index(node_name, scope)
       if node_name == nil
-        "db:index:node_reports:#{idx}"
+        Index["node_reports:#{scope}"]
       else
-        "db:index:node:#{node_name}:reports:#{idx}"
+        Index["node:#{node_name}:reports:#{scope}"]
       end
     end
 
-    def exists?(node_name, hash)
-      !!redis.zrank(index(node_name, :all), key(node_name, hash))
+    def exists?(node_name, key)
+      index(node_name, :all).exists? key
     end
 
     def redis
       App.redis
     end
-
-    private
-      def i30_days
-        60 * 60 * 24 * 30
-      end
   end
 
   attr_reader :attrs
@@ -106,7 +85,7 @@ class NodeReport
   end
 
   def exists?
-    self.class.exists?(certname, hash)
+    self.class.exists?(certname, key)
   end
 
   def stats
@@ -114,9 +93,14 @@ class NodeReport
   end
 
   def save
-    redis.zadd index(:all), start_time.to_i, key
-    redis.zadd nodeless_index(:all), start_time.to_i, key
-    redis.zadd index(:active), start_time.to_i, key if stats.active?
+    nodeless_index(:all).add    start_time, key
+    nodeless_index(:active).add start_time, key if stats.active?
+    nodeless_index(:failed).add start_time, key if stats.failed?
+
+    index(:all).add    start_time, key
+    index(:active).add start_time, key if stats.active?
+    index(:failed).add start_time, key if stats.failed?
+
     redis.set key, to_json
     self
   end

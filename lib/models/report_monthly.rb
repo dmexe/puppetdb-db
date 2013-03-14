@@ -22,7 +22,7 @@ class ReportMonthly
 
     private
       def latest(node, from)
-        NodeReport.latest(node, from: from)
+        NodeReport.latest(:all, node, from: from)
       end
 
       def fill_data

@@ -20,7 +20,7 @@ describe ReportWorker do
 
     it "should create report summary" do
       should change{
-        f = NodeReport.latest.map(&:attrs)
+        f = NodeReport.latest(:all).map(&:attrs)
       }.from([]).to([attrs])
     end
   end

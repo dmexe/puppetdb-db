@@ -31,26 +31,26 @@ describe NodeReport do
       expect(NodeReport.new(json).attrs).to eq attrs
     end
     it "should has index" do
-      expect(node_report.index(:all)).to eq index_key
+      expect(node_report.index(:all).key).to eq index_key
     end
 
     it "should has nodeless_index" do
-      expect(node_report.nodeless_index(:all)).to eq nodeless_index_key
+      expect(node_report.nodeless_index(:all).key).to eq nodeless_index_key
     end
   end
 
   context "#save" do
-    subject { ->{ node_report.save; node_report } }
+    let(:stats) { "stats" }
+    subject { ->{ node_report.save } }
+
     before do
-      mock(node_report).stats.mock!.active? { true }
+      stub(node_report).stats { stats }
+      stub(stats).active? { false }
+      stub(stats).failed? { false }
     end
 
     it "should store in the index" do
       should change{ r_zrange index_key }.from([]).to([[key, tm.to_i.to_f]])
-    end
-
-    it "should store in the active index" do
-      should change{ r_zrange index_active_key }.from([]).to([[key, tm.to_i.to_f]])
     end
 
     it "should store in the nodeless index" do
@@ -61,7 +61,7 @@ describe NodeReport do
       should change{ r_get key }.from(nil).to(json)
     end
 
-    it do
+    it "should change exists" do
       should change(node_report, :exists?).from(false).to(true)
     end
   end
@@ -77,60 +77,15 @@ describe NodeReport do
       NodeReport.create(json2, events_attrs)
     end
 
-    context ".latest_keys" do
-      subject { latest_keys }
-
-      it { should eq [key2, key] }
-
-      context "with limit" do
-        subject { latest_keys :limit => 1 }
-        it { should eq [key2] }
-      end
-
-      context "with limit and offset" do
-        subject { latest_keys :limit => 1, :offset => 1 }
-        it { should eq [key] }
-      end
-
-      context "active only" do
-        subject { latest_keys :active => true }
-
-        it { should eq [key2]}
-      end
-
-      context "without node" do
-        subject { NodeReport.latest_keys }
-        it { should eq [key2, key] }
-      end
-
-      def latest_keys(options = {})
-        NodeReport.latest_keys(node, options)
-      end
-    end
-
     context ".latest" do
-      subject { latest }
+      subject { NodeReport.latest(:all, node).map{|i| i.attrs} }
       let(:stats) { { "_stats" => { "success" => 1, "failure" => 1} } }
 
       it { should eq [attrs2.merge(stats), attrs] }
 
-      context "with limit" do
-        subject { latest :limit => 1 }
-        it { should eq [attrs2.merge(stats)] }
-      end
-
-      context "with limit and offset" do
-        subject { latest :limit => 1, :offset => 1 }
-        it { should eq [attrs] }
-      end
-
       context "without node" do
-        subject { NodeReport.latest.map{|i| i.attrs} }
+        subject { NodeReport.latest(:all).map{|i| i.attrs} }
         it { should eq [attrs2.merge(stats), attrs] }
-      end
-
-      def latest(options = {})
-        NodeReport.latest(node, options).map{|i| i.attrs }
       end
     end
   end
@@ -138,21 +93,19 @@ describe NodeReport do
   context "(class methods)" do
     subject { NodeReport }
 
-    its(:redis){ should be }
-
     it ".key" do
       expect(subject.key 'host', 'qwerty').to eq 'db:node:host:reports:qwerty'
     end
 
     it ".index" do
-      expect(subject.index 'host', 'all').to eq 'db:index:node:host:reports:all'
+      expect(subject.index('host', 'all').key).to eq 'db:index:node:host:reports:all'
     end
 
     it ".exists?" do
       expect{
         node_report.save
       }.to change{
-        subject.exists? 'example.com', 'abcd'
+        subject.exists? node, key
       }.from(false).to(true)
     end
 
