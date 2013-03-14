@@ -15,7 +15,10 @@ describe ReportWorker do
     end
 
     it "should create reports" do
-      should change(Report, :find_keys).from([]).to(["db:reports:#{hash}"])
+      should change{
+        r = Report.first(hash)
+        r && r.events.first
+      }.from(nil).to(hash_including("property" => "ensure"))
     end
 
     it "should create report summary" do

@@ -71,9 +71,9 @@ describe Index do
     end
   end
 
-  it "[]" do
-    expect(Index[:foo].key).to eq 'db:index:foo'
-    expect(Index[:bar].key).to eq 'db:index:bar'
-    expect(Index[:baz].object_id).to eq Index[:baz].object_id
+  context ".[]" do
+    subject { Index[:foo] }
+    it{ should be_an_instance_of Index }
+    its(:object_id){ should eq Index[:foo].object_id }
   end
 end

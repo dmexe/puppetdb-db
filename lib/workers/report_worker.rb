@@ -8,7 +8,7 @@ class ReportWorker
   def perform(hash, node_report)
     events       = client.report hash
     node_report  = NodeReport.create node_report, events
-    report       = Report.new(events).save
+    report       = Report.create events
     report
   end
 

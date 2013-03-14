@@ -11,32 +11,27 @@ class NodeReport
     def latest(*args)
       options   = args.pop if args.last.is_a?(Hash)
       options ||= {}
-      scope     = args.shift
+      scope     = args.shift || :all
       node_name = args.shift
-      keys = index(node_name, scope).all(*(args << options))
-      return [] if keys.empty?
-      reports = redis.mget(keys)
+      keys      = index(node_name, scope).all(*(args << options))
+      reports   = Storage.get keys
       reports.map!{|i| NodeReport.new i }
     end
 
     def key(node_name, hash)
-      "db:node:#{node_name}:reports:#{hash}"
+      "node:#{node_name}:reports:#{hash}"
     end
 
     def index(node_name, scope)
       if node_name == nil
         Index["node_reports:#{scope}"]
       else
-        Index["node:#{node_name}:reports:#{scope}"]
+        Index["nodes:#{node_name}:reports:#{scope}"]
       end
     end
 
     def exists?(node_name, key)
       index(node_name, :all).exists? key
-    end
-
-    def redis
-      App.redis
     end
   end
 
@@ -101,12 +96,7 @@ class NodeReport
     index(:active).add start_time, key if stats.active?
     index(:failed).add start_time, key if stats.failed?
 
-    redis.set key, to_json
+    Storage[key].add self
     self
   end
-
-  private
-    def redis
-      self.class.redis
-    end
 end

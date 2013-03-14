@@ -4,9 +4,9 @@ describe NodeReport do
   let(:tm)               { Time.now.utc - 10 }
   let(:node)             { "example.com" }
   let(:attrs)            { node_report_attrs "certname" => node, "start-time" => tm, "_stats" => {} }
-  let(:key)              { "db:node:example.com:reports:abcd" }
-  let(:index_key)        { "db:index:node:example.com:reports:all" }
-  let(:index_active_key) { "db:index:node:example.com:reports:active" }
+  let(:key)              { "node:example.com:reports:abcd" }
+  let(:index_key)        { "db:index:nodes:example.com:reports:all" }
+  let(:index_active_key) { "db:index:nodes:example.com:reports:active" }
   let(:nodeless_index_key) { "db:index:node_reports:all" }
   let(:node_report)      { NodeReport.new attrs }
   let(:json)             { attrs.to_json }
@@ -49,20 +49,56 @@ describe NodeReport do
       stub(stats).failed? { false }
     end
 
-    it "should store in the index" do
-      should change{ r_zrange index_key }.from([]).to([[key, tm.to_i.to_f]])
+    it "should store in the all:index" do
+      should change {
+        Index['nodes:example.com:reports:all'].all :score => true
+      }.from([]).to([[key, tm.to_i.to_f]])
     end
 
-    it "should store in the nodeless index" do
-      should change{ r_zrange nodeless_index_key}.from([]).to([[key, tm.to_i.to_f]])
+    it "should store in the nodeless all:index" do
+      should change {
+        Index['node_reports:all'].all :score => true
+      }.from([]).to([[key, tm.to_i.to_f]])
     end
 
     it "should store a node report" do
-      should change{ r_get key }.from(nil).to(json)
+      should change{ Storage.first key }.from(nil).to(json)
     end
 
     it "should change exists" do
       should change(node_report, :exists?).from(false).to(true)
+    end
+
+    context "when is active" do
+      before { stub(stats).active? { true } }
+
+      it "should store in the active:index" do
+        should change {
+          Index['nodes:example.com:reports:active'].all :score => true
+        }.from([]).to([[key, tm.to_i.to_f]])
+      end
+
+      it "should store in the nodeless active:index" do
+        should change {
+          Index['node_reports:active'].all :score => true
+        }.from([]).to([[key, tm.to_i.to_f]])
+      end
+    end
+
+    context "when is failed" do
+      before { stub(stats).failed? { true } }
+
+      it "should store in the failed:index" do
+        should change {
+          Index['nodes:example.com:reports:failed'].all :score => true
+        }.from([]).to([[key, tm.to_i.to_f]])
+      end
+
+      it "should store in the nodeless active:failed" do
+        should change {
+          Index['node_reports:failed'].all :score => true
+        }.from([]).to([[key, tm.to_i.to_f]])
+      end
     end
   end
 
@@ -94,11 +130,11 @@ describe NodeReport do
     subject { NodeReport }
 
     it ".key" do
-      expect(subject.key 'host', 'qwerty').to eq 'db:node:host:reports:qwerty'
+      expect(subject.key 'host', 'qwerty').to eq 'node:host:reports:qwerty'
     end
 
     it ".index" do
-      expect(subject.index('host', 'all').key).to eq 'db:index:node:host:reports:all'
+      expect(subject.index('host', 'all').key).to eq 'db:index:nodes:host:reports:all'
     end
 
     it ".exists?" do

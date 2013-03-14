@@ -26,7 +26,7 @@ module App
     end
 
     get '/nodes/:node/reports' do |node|
-      json NodeReport.latest(node, limit: 30, active: true)
+      json NodeReport.latest(:active, node, limit: 30)
     end
 
     get '/nodes/:node/reports/:report' do |node, report|

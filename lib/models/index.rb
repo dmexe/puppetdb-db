@@ -30,6 +30,7 @@ class Index
     if options[:limit]
       params[:limit] = [options[:offset] || 0, options[:limit]]
     end
+    params[:withscores] = true if options[:score]
 
     if order == :asc
       redis.zrangebyscore key, from.to_i, to.to_i, params

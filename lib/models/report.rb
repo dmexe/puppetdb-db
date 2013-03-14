@@ -3,54 +3,37 @@ require 'time'
 
 class Report
   class << self
-    def populate(json)
-      Report.new json
+    def create(json)
+      new(json).save
     end
 
     def key(hash)
-      "db:reports:#{hash}"
+      "reports:#{hash}"
     end
 
-    def index_key
-      "db:index:reports"
+    def index
+      Index['reports']
     end
 
-    def find_keys(from = nil)
-      from ||= Time.at(Time.now.to_i - i30_days)
-      to = Time.now
-      redis.zrevrangebyscore index_key, to.to_i, from.to_i
-    end
-
-    def find(hashes)
+    def get(hashes)
       hashes = [hashes] unless hashes.is_a?(Array)
-      reports = redis.mget hashes.map{|i| key(i) }
-      reports.compact!
-      reports.map! do |report|
-        populate report
+      hashes = hashes.map{|i| key(i) }
+      reports = Storage.get hashes
+      reports = (reports || []).map do |report|
+        new report
       end
       reports
     end
 
     def first(hash)
-      find([hash]).first
+      get([hash]).first
     end
-
-    def redis
-      App.redis
-    end
-
-    private
-      def i30_days
-        60 * 60 * 24 * 30
-      end
   end
 
   attr_reader :events, :hash
 
   def initialize(events, options = {})
-    if events.is_a?(String)
-      events = JSON.parse(events)
-    end
+    events  = JSON.parse(events) if events.is_a?(String)
     @events = events
     @hash   = options[:hash] || (@events.first && @events.first["report"])
     raise ArgumentError unless @hash
@@ -61,8 +44,9 @@ class Report
   end
 
   def save
-    redis.set key, to_json
-    redis.zadd index_key, timestamp.to_i, key
+    index.add timestamp, key
+    Storage[key].add self
+    self
   end
 
   def timestamp
@@ -73,12 +57,7 @@ class Report
     self.class.key hash
   end
 
-  def index_key
-    self.class.index_key
+  def index
+    self.class.index
   end
-
-  private
-    def redis
-      self.class.redis
-    end
 end

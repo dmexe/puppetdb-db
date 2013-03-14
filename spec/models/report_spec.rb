@@ -3,7 +3,7 @@ require 'spec_helper'
 describe Report do
   let(:tm)        { (Time.now - 10).utc }
   let(:attrs)     { report_attrs("timestamp" => tm) }
-  let(:key)       { "db:reports:abcd" }
+  let(:key)       { "reports:abcd" }
   let(:index_key) { "db:index:reports" }
   let(:json)      { [attrs].to_json }
   let(:report)    { Report.new [attrs] }
@@ -15,7 +15,7 @@ describe Report do
     its(:to_json)         { should eq json }
     its("timestamp.to_i") { should eq tm.to_i }
     its(:key)             { should eq key }
-    its(:index_key)       { should eq index_key }
+    its("index.key")      { should eq index_key }
     its(:hash)            { should eq "abcd" }
     its(:events)          { should eq [attrs] }
 
@@ -35,31 +35,24 @@ describe Report do
   end
 
   context "#save" do
-    subject { ->{ report.save; report } }
+    subject { ->{ report.save } }
 
     it "should store the index" do
-      should change{ r_get key }.from(nil).to(json)
+      should change{ Index['reports'].all }.from([]).to([key])
     end
 
     it "should store a report" do
-      should change{ r_zrange index_key }.from([]).to([[key, tm.to_i.to_f]])
+      should change{ Storage.first key }.from(nil).to(json)
     end
   end
 
   context "(class methods)" do
     subject { Report }
 
-    its(:index_key) { should eq 'db:index:reports' }
-    its(:redis)     { should be }
+    its("index.key") { should eq 'db:index:reports' }
 
     it ".key" do
-      expect(subject.key "xzy").to eq 'db:reports:xzy'
-    end
-
-    context ".populate" do
-      subject { Report.populate json }
-      it { should be_an_instance_of Report }
-      its(:events) { should eq [attrs] }
+      expect(subject.key "xzy").to eq 'reports:xzy'
     end
   end
 
@@ -70,26 +63,11 @@ describe Report do
     }
 
     before do
-      [attrs,attrs2].each{|i| Report.new([i]).save }
+      [attrs,attrs2].each{|i| Report.create([i]) }
     end
 
-    context ".find_keys" do
-      subject { find_keys }
-
-      it { should eq ["db:reports:zxy", "db:reports:abcd"] }
-
-      context "with from" do
-        subject { find_keys tm2 }
-        it { should eq ['db:reports:zxy'] }
-      end
-
-      def find_keys(from = nil)
-        Report.find_keys from
-      end
-    end
-
-    context ".find" do
-      subject { Report.find(["zxy", 'abcd']).map{|i| i.events } }
+    context ".get" do
+      subject { Report.get(["zxy", 'abcd']).map{|i| i.events } }
       it { should eq [[attrs2],[attrs]] }
     end
 
