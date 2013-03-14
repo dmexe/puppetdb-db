@@ -5,8 +5,8 @@ describe NodeReport do
   let(:node)             { "example.com" }
   let(:attrs)            { node_report_attrs "certname" => node, "start-time" => tm, "_stats" => {} }
   let(:key)              { "node:example.com:reports:abcd" }
-  let(:index_key)        { "db:index:nodes:example.com:reports:all" }
-  let(:index_active_key) { "db:index:nodes:example.com:reports:active" }
+  let(:index_key)        { "db:index:node:example.com:reports:all" }
+  let(:index_active_key) { "db:index:node:example.com:reports:active" }
   let(:nodeless_index_key) { "db:index:node_reports:all" }
   let(:node_report)      { NodeReport.new attrs }
   let(:json)             { attrs.to_json }
@@ -51,7 +51,7 @@ describe NodeReport do
 
     it "should store in the all:index" do
       should change {
-        Index['nodes:example.com:reports:all'].all :score => true
+        Index['node:example.com:reports:all'].all :score => true
       }.from([]).to([[key, tm.to_i.to_f]])
     end
 
@@ -74,7 +74,7 @@ describe NodeReport do
 
       it "should store in the active:index" do
         should change {
-          Index['nodes:example.com:reports:active'].all :score => true
+          Index['node:example.com:reports:active'].all :score => true
         }.from([]).to([[key, tm.to_i.to_f]])
       end
 
@@ -90,7 +90,7 @@ describe NodeReport do
 
       it "should store in the failed:index" do
         should change {
-          Index['nodes:example.com:reports:failed'].all :score => true
+          Index['node:example.com:reports:failed'].all :score => true
         }.from([]).to([[key, tm.to_i.to_f]])
       end
 
@@ -134,7 +134,7 @@ describe NodeReport do
     end
 
     it ".index" do
-      expect(subject.index('host', 'all').key).to eq 'db:index:nodes:host:reports:all'
+      expect(subject.index('host', 'all').key).to eq 'db:index:node:host:reports:all'
     end
 
     it ".exists?" do
