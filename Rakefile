@@ -10,10 +10,15 @@ task :environment do
 end
 
 namespace :cron do
-  desc "Touch NodeReportsWorker"
-  task :nodes => :environment do
+  desc "Fetch nodes from puppetdb"
+  task :touch => :environment do
     App.puppetdb.nodes.each do |n|
-      NodeReportsWorker.perform_async(n['name'])
+      remote = Node.new n
+      local  = Node.first remote.name
+      if !local || remote.report_timestamp != local.report_timestamp
+        remote.save
+        NodeReportsWorker.perform_async(remote.name)
+      end
     end
   end
 end

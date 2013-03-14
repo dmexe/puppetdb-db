@@ -14,7 +14,7 @@ module App
     end
 
     get '/nodes' do
-      json client.nodes
+      json Node.latest(:report)
     end
 
     get '/nodes/:node/stats/monthly' do |node|

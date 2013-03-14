@@ -26,7 +26,7 @@ class NodeReport
       if node_name == nil
         Index["node_reports:#{scope}"]
       else
-        Index["nodes:#{node_name}:reports:#{scope}"]
+        Index["node:#{node_name}:reports:#{scope}"]
       end
     end
 

@@ -80,7 +80,6 @@ module App
       end
 
       def get(url, options = {})
-        puts url.inspect
         conn.get("/v2/#{url}", options).body
       end
 
