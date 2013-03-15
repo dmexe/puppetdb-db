@@ -53,6 +53,16 @@ module FixturesSpecHelper
     ]
   end
 
+  def node_attrs(options = {})
+    {
+      "name"              => "example.com",
+      "deactivated"       => nil,
+      "catalog_timestamp" => "2013-03-11T15:00:13.458Z",
+      "facts_timestamp"   => "2013-03-11T15:00:10.754Z",
+      "report_timestamp"  => "2013-03-11T15:00:18.000Z"
+    }.merge(options)
+  end
+
   def json_fixture(name)
     File.read File.expand_path(__FILE__ + "/../../fixtures/#{name}.json")
   end
