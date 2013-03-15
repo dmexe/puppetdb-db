@@ -10,7 +10,7 @@
       <td>
         <%= @linkTo node %>
       </td>
-      <td><%= node.reportAt() %></td>
+      <td><%= node.reportAt().calendar() %></td>
     </tr>
   <% end %>
 </table>

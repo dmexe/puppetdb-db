@@ -9,8 +9,5 @@ window.App.ReportsCollection = Backbone.Collection.extend
   url: ->
     "/api/nodes/#{@node.name}/reports"
 
-  comparator: (report) ->
-    report.startAtTimestamp() * -1
-
   findByHash: (hash) ->
     @where(hash: hash)[0]

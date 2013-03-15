@@ -6,17 +6,14 @@ window.App.Report = Backbone.Model.extend
     @name    = @hash.substring(0,6)
     @events  = new App.EventsCollection([], report: @)
 
-  startAtTimestamp: ->
-    Date.parse(@get "start-time")
-
-  endAtTimestamp: ->
-    Date.parse(@get "end-time")
-
   startAt: ->
-    new Date(@startAtTimestamp()).toLocaleString()
+    moment(@get "start-time")
+
+  endAt: ->
+    moment(@get "end-time")
 
   duration: ->
-    (@endAtTimestamp() - @startAtTimestamp()) / 1000
+    @endAt().seconds() - @startAt().seconds()
 
   summary: ->
     @get "_stats"

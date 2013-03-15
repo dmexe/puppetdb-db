@@ -5,11 +5,8 @@ window.App.Node = Backbone.Model.extend
     @facts          = new App.FactsCollection([], node: @)
     @reports        = new App.ReportsCollection([], node: @)
 
-  reportAtTimestamp: ->
-    Date.parse(@get "report_timestamp")
-
   reportAt: ->
-    new Date(@reportAtTimestamp()).toLocaleString()
+    moment(@get "report_timestamp")
 
   fact: (name) ->
     @facts.findByName(name).value

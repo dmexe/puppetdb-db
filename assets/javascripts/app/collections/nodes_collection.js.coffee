@@ -3,8 +3,5 @@ window.App.NodesCollection = Backbone.Collection.extend
 
   url: '/api/nodes'
 
-  comparator: (node) ->
-    node.reportAtTimestamp() * -1
-
   findByName: (name) ->
     @where(name: name)[0]
