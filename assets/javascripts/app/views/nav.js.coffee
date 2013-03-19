@@ -1,24 +1,30 @@
 window.App.NavView = Backbone.View.extend
   el: '.header'
 
-  render:(options = {}) ->
-    @html 'layout/navigation', values: @values(options)
+  initialize: ->
+    @defaultValues = [{ link: "/", name: "PuppetDB Dashboard" }]
 
-  values: (options) ->
-    @defaultValues ||= [{ link: "/", name: "PuppetDB Dashboard" }]
-    val = _.clone(@defaultValues)
-    if _.isEmpty(options)
-      val.active = "/"
-    else if options.query
-      val.push({name: "Query: #{options.query}", link: '/query' })
-      val.active = '/query'
-    else if options.node
-      val.push options.node
-      val.push options.node.reports
-      if options.report
-        val.push options.report
+  render:(active, values) ->
+    @html 'layout/navigation', values: values, active: active
 
-      val.active = options.report.link if options.report
-      val.active = options.node.reports.link if options.reports
-      val.active ||= options.node.link
-    val
+  activateDashboard: ->
+    @render '/', @defaultValues
+
+  activateNode: (node) ->
+    values = @nodeValues node
+    @render node.link, values
+
+  activateNodeReports: (node) ->
+    values = @nodeValues node
+    @render node.reports.link, values
+
+  activateNodeReport: (node, hash) ->
+    values = @nodeValues node
+    values.push link: hash, name: hash.substring(0,6)
+    @render hash, values
+
+  nodeValues:(node) ->
+    values = _.clone(@defaultValues)
+    values.push node
+    values.push link: node.reports.link, name: 'Reports'
+    values

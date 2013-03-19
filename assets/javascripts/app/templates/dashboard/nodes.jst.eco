@@ -1,0 +1,14 @@
+<table class="table table-striped table-nodes">
+  <thead>
+    <th>Node</th>
+    <th>Last Report At</th>
+  </thead>
+  <% for node in @nodes.models: %>
+    <tr>
+      <td>
+        <%= @linkTo node %>
+      </td>
+      <td><%= node.reportAt().calendar() %></td>
+    </tr>
+  <% end %>
+</table>

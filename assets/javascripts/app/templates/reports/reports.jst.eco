@@ -1,0 +1,21 @@
+<table class="table table-striped table-node-reports">
+  <thead>
+    <th>Status</th>
+    <th>At</th>
+    <th>Version</th>
+    <th>Hash</th>
+    <th>Duration</th>
+  </thead>
+  <tbody>
+    <% for report in @reports.models: %>
+      <tr>
+        <td><%= @reportStats report.stats() %></td>
+        <td><%= @linkToNodeReport report,  title: report.startAt().calendar() %></td>
+        <td><%= report.version %></td>
+        <td><%= @truncate report.hash, 30 %></td>
+        <td><%= report.duration() %> sec</td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+

@@ -2,32 +2,33 @@ window.App.NodeReportsView = Backbone.View.extend
   el: '.js-view-container'
 
   initialize: ->
+    @statsView = new App.NodeReportsStatsView
+    @reportsView = new App.NodeReportsReportsView
 
   activate: (node) ->
-    @node  = node
-    @stats = new App.NodeMonthlyStats({}, {node: @node})
-    @node.reports.once        "sync", @render, @
-    @stats.once               "sync", @addChart, @
-    @node.reports.fetch()
+    @node = node
+    @render()
+    @node.reports.fetch().then @addReports.bind(@)
+    @node.stats.fetch().then @addChart.bind(@)
 
   render: ->
     @html 'reports/index', node: @node
-    @node.reports.each(@addOneReport)
-    @stats.fetch()
-
-  addOneReport: (report) =>
-    view = new App.NodeReportView(model: report)
-    $("table tbody", @el).append view.render().el
 
   addChart: ->
-    new App.SummaryChart(@stats.forChart(), 'node-reports-summary-chart')
+    @statsView.render(@node.stats)
 
-window.App.NodeReportView = Backbone.View.extend
-  tagName: "tr"
+  addReports: ->
+    @reportsView.render(@node.reports).appendTo @el
 
-  initialize: ->
-    @model.on "change", @render, @
 
-  render: ->
-    @html 'reports/row', report: @model
-    @
+App.NodeReportsStatsView = Backbone.View.extend
+  render: (stats) ->
+    el = $("#node-reports-stats-view")
+    @chart = new App.SummaryChart(stats.forChart(), el.get(0))
+
+
+App.NodeReportsReportsView = Backbone.View.extend
+  id: "node-reports-reports-view"
+
+  render: (reports) ->
+    @html 'reports/reports', reports: reports

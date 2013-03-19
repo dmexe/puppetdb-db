@@ -8,7 +8,7 @@
     </tr>
   </thead>
   <body>
-    <% for event in @report.events.models: %>
+    <% for event in @events.models: %>
       <tr>
         <td><%= @eventStatusLabel event.status %></td>
         <td><%= @truncate(event.resource, 35) %></td>

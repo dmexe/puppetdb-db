@@ -4,9 +4,10 @@ window.App.NodeView = Backbone.View.extend
   initialize: ->
 
   activate: (node) ->
-    @node = node
-    @node.facts.once "sync", @render, @
-    @node.facts.fetch()
+    @node  = node
+    @facts = node.facts
+    @facts.once "sync", @render, @
+    @facts.fetch()
 
   render: ->
     @html 'node/index', node: @node

@@ -1,6 +1,0 @@
-<td><%= @reportSummary @report.summary() %></td>
-<td><%= @linkTo @report.startAt().calendar(), @report.link %></td>
-<td><%= @report.version %></td>
-<td><%= @truncate @report.hash, 30 %></td>
-<td><%= @report.duration() %> sec</td>
-

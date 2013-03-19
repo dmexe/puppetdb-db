@@ -3,8 +3,7 @@
 body {
   color: white;
   background: #f2e9d9;
-  font-family:  Helvetica, sans-serif;
-  font-size: 14px;
+  font-family:  'PT Sans', sans-serif;
 
   > .container {
     color: #666;
@@ -27,11 +26,6 @@ body {
         font-size: 15px;
         padding: 1em .5em;
       }
-    }
-
-    #node-reports-summary-chart {
-      height: 250px;
-      margin-bottom: 2em;
     }
 
     table.table-node-facts {
@@ -132,6 +126,13 @@ body {
 }
 
 // dashboard
+
+#dashboard-stats-view,
+#node-reports-stats-view {
+  height: 250px;
+  margin-bottom: 4em;
+}
+
 .node-facts-info {
   height: 5em;
   margin-bottom: 3em;
@@ -212,7 +213,8 @@ h3 {
 table.table {
   th {
     font-weight: normal !important;
-    font-size: 17px;
+    font-size: 1em !important;
+    color: #999 !important;
   }
 
   td {

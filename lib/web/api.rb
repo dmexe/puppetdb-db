@@ -5,16 +5,21 @@ module App
       content_type 'application/json'
     end
 
-    get '/metrics' do
-      json client.metrics
-    end
-
     get '/stats/monthly' do
       json ReportMonthly.stats
     end
 
     get '/nodes' do
       json Node.latest(:report)
+    end
+
+    get '/reports' do
+      scope = (params["scope"] || :active).to_sym
+      json NodeReport.latest(scope, limit: 30)
+    end
+
+    get '/nodes/:node' do |node|
+      json Node.first node
     end
 
     get '/nodes/:node/stats/monthly' do |node|

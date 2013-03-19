@@ -1,37 +1,57 @@
-window.App.DashboardView = Backbone.View.extend
+App.DashboardView = Backbone.View.extend
   el: '.js-view-container'
 
   initialize: ->
-    @nodes   = @options.nodes
-    @stats   = new App.MonthlyStats
-    @metrics = new App.Metrics
-    #@metrics.on "sync", @addMetrics, @
-    @stats.on   "sync", @addStats, @
+    @stats       = new App.MonthlyStats
+    @nodes       = new App.NodesCollection
+    @reports     = new App.NodeReportsCollection
+    @statsView   = new App.DashboardStatsView(model: @stats)
+    @nodesView   = new App.DashboardNodesView(collection: @nodes)
+    @reportsView = new App.DashboardReportsView(collection: @reports)
+    @nodes.on   "sync", @addNodes,   @
+    @stats.on   "sync", @addStats,   @
+    @reports.on "sync", @addReports, @
 
   activate: ->
-    @metrics.fetch()
-    @stats.fetch()
     @render()
+    @stats.fetch()
+    @nodes.fetch()
+    @reports.fetch()
 
   render: ->
-    @html 'dashboard/show', nodes: @nodes
-
-  addMetrics: ->
-    metrics = new App.MetricsView model: @metrics
-    $(".table-nodes", $(@el)).before metrics.render().el
+    @html 'dashboard/show'
 
   addStats: ->
-    data = @stats.forChart()
-    chart = new App.SummaryChart(data, 'node-reports-summary-chart')
+    @statsView.render()
 
-window.App.MetricsView = Backbone.View.extend
-  tagName: "ul"
-  className: "metrics inline well"
+  addNodes: ->
+    @nodesView.render().appendTo $(".pill-content", @el)
+    @toggleTab()
 
-  initialize: ->
-    @model = @options.model
+  addReports: ->
+    @reportsView.render().appendTo $(".pill-content", @el)
+    @toggleTab()
+
+  toggleTab: ->
+    id = $(".pill-content .active", @el).attr("id")
+    $(".nav a[href=##{id}]", @el).click()
+
+
+App.DashboardStatsView = Backbone.View.extend
+  render: ->
+    el = $("#dashboard-stats-view")
+    @chart = new App.SummaryChart(@model.forChart(), el.get(0))
+
+App.DashboardNodesView = Backbone.View.extend
+  id: "dashboard-nodes-view"
+  className: "pill-pane active"
 
   render: ->
-    @html 'dashboard/metrics', metrics: @model
-    @
+    @html "dashboard/nodes", nodes: @collection
 
+App.DashboardReportsView = Backbone.View.extend
+  id: "dashboard-reports-view"
+  className: "pill-pane"
+
+  render: ->
+    @html "dashboard/reports", reports: @collection

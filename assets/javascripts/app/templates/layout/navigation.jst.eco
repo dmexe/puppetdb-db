@@ -1,16 +1,11 @@
 <ul class="navigation">
   <% for value in @values: %>
-    <li class="<%= "active" if value.link == @values.active %>">
-      <% if value.link == @values.active: %>
+    <li class="<%= "active" if value.link == @active %>">
+      <% if value.link == @active: %>
         <span><%= value.name %></span>
       <% else: %>
         <%= @linkTo value.name, value.link %>
       <% end %>
     </li>
   <% end %>
-  <li class="search">
-    <form>
-      <input type="text" name="query" value="" class="" placeholder="Search" />
-    </form>
-  </li>
 </ul>

@@ -1,10 +1,8 @@
 window.App.Report = Backbone.Model.extend
   initialize: ->
-    @hash    = @get "hash"
-    @version = @get "configuration-version"
-    @link    = "#{@collection.link}/#{@hash}"
-    @name    = @hash.substring(0,6)
-    @events  = new App.EventsCollection([], report: @)
+    @hash     = @get "hash"
+    @version  = @get "configuration-version"
+    @nodeName = @get "certname"
 
   startAt: ->
     moment(@get "start-time")
@@ -15,5 +13,5 @@ window.App.Report = Backbone.Model.extend
   duration: ->
     @endAt().seconds() - @startAt().seconds()
 
-  summary: ->
+  stats: ->
     @get "_stats"
