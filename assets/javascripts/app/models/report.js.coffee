@@ -11,7 +11,7 @@ window.App.Report = Backbone.Model.extend
     moment(@get "end-time")
 
   duration: ->
-    @endAt().seconds() - @startAt().seconds()
+    @endAt().unix() - @startAt().unix()
 
   stats: ->
     @get "_stats"
