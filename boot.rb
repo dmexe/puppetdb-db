@@ -8,6 +8,7 @@ require File.expand_path(__FILE__ + "/../lib/app")
 module App
   autoload :Home,     App.root.join('lib', 'web', 'home')
   autoload :Api,      App.root.join('lib', 'web', 'api')
+  autoload :Reports,  App.root.join('lib', 'web', 'reports')
   autoload :PuppetDB, App.root.join("lib", 'puppetdb')
 end
 
@@ -18,6 +19,7 @@ autoload :ReportStats,       App.root.join("lib", "models", "report_stats")
 autoload :ReportMonthly,     App.root.join("lib", "models", "report_monthly")
 autoload :Index,             App.root.join("lib", "models", "index")
 autoload :Storage,           App.root.join("lib", "models", "storage")
+autoload :ReportProcessing,  App.root.join("lib", "models", "report_processing")
 
 autoload :NodeReportsWorker, App.root.join("lib", "workers", "node_reports_worker")
 autoload :ReportWorker,      App.root.join("lib", "workers", "report_worker")

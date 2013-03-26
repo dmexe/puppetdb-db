@@ -63,6 +63,10 @@ module FixturesSpecHelper
     }.merge(options)
   end
 
+  def from_fixture(name)
+    File.read File.expand_path(__FILE__ + "/../../fixtures/#{name}")
+  end
+
   def json_fixture(name)
     File.read File.expand_path(__FILE__ + "/../../fixtures/#{name}.json")
   end

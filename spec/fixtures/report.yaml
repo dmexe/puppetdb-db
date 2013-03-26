@@ -1,0 +1,3462 @@
+--- !ruby/object:Puppet::Transaction::Report
+  kind: apply
+  status: failed
+  resource_statuses:
+    File[/etc/sv/puppetmaster/log/finish]: !ruby/object:Puppet::Resource::Status
+      resource: File[/etc/sv/puppetmaster/log/finish]
+      file: /opt/provision/production/vendor/modules/runit/manifests/service.pp
+      line: 81
+      evaluation_time: 0.001209
+      change_count: 0
+      out_of_sync_count: 1
+      tags:
+        - file
+        - "runit::service"
+        - runit
+        - service
+        - puppetmaster
+        - class
+        - "evrone::role::puppet::master"
+        - evrone
+        - role
+        - puppet
+        - master
+        - node
+        - default
+      time: 2013-03-22 20:11:44.741008 +00:00
+      events:
+        - !ruby/object:Puppet::Transaction::Event
+          audited: false
+          property: ensure
+          previous_value: !ruby/sym absent
+          desired_value: !ruby/sym present
+          historical_value:
+          message: "current_value absent, should be present (noop)"
+          name: !ruby/sym file_created
+          status: noop
+          time: 2013-03-22 20:11:44.741387 +00:00
+      out_of_sync: true
+      changed: false
+      resource_type: File
+      title: /etc/sv/puppetmaster/log/finish
+      skipped: false
+      failed: false
+    Cron[apt-update]: !ruby/object:Puppet::Resource::Status
+      resource: Cron[apt-update]
+      file: /opt/provision/production/vendor/modules/evrone/manifests/repo.pp
+      line: 22
+      evaluation_time: 0.000986
+      change_count: 0
+      out_of_sync_count: 1
+      tags:
+        - cron
+        - apt-update
+        - class
+        - "evrone::repo"
+        - evrone
+        - repo
+        - "evrone::role"
+        - role
+        - node
+        - default
+      time: 2013-03-22 20:11:44.035753 +00:00
+      events:
+        - !ruby/object:Puppet::Transaction::Event
+          audited: false
+          property: ensure
+          previous_value: !ruby/sym absent
+          desired_value: !ruby/sym present
+          historical_value:
+          message: "current_value absent, should be present (noop)"
+          name: !ruby/sym cron_created
+          status: noop
+          time: 2013-03-22 20:11:44.035872 +00:00
+      out_of_sync: true
+      changed: true
+      resource_type: Cron
+      title: apt-update
+      skipped: false
+      failed: false
+    File[/etc/nginx/sites-available/master.local_8140]: !ruby/object:Puppet::Resource::Status
+      resource: File[/etc/nginx/sites-available/master.local_8140]
+      file: /opt/provision/production/vendor/modules/nginx/manifests/install_site.pp
+      line: 30
+      evaluation_time: 0.002077
+      change_count: 0
+      out_of_sync_count: 1
+      tags:
+        - file
+        - "nginx::install_site"
+        - nginx
+        - install_site
+        - master.local_8140
+        - "nginx::site"
+        - site
+        - class
+        - "evrone::role::puppet::master"
+        - evrone
+        - role
+        - puppet
+        - master
+        - node
+        - default
+      time: 2013-03-22 20:11:44.607111 +00:00
+      events:
+        - !ruby/object:Puppet::Transaction::Event
+          audited: false
+          property: ensure
+          previous_value: !ruby/sym absent
+          desired_value: !ruby/sym present
+          historical_value:
+          message: "current_value absent, should be present (noop)"
+          name: !ruby/sym file_created
+          status: noop
+          time: 2013-03-22 20:11:44.607507 +00:00
+      out_of_sync: true
+      changed: false
+      resource_type: File
+      title: /etc/nginx/sites-available/master.local_8140
+      skipped: true
+      failed: false
+    Package[rake]: !ruby/object:Puppet::Resource::Status
+      resource: Package[rake]
+      file: /opt/provision/production/vendor/modules/evrone/manifests/role/puppet/master.pp
+      line: 17
+      evaluation_time: 0.069362
+      change_count: 0
+      out_of_sync_count: 1
+      tags:
+        - package
+        - rake
+        - class
+        - "evrone::role::puppet::master"
+        - evrone
+        - role
+        - puppet
+        - master
+        - node
+        - default
+      time: 2013-03-22 20:11:44.222929 +00:00
+      events:
+        - !ruby/object:Puppet::Transaction::Event
+          audited: false
+          property: ensure
+          previous_value: !ruby/sym absent
+          desired_value: !ruby/sym present
+          historical_value:
+          message: "current_value absent, should be present (noop)"
+          name: !ruby/sym package_installed
+          status: noop
+          time: 2013-03-22 20:11:44.291195 +00:00
+      out_of_sync: true
+      changed: false
+      resource_type: Package
+      title: rake
+      skipped: false
+      failed: true
+    File[/etc/nginx/sites-available]: !ruby/object:Puppet::Resource::Status
+      resource: File[/etc/nginx/sites-available]
+      file: /opt/provision/production/vendor/modules/nginx/manifests/init.pp
+      line: 99
+      evaluation_time: 0.00107
+      change_count: 0
+      out_of_sync_count: 1
+      tags:
+        - file
+        - class
+        - nginx
+        - "evrone::role::puppet::master"
+        - evrone
+        - role
+        - puppet
+        - master
+        - node
+        - default
+      time: 2013-03-22 20:11:44.605235 +00:00
+      events:
+        - !ruby/object:Puppet::Transaction::Event
+          audited: false
+          property: ensure
+          previous_value: !ruby/sym absent
+          desired_value: !ruby/sym directory
+          historical_value:
+          message: "current_value absent, should be directory (noop)"
+          name: !ruby/sym directory_created
+          status: noop
+          time: 2013-03-22 20:11:44.605574 +00:00
+      out_of_sync: true
+      changed: false
+      resource_type: File
+      title: /etc/nginx/sites-available
+      skipped: false
+      failed: false
+    Schedule[hourly]: !ruby/object:Puppet::Resource::Status
+      resource: Schedule[hourly]
+      file:
+      line:
+      change_count: 0
+      out_of_sync_count: 0
+      tags:
+        - schedule
+        - hourly
+      time: 2013-03-22 20:11:44.003351 +00:00
+      events: []
+      out_of_sync: false
+      changed: false
+      resource_type: Schedule
+      title: hourly
+      skipped: true
+      failed: false
+    Package[vim]: !ruby/object:Puppet::Resource::Status
+      resource: Package[vim]
+      file: /opt/provision/production/vendor/modules/evrone/manifests/sys.pp
+      line: 17
+      evaluation_time: 0.028681
+      change_count: 0
+      out_of_sync_count: 1
+      tags:
+        - package
+        - vim
+        - class
+        - "evrone::sys"
+        - evrone
+        - sys
+        - "evrone::role"
+        - role
+        - node
+        - default
+      time: 2013-03-22 20:11:44.466055 +00:00
+      events:
+        - !ruby/object:Puppet::Transaction::Event
+          audited: false
+          property: ensure
+          previous_value: !ruby/sym purged
+          desired_value: !ruby/sym present
+          historical_value:
+          message: "current_value purged, should be present (noop)"
+          name: !ruby/sym package_installed
+          status: noop
+          time: 2013-03-22 20:11:44.493034 +00:00
+      out_of_sync: true
+      changed: false
+      resource_type: Package
+      title: vim
+      skipped: false
+      failed: false
+    File[/etc/nginx/includes]: !ruby/object:Puppet::Resource::Status
+      resource: File[/etc/nginx/includes]
+      file: /opt/provision/production/vendor/modules/nginx/manifests/init.pp
+      line: 91
+      evaluation_time: 0.001123
+      change_count: 0
+      out_of_sync_count: 1
+      tags:
+        - file
+        - class
+        - nginx
+        - "evrone::role::puppet::master"
+        - evrone
+        - role
+        - puppet
+        - master
+        - node
+        - default
+      time: 2013-03-22 20:11:44.601587 +00:00
+      events:
+        - !ruby/object:Puppet::Transaction::Event
+          audited: false
+          property: ensure
+          previous_value: !ruby/sym absent
+          desired_value: !ruby/sym directory
+          historical_value:
+          message: "current_value absent, should be directory (noop)"
+          name: !ruby/sym directory_created
+          status: noop
+          time: 2013-03-22 20:11:44.601958 +00:00
+      out_of_sync: true
+      changed: false
+      resource_type: File
+      title: /etc/nginx/includes
+      skipped: false
+      failed: false
+    "Anchor[apt::source::Evrone]": !ruby/object:Puppet::Resource::Status
+      resource: "Anchor[apt::source::Evrone]"
+      file: /opt/provision/production/vendor/modules/apt/manifests/source.pp
+      line: 82
+      evaluation_time: 0.000183
+      change_count: 0
+      out_of_sync_count: 0
+      tags:
+        - anchor
+        - "apt::source::evrone"
+        - apt
+        - source
+        - evrone
+        - "apt::source"
+        - class
+        - "evrone::repo"
+        - repo
+        - "evrone::role"
+        - role
+        - node
+        - default
+      time: 2013-03-22 20:11:44.147804 +00:00
+      events: []
+      out_of_sync: false
+      changed: false
+      resource_type: Anchor
+      title: "apt::source::Evrone"
+      skipped: false
+      failed: false
+    Package[puppetdb-terminus]: !ruby/object:Puppet::Resource::Status
+      resource: Package[puppetdb-terminus]
+      file: /opt/provision/production/vendor/modules/evrone/manifests/role/puppet/master.pp
+      line: 21
+      evaluation_time: 0.026774
+      change_count: 0
+      out_of_sync_count: 1
+      tags:
+        - package
+        - puppetdb-terminus
+        - class
+        - "evrone::role::puppet::master"
+        - evrone
+        - role
+        - puppet
+        - master
+        - node
+        - default
+      time: 2013-03-22 20:11:44.438570 +00:00
+      events:
+        - !ruby/object:Puppet::Transaction::Event
+          audited: false
+          property: ensure
+          previous_value: !ruby/sym purged
+          desired_value: !ruby/sym present
+          historical_value:
+          message: "current_value purged, should be present (noop)"
+          name: !ruby/sym package_installed
+          status: noop
+          time: 2013-03-22 20:11:44.464969 +00:00
+      out_of_sync: true
+      changed: false
+      resource_type: Package
+      title: puppetdb-terminus
+      skipped: false
+      failed: false
+    File[/etc/puppet/puppet.conf]: !ruby/object:Puppet::Resource::Status
+      resource: File[/etc/puppet/puppet.conf]
+      file: /opt/provision/production/vendor/modules/evrone/manifests/role/puppet/master.pp
+      line: 49
+      evaluation_time: 0.00259
+      change_count: 0
+      out_of_sync_count: 2
+      tags:
+        - file
+        - class
+        - "evrone::role::puppet::master"
+        - evrone
+        - role
+        - puppet
+        - master
+        - node
+        - default
+      time: 2013-03-22 20:11:44.043090 +00:00
+      events:
+        - !ruby/object:Puppet::Transaction::Event
+          audited: false
+          property: content
+          previous_value: "{md5}2247589d683c46bfa7c2fc6456b0e7bc"
+          desired_value: "{md5}5766f1627f037640f2cd5dd723bce093"
+          historical_value:
+          message: "current_value {md5}2247589d683c46bfa7c2fc6456b0e7bc, should be {md5}5766f1627f037640f2cd5dd723bce093 (noop)"
+          name: !ruby/sym content_changed
+          status: noop
+          time: 2013-03-22 20:11:44.043576 +00:00
+        - !ruby/object:Puppet::Transaction::Event
+          audited: false
+          property: owner
+          previous_value: 0
+          desired_value: 106
+          historical_value:
+          message: "current_value root, should be puppet (noop)"
+          name: !ruby/sym owner_changed
+          status: noop
+          time: 2013-03-22 20:11:44.044716 +00:00
+      out_of_sync: true
+      changed: false
+      resource_type: File
+      title: /etc/puppet/puppet.conf
+      skipped: false
+      failed: false
+    Exec[apt_update]: !ruby/object:Puppet::Resource::Status
+      resource: Exec[apt_update]
+      file: /opt/provision/production/vendor/modules/apt/manifests/update.pp
+      line: 8
+      evaluation_time: 0.000299
+      change_count: 0
+      out_of_sync_count: 0
+      tags:
+        - exec
+        - apt_update
+        - class
+        - "apt::update"
+        - apt
+        - update
+        - "apt::source"
+        - source
+        - evrone
+        - "evrone::repo"
+        - repo
+        - "evrone::role"
+        - role
+        - node
+        - default
+      time: 2013-03-22 20:11:44.143762 +00:00
+      events: []
+      out_of_sync: false
+      changed: false
+      resource_type: Exec
+      title: apt_update
+      skipped: false
+      failed: false
+    File[/etc/sv/puppetmaster]: !ruby/object:Puppet::Resource::Status
+      resource: File[/etc/sv/puppetmaster]
+      file: /opt/provision/production/vendor/modules/runit/manifests/service.pp
+      line: 81
+      evaluation_time: 0.001975
+      change_count: 0
+      out_of_sync_count: 1
+      tags:
+        - file
+        - "runit::service"
+        - runit
+        - service
+        - puppetmaster
+        - class
+        - "evrone::role::puppet::master"
+        - evrone
+        - role
+        - puppet
+        - master
+        - node
+        - default
+      time: 2013-03-22 20:11:44.714378 +00:00
+      events:
+        - !ruby/object:Puppet::Transaction::Event
+          audited: false
+          property: ensure
+          previous_value: !ruby/sym absent
+          desired_value: !ruby/sym directory
+          historical_value:
+          message: "current_value absent, should be directory (noop)"
+          name: !ruby/sym directory_created
+          status: noop
+          time: 2013-03-22 20:11:44.715219 +00:00
+      out_of_sync: true
+      changed: false
+      resource_type: File
+      title: /etc/sv/puppetmaster
+      skipped: false
+      failed: false
+    Package[runit]: !ruby/object:Puppet::Resource::Status
+      resource: Package[runit]
+      file: /opt/provision/production/vendor/modules/runit/manifests/init.pp
+      line: 3
+      evaluation_time: 0.027585
+      change_count: 0
+      out_of_sync_count: 1
+      tags:
+        - package
+        - runit
+        - class
+        - "evrone::role::puppet::master"
+        - evrone
+        - role
+        - puppet
+        - master
+        - node
+        - default
+      time: 2013-03-22 20:11:44.342301 +00:00
+      events:
+        - !ruby/object:Puppet::Transaction::Event
+          audited: false
+          property: ensure
+          previous_value: !ruby/sym purged
+          desired_value: !ruby/sym present
+          historical_value:
+          message: "current_value purged, should be present (noop)"
+          name: !ruby/sym package_installed
+          status: noop
+          time: 2013-03-22 20:11:44.369457 +00:00
+      out_of_sync: true
+      changed: false
+      resource_type: Package
+      title: runit
+      skipped: false
+      failed: false
+    File[/etc/puppet/unicorn.rb]: !ruby/object:Puppet::Resource::Status
+      resource: File[/etc/puppet/unicorn.rb]
+      file: /opt/provision/production/vendor/modules/evrone/manifests/role/puppet/master.pp
+      line: 49
+      evaluation_time: 0.001155
+      change_count: 0
+      out_of_sync_count: 1
+      tags:
+        - file
+        - class
+        - "evrone::role::puppet::master"
+        - evrone
+        - role
+        - puppet
+        - master
+        - node
+        - default
+      time: 2013-03-22 20:11:44.019546 +00:00
+      events:
+        - !ruby/object:Puppet::Transaction::Event
+          audited: false
+          property: ensure
+          previous_value: !ruby/sym absent
+          desired_value: !ruby/sym present
+          historical_value:
+          message: "current_value absent, should be present (noop)"
+          name: !ruby/sym file_created
+          status: noop
+          time: 2013-03-22 20:11:44.019876 +00:00
+      out_of_sync: true
+      changed: false
+      resource_type: File
+      title: /etc/puppet/unicorn.rb
+      skipped: false
+      failed: false
+    "Anchor[apt::key 1024D/4CFF08F2 present]": !ruby/object:Puppet::Resource::Status
+      resource: "Anchor[apt::key 1024D/4CFF08F2 present]"
+      file: /opt/provision/production/vendor/modules/apt/manifests/key.pp
+      line: 39
+      evaluation_time: 0.000233
+      change_count: 0
+      out_of_sync_count: 0
+      tags:
+        - anchor
+        - "apt::key"
+        - apt
+        - key
+        - "apt::source"
+        - source
+        - evrone
+        - class
+        - "evrone::repo"
+        - repo
+        - "evrone::role"
+        - role
+        - node
+        - default
+      time: 2013-03-22 20:11:44.135990 +00:00
+      events: []
+      out_of_sync: false
+      changed: false
+      resource_type: Anchor
+      title: "apt::key 1024D/4CFF08F2 present"
+      skipped: false
+      failed: false
+    Group[dmexe]: !ruby/object:Puppet::Resource::Status
+      resource: Group[dmexe]
+      file: /opt/provision/production/vendor/modules/evrone/manifests/sys/admin.pp
+      line: 23
+      evaluation_time: 0.002433
+      change_count: 0
+      out_of_sync_count: 1
+      tags:
+        - group
+        - dmexe
+        - "evrone::sys::admin"
+        - evrone
+        - sys
+        - admin
+        - class
+        - "evrone::sys"
+        - "evrone::role"
+        - role
+        - node
+        - default
+      time: 2013-03-22 20:11:44.059320 +00:00
+      events:
+        - !ruby/object:Puppet::Transaction::Event
+          audited: false
+          property: ensure
+          previous_value: !ruby/sym absent
+          desired_value: !ruby/sym present
+          historical_value:
+          message: "current_value absent, should be present (noop)"
+          name: !ruby/sym group_created
+          status: noop
+          time: 2013-03-22 20:11:44.060480 +00:00
+      out_of_sync: true
+      changed: false
+      resource_type: Group
+      title: dmexe
+      skipped: false
+      failed: false
+    File[/etc/nginx/sites-enabled]: !ruby/object:Puppet::Resource::Status
+      resource: File[/etc/nginx/sites-enabled]
+      file: /opt/provision/production/vendor/modules/nginx/manifests/init.pp
+      line: 99
+      evaluation_time: 0.001076
+      change_count: 0
+      out_of_sync_count: 1
+      tags:
+        - file
+        - class
+        - nginx
+        - "evrone::role::puppet::master"
+        - evrone
+        - role
+        - puppet
+        - master
+        - node
+        - default
+      time: 2013-03-22 20:11:44.603482 +00:00
+      events:
+        - !ruby/object:Puppet::Transaction::Event
+          audited: false
+          property: ensure
+          previous_value: !ruby/sym absent
+          desired_value: !ruby/sym directory
+          historical_value:
+          message: "current_value absent, should be directory (noop)"
+          name: !ruby/sym directory_created
+          status: noop
+          time: 2013-03-22 20:11:44.603809 +00:00
+      out_of_sync: true
+      changed: false
+      resource_type: File
+      title: /etc/nginx/sites-enabled
+      skipped: false
+      failed: false
+    Filebucket[puppet]: !ruby/object:Puppet::Resource::Status
+      resource: Filebucket[puppet]
+      file:
+      line:
+      evaluation_time: 0.000167
+      change_count: 0
+      out_of_sync_count: 0
+      tags:
+        - filebucket
+        - puppet
+      time: 2013-03-22 20:11:44.495819 +00:00
+      events: []
+      out_of_sync: false
+      changed: false
+      resource_type: Filebucket
+      title: puppet
+      skipped: false
+      failed: false
+    Package[htop]: !ruby/object:Puppet::Resource::Status
+      resource: Package[htop]
+      file: /opt/provision/production/vendor/modules/evrone/manifests/sys.pp
+      line: 17
+      evaluation_time: 0.027426
+      change_count: 0
+      out_of_sync_count: 1
+      tags:
+        - package
+        - htop
+        - class
+        - "evrone::sys"
+        - evrone
+        - sys
+        - "evrone::role"
+        - role
+        - node
+        - default
+      time: 2013-03-22 20:11:44.314164 +00:00
+      events:
+        - !ruby/object:Puppet::Transaction::Event
+          audited: false
+          property: ensure
+          previous_value: !ruby/sym purged
+          desired_value: !ruby/sym present
+          historical_value:
+          message: "current_value purged, should be present (noop)"
+          name: !ruby/sym package_installed
+          status: noop
+          time: 2013-03-22 20:11:44.341190 +00:00
+      out_of_sync: true
+      changed: false
+      resource_type: Package
+      title: htop
+      skipped: false
+      failed: false
+    File[/etc/sv]: !ruby/object:Puppet::Resource::Status
+      resource: File[/etc/sv]
+      file: /opt/provision/production/vendor/modules/runit/manifests/init.pp
+      line: 14
+      evaluation_time: 0.001078
+      change_count: 0
+      out_of_sync_count: 1
+      tags:
+        - file
+        - class
+        - runit
+        - "evrone::role::puppet::master"
+        - evrone
+        - role
+        - puppet
+        - master
+        - node
+        - default
+      time: 2013-03-22 20:11:44.012654 +00:00
+      events:
+        - !ruby/object:Puppet::Transaction::Event
+          audited: false
+          property: ensure
+          previous_value: !ruby/sym absent
+          desired_value: !ruby/sym directory
+          historical_value:
+          message: "current_value absent, should be directory (noop)"
+          name: !ruby/sym directory_created
+          status: noop
+          time: 2013-03-22 20:11:44.012971 +00:00
+      out_of_sync: true
+      changed: false
+      resource_type: File
+      title: /etc/sv
+      skipped: false
+      failed: false
+    File[/var/lib/puppet/reports]: !ruby/object:Puppet::Resource::Status
+      resource: File[/var/lib/puppet/reports]
+      file: /opt/provision/production/vendor/modules/evrone/manifests/role/puppet/master.pp
+      line: 62
+      evaluation_time: 0.001025
+      change_count: 0
+      out_of_sync_count: 1
+      tags:
+        - file
+        - class
+        - "evrone::role::puppet::master"
+        - evrone
+        - role
+        - puppet
+        - master
+        - node
+        - default
+      time: 2013-03-22 20:11:44.022205 +00:00
+      events:
+        - !ruby/object:Puppet::Transaction::Event
+          audited: false
+          property: ensure
+          previous_value: !ruby/sym absent
+          desired_value: !ruby/sym directory
+          historical_value:
+          message: "current_value absent, should be directory (noop)"
+          name: !ruby/sym directory_created
+          status: noop
+          time: 2013-03-22 20:11:44.022562 +00:00
+      out_of_sync: true
+      changed: false
+      resource_type: File
+      title: /var/lib/puppet/reports
+      skipped: false
+      failed: false
+    "Exec[puppetca:generate]": !ruby/object:Puppet::Resource::Status
+      resource: "Exec[puppetca:generate]"
+      file: /opt/provision/production/vendor/modules/evrone/manifests/role/puppet/master.pp
+      line: 56
+      evaluation_time: 0.001356
+      change_count: 0
+      out_of_sync_count: 1
+      tags:
+        - exec
+        - "puppetca:generate"
+        - class
+        - "evrone::role::puppet::master"
+        - evrone
+        - role
+        - puppet
+        - master
+        - node
+        - default
+      time: 2013-03-22 20:11:44.025024 +00:00
+      events:
+        - !ruby/object:Puppet::Transaction::Event
+          audited: false
+          property: returns
+          previous_value: !ruby/sym notrun
+          desired_value:
+            - "0"
+            - "24"
+          historical_value:
+          message: "current_value notrun, should be 0 24 (noop)"
+          name: !ruby/sym executed_command
+          status: noop
+          time: 2013-03-22 20:11:44.025290 +00:00
+      out_of_sync: true
+      changed: false
+      resource_type: Exec
+      title: "puppetca:generate"
+      skipped: false
+      failed: false
+    File[/etc/puppet/config.ru]: !ruby/object:Puppet::Resource::Status
+      resource: File[/etc/puppet/config.ru]
+      file: /opt/provision/production/vendor/modules/evrone/manifests/role/puppet/master.pp
+      line: 49
+      evaluation_time: 0.001082
+      change_count: 0
+      out_of_sync_count: 1
+      tags:
+        - file
+        - class
+        - "evrone::role::puppet::master"
+        - evrone
+        - role
+        - puppet
+        - master
+        - node
+        - default
+      time: 2013-03-22 20:11:44.069061 +00:00
+      events:
+        - !ruby/object:Puppet::Transaction::Event
+          audited: false
+          property: ensure
+          previous_value: !ruby/sym absent
+          desired_value: !ruby/sym present
+          historical_value:
+          message: "current_value absent, should be present (noop)"
+          name: !ruby/sym file_created
+          status: noop
+          time: 2013-03-22 20:11:44.069404 +00:00
+      out_of_sync: true
+      changed: false
+      resource_type: File
+      title: /etc/puppet/config.ru
+      skipped: false
+      failed: false
+    File[/etc/sv/puppetmaster/finish]: !ruby/object:Puppet::Resource::Status
+      resource: File[/etc/sv/puppetmaster/finish]
+      file: /opt/provision/production/vendor/modules/runit/manifests/service.pp
+      line: 81
+      evaluation_time: 0.001667
+      change_count: 0
+      out_of_sync_count: 1
+      tags:
+        - file
+        - "runit::service"
+        - runit
+        - service
+        - puppetmaster
+        - class
+        - "evrone::role::puppet::master"
+        - evrone
+        - role
+        - puppet
+        - master
+        - node
+        - default
+      time: 2013-03-22 20:11:44.730301 +00:00
+      events:
+        - !ruby/object:Puppet::Transaction::Event
+          audited: false
+          property: ensure
+          previous_value: !ruby/sym absent
+          desired_value: !ruby/sym present
+          historical_value:
+          message: "current_value absent, should be present (noop)"
+          name: !ruby/sym file_created
+          status: noop
+          time: 2013-03-22 20:11:44.730794 +00:00
+      out_of_sync: true
+      changed: false
+      resource_type: File
+      title: /etc/sv/puppetmaster/finish
+      skipped: false
+      failed: false
+    Package[puppet]: !ruby/object:Puppet::Resource::Status
+      resource: Package[puppet]
+      file: /opt/provision/production/vendor/modules/evrone/manifests/puppet.pp
+      line: 13
+      evaluation_time: 0.000432
+      change_count: 0
+      out_of_sync_count: 0
+      tags:
+        - package
+        - puppet
+        - class
+        - "evrone::puppet"
+        - evrone
+        - node
+        - default
+      time: 2013-03-22 20:11:44.705421 +00:00
+      events: []
+      out_of_sync: false
+      changed: false
+      resource_type: Package
+      title: puppet
+      skipped: false
+      failed: false
+    File[/etc/nginx/conf.d]: !ruby/object:Puppet::Resource::Status
+      resource: File[/etc/nginx/conf.d]
+      file: /opt/provision/production/vendor/modules/nginx/manifests/init.pp
+      line: 75
+      evaluation_time: 0.001416
+      change_count: 0
+      out_of_sync_count: 1
+      tags:
+        - file
+        - class
+        - nginx
+        - "evrone::role::puppet::master"
+        - evrone
+        - role
+        - puppet
+        - master
+        - node
+        - default
+      time: 2013-03-22 20:11:44.702792 +00:00
+      events:
+        - !ruby/object:Puppet::Transaction::Event
+          audited: false
+          property: ensure
+          previous_value: !ruby/sym absent
+          desired_value: !ruby/sym directory
+          historical_value:
+          message: "current_value absent, should be directory (noop)"
+          name: !ruby/sym directory_created
+          status: noop
+          time: 2013-03-22 20:11:44.703207 +00:00
+      out_of_sync: true
+      changed: false
+      resource_type: File
+      title: /etc/nginx/conf.d
+      skipped: false
+      failed: false
+    File[/etc/nginx/nginx.conf]: !ruby/object:Puppet::Resource::Status
+      resource: File[/etc/nginx/nginx.conf]
+      file: /opt/provision/production/vendor/modules/nginx/manifests/init.pp
+      line: 67
+      evaluation_time: 0.000589
+      change_count: 0
+      out_of_sync_count: 1
+      tags:
+        - file
+        - class
+        - nginx
+        - "evrone::role::puppet::master"
+        - evrone
+        - role
+        - puppet
+        - master
+        - node
+        - default
+      time: 2013-03-22 20:11:44.596621 +00:00
+      events:
+        - !ruby/object:Puppet::Transaction::Event
+          audited: false
+          property: ensure
+          previous_value: !ruby/sym absent
+          desired_value: !ruby/sym present
+          historical_value:
+          message: "current_value absent, should be present (noop)"
+          name: !ruby/sym file_created
+          status: noop
+          time: 2013-03-22 20:11:44.596946 +00:00
+      out_of_sync: true
+      changed: false
+      resource_type: File
+      title: /etc/nginx/nginx.conf
+      skipped: false
+      failed: false
+    "Ssh_authorized_key[dmexe@master.local]": !ruby/object:Puppet::Resource::Status
+      resource: "Ssh_authorized_key[dmexe@master.local]"
+      file: /opt/provision/production/vendor/modules/evrone/manifests/sys/admin.pp
+      line: 41
+      evaluation_time: 0.001458
+      change_count: 0
+      out_of_sync_count: 1
+      tags:
+        - ssh_authorized_key
+        - "evrone::sys::admin"
+        - evrone
+        - sys
+        - admin
+        - dmexe
+        - class
+        - "evrone::sys"
+        - "evrone::role"
+        - role
+        - node
+        - default
+      time: 2013-03-22 20:11:44.558838 +00:00
+      events:
+        - !ruby/object:Puppet::Transaction::Event
+          audited: false
+          property: ensure
+          previous_value: !ruby/sym absent
+          desired_value: !ruby/sym present
+          historical_value:
+          message: "current_value absent, should be present (noop)"
+          name: !ruby/sym ssh_authorized_key_created
+          status: noop
+          time: 2013-03-22 20:11:44.559356 +00:00
+      out_of_sync: true
+      changed: false
+      resource_type: Ssh_authorized_key
+      title: "dmexe@master.local"
+      skipped: false
+      failed: false
+    Schedule[daily]: !ruby/object:Puppet::Resource::Status
+      resource: Schedule[daily]
+      file:
+      line:
+      change_count: 0
+      out_of_sync_count: 0
+      tags:
+        - schedule
+        - daily
+      time: 2013-03-22 20:11:44.002711 +00:00
+      events: []
+      out_of_sync: false
+      changed: false
+      resource_type: Schedule
+      title: daily
+      skipped: true
+      failed: false
+    User[dmexe]: !ruby/object:Puppet::Resource::Status
+      resource: User[dmexe]
+      file: /opt/provision/production/vendor/modules/evrone/manifests/sys/admin.pp
+      line: 33
+      evaluation_time: 0.001905
+      change_count: 0
+      out_of_sync_count: 1
+      tags:
+        - user
+        - dmexe
+        - "evrone::sys::admin"
+        - evrone
+        - sys
+        - admin
+        - class
+        - "evrone::sys"
+        - "evrone::role"
+        - role
+        - node
+        - default
+      time: 2013-03-22 20:11:44.553931 +00:00
+      events:
+        - !ruby/object:Puppet::Transaction::Event
+          audited: false
+          property: ensure
+          previous_value: !ruby/sym absent
+          desired_value: !ruby/sym present
+          historical_value:
+          message: "current_value absent, should be present (noop)"
+          name: !ruby/sym user_created
+          status: noop
+          time: 2013-03-22 20:11:44.554582 +00:00
+      out_of_sync: true
+      changed: false
+      resource_type: User
+      title: dmexe
+      skipped: false
+      failed: false
+    File[/etc/service]: !ruby/object:Puppet::Resource::Status
+      resource: File[/etc/service]
+      file: /opt/provision/production/vendor/modules/runit/manifests/init.pp
+      line: 14
+      evaluation_time: 0.001562
+      change_count: 0
+      out_of_sync_count: 1
+      tags:
+        - file
+        - class
+        - runit
+        - "evrone::role::puppet::master"
+        - evrone
+        - role
+        - puppet
+        - master
+        - node
+        - default
+      time: 2013-03-22 20:11:44.049029 +00:00
+      events:
+        - !ruby/object:Puppet::Transaction::Event
+          audited: false
+          property: ensure
+          previous_value: !ruby/sym absent
+          desired_value: !ruby/sym directory
+          historical_value:
+          message: "current_value absent, should be directory (noop)"
+          name: !ruby/sym directory_created
+          status: noop
+          time: 2013-03-22 20:11:44.049581 +00:00
+      out_of_sync: true
+      changed: false
+      resource_type: File
+      title: /etc/service
+      skipped: false
+      failed: false
+    File[/home/dmexe]: !ruby/object:Puppet::Resource::Status
+      resource: File[/home/dmexe]
+      file: /opt/provision/production/vendor/modules/evrone/manifests/sys/admin.pp
+      line: 50
+      evaluation_time: 0.001163
+      change_count: 0
+      out_of_sync_count: 1
+      tags:
+        - file
+        - "evrone::sys::admin"
+        - evrone
+        - sys
+        - admin
+        - dmexe
+        - class
+        - "evrone::sys"
+        - "evrone::role"
+        - role
+        - node
+        - default
+      time: 2013-03-22 20:11:44.556585 +00:00
+      events:
+        - !ruby/object:Puppet::Transaction::Event
+          audited: false
+          property: ensure
+          previous_value: !ruby/sym absent
+          desired_value: !ruby/sym directory
+          historical_value:
+          message: "current_value absent, should be directory (noop)"
+          name: !ruby/sym directory_created
+          status: noop
+          time: 2013-03-22 20:11:44.556951 +00:00
+      out_of_sync: true
+      changed: false
+      resource_type: File
+      title: /home/dmexe
+      skipped: false
+      failed: false
+    File[/etc/sv/puppetmaster/run]: !ruby/object:Puppet::Resource::Status
+      resource: File[/etc/sv/puppetmaster/run]
+      file: /opt/provision/production/vendor/modules/runit/manifests/service.pp
+      line: 81
+      evaluation_time: 0.001653
+      change_count: 0
+      out_of_sync_count: 1
+      tags:
+        - file
+        - "runit::service"
+        - runit
+        - service
+        - puppetmaster
+        - class
+        - "evrone::role::puppet::master"
+        - evrone
+        - role
+        - puppet
+        - master
+        - node
+        - default
+      time: 2013-03-22 20:11:44.717901 +00:00
+      events:
+        - !ruby/object:Puppet::Transaction::Event
+          audited: false
+          property: ensure
+          previous_value: !ruby/sym absent
+          desired_value: !ruby/sym present
+          historical_value:
+          message: "current_value absent, should be present (noop)"
+          name: !ruby/sym file_created
+          status: noop
+          time: 2013-03-22 20:11:44.718469 +00:00
+      out_of_sync: true
+      changed: false
+      resource_type: File
+      title: /etc/sv/puppetmaster/run
+      skipped: false
+      failed: false
+    Exec[4de625c7ede65a0bdfde3b35a4a8fa72b6c941ec]: !ruby/object:Puppet::Resource::Status
+      resource: Exec[4de625c7ede65a0bdfde3b35a4a8fa72b6c941ec]
+      file: /opt/provision/production/vendor/modules/apt/manifests/key.pp
+      line: 54
+      evaluation_time: 0.063544
+      change_count: 0
+      out_of_sync_count: 1
+      tags:
+        - exec
+        - "4de625c7ede65a0bdfde3b35a4a8fa72b6c941ec"
+        - "apt::key"
+        - apt
+        - key
+        - "apt::source"
+        - source
+        - evrone
+        - class
+        - "evrone::repo"
+        - repo
+        - "evrone::role"
+        - role
+        - node
+        - default
+      time: 2013-03-22 20:11:44.071594 +00:00
+      events:
+        - !ruby/object:Puppet::Transaction::Event
+          audited: false
+          property: returns
+          previous_value: !ruby/sym notrun
+          desired_value:
+            - "0"
+          historical_value:
+          message: "current_value notrun, should be 0 (noop)"
+          name: !ruby/sym executed_command
+          status: noop
+          time: 2013-03-22 20:11:44.134051 +00:00
+      out_of_sync: true
+      changed: false
+      resource_type: Exec
+      title: "4de625c7ede65a0bdfde3b35a4a8fa72b6c941ec"
+      skipped: false
+      failed: false
+    Package[unicorn]: !ruby/object:Puppet::Resource::Status
+      resource: Package[unicorn]
+      file: /opt/provision/production/vendor/modules/evrone/manifests/role/puppet/master.pp
+      line: 17
+      evaluation_time: 0.066993
+      change_count: 0
+      out_of_sync_count: 1
+      tags:
+        - package
+        - unicorn
+        - class
+        - "evrone::role::puppet::master"
+        - evrone
+        - role
+        - puppet
+        - master
+        - node
+        - default
+      time: 2013-03-22 20:11:44.370877 +00:00
+      events:
+        - !ruby/object:Puppet::Transaction::Event
+          audited: false
+          property: ensure
+          previous_value: !ruby/sym absent
+          desired_value: !ruby/sym present
+          historical_value:
+          message: "current_value absent, should be present (noop)"
+          name: !ruby/sym package_installed
+          status: noop
+          time: 2013-03-22 20:11:44.437484 +00:00
+      out_of_sync: true
+      changed: false
+      resource_type: Package
+      title: unicorn
+      skipped: false
+      failed: false
+    "Exec[ln -s /etc/nginx/sites-available/master.local_8140 /etc/nginx/sites-enabled/master.local_8140]": !ruby/object:Puppet::Resource::Status
+      resource: "Exec[ln -s /etc/nginx/sites-available/master.local_8140 /etc/nginx/sites-enabled/master.local_8140]"
+      file: /opt/provision/production/vendor/modules/nginx/manifests/install_site.pp
+      line: 41
+      evaluation_time: 0.066568
+      change_count: 0
+      out_of_sync_count: 1
+      tags:
+        - exec
+        - "nginx::install_site"
+        - nginx
+        - install_site
+        - master.local_8140
+        - "nginx::site"
+        - site
+        - class
+        - "evrone::role::puppet::master"
+        - evrone
+        - role
+        - puppet
+        - master
+        - node
+        - default
+      time: 2013-03-22 20:11:44.610909 +00:00
+      events:
+        - !ruby/object:Puppet::Transaction::Event
+          audited: false
+          property: returns
+          previous_value: !ruby/sym notrun
+          desired_value:
+            - "0"
+          historical_value:
+          message: "current_value notrun, should be 0 (noop)"
+          name: !ruby/sym executed_command
+          status: noop
+          time: 2013-03-22 20:11:44.675278 +00:00
+      out_of_sync: true
+      changed: false
+      resource_type: Exec
+      title: "ln -s /etc/nginx/sites-available/master.local_8140 /etc/nginx/sites-enabled/master.local_8140"
+      skipped: false
+      failed: false
+    File[/etc/sudoers]: !ruby/object:Puppet::Resource::Status
+      resource: File[/etc/sudoers]
+      file: /opt/provision/production/vendor/modules/evrone/manifests/profile/sudo.pp
+      line: 11
+      evaluation_time: 0.001649
+      change_count: 0
+      out_of_sync_count: 1
+      tags:
+        - file
+        - class
+        - "evrone::profile::sudo"
+        - evrone
+        - profile
+        - sudo
+        - "evrone::sys"
+        - sys
+        - "evrone::role"
+        - role
+        - node
+        - default
+      time: 2013-03-22 20:11:44.066763 +00:00
+      events:
+        - !ruby/object:Puppet::Transaction::Event
+          audited: false
+          property: content
+          previous_value: "{md5}683eca72967d971ee3be5cd581069b9a"
+          desired_value: "{md5}701fb73bc5a8d8da6ac3458ddf613b39"
+          historical_value:
+          message: "current_value {md5}683eca72967d971ee3be5cd581069b9a, should be {md5}701fb73bc5a8d8da6ac3458ddf613b39 (noop)"
+          name: !ruby/sym content_changed
+          status: noop
+          time: 2013-03-22 20:11:44.067334 +00:00
+      out_of_sync: true
+      changed: false
+      resource_type: File
+      title: /etc/sudoers
+      skipped: false
+      failed: false
+    Service[nginx]: !ruby/object:Puppet::Resource::Status
+      resource: Service[nginx]
+      file: /opt/provision/production/vendor/modules/nginx/manifests/init.pp
+      line: 57
+      evaluation_time: 0.001135
+      change_count: 0
+      out_of_sync_count: 0
+      tags:
+        - service
+        - nginx
+        - class
+        - "evrone::role::puppet::master"
+        - evrone
+        - role
+        - puppet
+        - master
+        - node
+        - default
+      time: 2013-03-22 20:11:44.753938 +00:00
+      events: []
+      out_of_sync: false
+      changed: false
+      resource_type: Service
+      title: nginx
+      skipped: false
+      failed: true
+    "Anchor[apt::key/Add key: 1024D/4CFF08F2 from Apt::Source Evrone]": !ruby/object:Puppet::Resource::Status
+      resource: "Anchor[apt::key/Add key: 1024D/4CFF08F2 from Apt::Source Evrone]"
+      file: /opt/provision/production/vendor/modules/apt/manifests/key.pp
+      line: 32
+      evaluation_time: 0.000161
+      change_count: 0
+      out_of_sync_count: 0
+      tags:
+        - anchor
+        - "apt::key"
+        - apt
+        - key
+        - "apt::source"
+        - source
+        - evrone
+        - class
+        - "evrone::repo"
+        - repo
+        - "evrone::role"
+        - role
+        - node
+        - default
+      time: 2013-03-22 20:11:44.136687 +00:00
+      events: []
+      out_of_sync: false
+      changed: false
+      resource_type: Anchor
+      title: "apt::key/Add key: 1024D/4CFF08F2 from Apt::Source Evrone"
+      skipped: false
+      failed: false
+    Schedule[weekly]: !ruby/object:Puppet::Resource::Status
+      resource: Schedule[weekly]
+      file:
+      line:
+      change_count: 0
+      out_of_sync_count: 0
+      tags:
+        - schedule
+        - weekly
+      time: 2013-03-22 20:11:44.566213 +00:00
+      events: []
+      out_of_sync: false
+      changed: false
+      resource_type: Schedule
+      title: weekly
+      skipped: true
+      failed: false
+    File[/etc/sv/puppetmaster/log/run]: !ruby/object:Puppet::Resource::Status
+      resource: File[/etc/sv/puppetmaster/log/run]
+      file: /opt/provision/production/vendor/modules/runit/manifests/service.pp
+      line: 81
+      evaluation_time: 0.001379
+      change_count: 0
+      out_of_sync_count: 1
+      tags:
+        - file
+        - "runit::service"
+        - runit
+        - service
+        - puppetmaster
+        - class
+        - "evrone::role::puppet::master"
+        - evrone
+        - role
+        - puppet
+        - master
+        - node
+        - default
+      time: 2013-03-22 20:11:44.738906 +00:00
+      events:
+        - !ruby/object:Puppet::Transaction::Event
+          audited: false
+          property: ensure
+          previous_value: !ruby/sym absent
+          desired_value: !ruby/sym present
+          historical_value:
+          message: "current_value absent, should be present (noop)"
+          name: !ruby/sym file_created
+          status: noop
+          time: 2013-03-22 20:11:44.739365 +00:00
+      out_of_sync: true
+      changed: false
+      resource_type: File
+      title: /etc/sv/puppetmaster/log/run
+      skipped: false
+      failed: false
+    File[/etc/sv/puppetmaster/log]: !ruby/object:Puppet::Resource::Status
+      resource: File[/etc/sv/puppetmaster/log]
+      file: /opt/provision/production/vendor/modules/runit/manifests/service.pp
+      line: 81
+      evaluation_time: 0.002101
+      change_count: 0
+      out_of_sync_count: 1
+      tags:
+        - file
+        - "runit::service"
+        - runit
+        - service
+        - puppetmaster
+        - class
+        - "evrone::role::puppet::master"
+        - evrone
+        - role
+        - puppet
+        - master
+        - node
+        - default
+      time: 2013-03-22 20:11:44.735686 +00:00
+      events:
+        - !ruby/object:Puppet::Transaction::Event
+          audited: false
+          property: ensure
+          previous_value: !ruby/sym absent
+          desired_value: !ruby/sym directory
+          historical_value:
+          message: "current_value absent, should be directory (noop)"
+          name: !ruby/sym directory_created
+          status: noop
+          time: 2013-03-22 20:11:44.736911 +00:00
+      out_of_sync: true
+      changed: false
+      resource_type: File
+      title: /etc/sv/puppetmaster/log
+      skipped: false
+      failed: false
+    "Exec[sv restart puppetmaster]": !ruby/object:Puppet::Resource::Status
+      resource: "Exec[sv restart puppetmaster]"
+      file: /opt/provision/production/vendor/modules/runit/manifests/service/enabled.pp
+      line: 32
+      evaluation_time: 0.000266
+      change_count: 0
+      out_of_sync_count: 0
+      tags:
+        - exec
+        - "runit::service::enabled"
+        - runit
+        - service
+        - enabled
+        - puppetmaster
+        - "runit::service"
+        - class
+        - "evrone::role::puppet::master"
+        - evrone
+        - role
+        - puppet
+        - master
+        - node
+        - default
+      time: 2013-03-22 20:11:44.728478 +00:00
+      events: []
+      out_of_sync: false
+      changed: false
+      resource_type: Exec
+      title: "sv restart puppetmaster"
+      skipped: false
+      failed: false
+    Schedule[monthly]: !ruby/object:Puppet::Resource::Status
+      resource: Schedule[monthly]
+      file:
+      line:
+      change_count: 0
+      out_of_sync_count: 0
+      tags:
+        - schedule
+        - monthly
+      time: 2013-03-22 20:11:44.003068 +00:00
+      events: []
+      out_of_sync: false
+      changed: false
+      resource_type: Schedule
+      title: monthly
+      skipped: true
+      failed: false
+    Group[admin]: !ruby/object:Puppet::Resource::Status
+      resource: Group[admin]
+      file: /opt/provision/production/vendor/modules/evrone/manifests/sys/admin.pp
+      line: 18
+      evaluation_time: 0.000452
+      change_count: 0
+      out_of_sync_count: 0
+      tags:
+        - group
+        - admin
+        - "evrone::sys::admin"
+        - evrone
+        - sys
+        - dmexe
+        - class
+        - "evrone::sys"
+        - "evrone::role"
+        - role
+        - node
+        - default
+      time: 2013-03-22 20:11:44.552772 +00:00
+      events: []
+      out_of_sync: false
+      changed: false
+      resource_type: Group
+      title: admin
+      skipped: false
+      failed: false
+    File[/etc/ssh/sshd_config]: !ruby/object:Puppet::Resource::Status
+      resource: File[/etc/ssh/sshd_config]
+      file: /opt/provision/production/vendor/modules/evrone/manifests/profile/sshd.pp
+      line: 13
+      evaluation_time: 0.002296
+      change_count: 0
+      out_of_sync_count: 1
+      tags:
+        - file
+        - class
+        - "evrone::profile::sshd"
+        - evrone
+        - profile
+        - sshd
+        - "evrone::sys"
+        - sys
+        - "evrone::role"
+        - role
+        - node
+        - default
+      time: 2013-03-22 20:11:44.499026 +00:00
+      events:
+        - !ruby/object:Puppet::Transaction::Event
+          audited: false
+          property: content
+          previous_value: "{md5}b951734458b83fbd246ff2b753b61841"
+          desired_value: "{md5}f5ea67f41c9f2cc8a0989d95dc480567"
+          historical_value:
+          message: "current_value {md5}b951734458b83fbd246ff2b753b61841, should be {md5}f5ea67f41c9f2cc8a0989d95dc480567 (noop)"
+          name: !ruby/sym content_changed
+          status: noop
+          time: 2013-03-22 20:11:44.499640 +00:00
+      out_of_sync: true
+      changed: false
+      resource_type: File
+      title: /etc/ssh/sshd_config
+      skipped: false
+      failed: false
+    File[/etc/nginx/ssl]: !ruby/object:Puppet::Resource::Status
+      resource: File[/etc/nginx/ssl]
+      file: /opt/provision/production/vendor/modules/nginx/manifests/init.pp
+      line: 83
+      evaluation_time: 0.002869
+      change_count: 0
+      out_of_sync_count: 1
+      tags:
+        - file
+        - class
+        - nginx
+        - "evrone::role::puppet::master"
+        - evrone
+        - role
+        - puppet
+        - master
+        - node
+        - default
+      time: 2013-03-22 20:11:44.597943 +00:00
+      events:
+        - !ruby/object:Puppet::Transaction::Event
+          audited: false
+          property: ensure
+          previous_value: !ruby/sym absent
+          desired_value: !ruby/sym directory
+          historical_value:
+          message: "current_value absent, should be directory (noop)"
+          name: !ruby/sym directory_created
+          status: noop
+          time: 2013-03-22 20:11:44.599371 +00:00
+      out_of_sync: true
+      changed: false
+      resource_type: File
+      title: /etc/nginx/ssl
+      skipped: false
+      failed: false
+    File[/etc/puppet/routes.yaml]: !ruby/object:Puppet::Resource::Status
+      resource: File[/etc/puppet/routes.yaml]
+      file: /opt/provision/production/vendor/modules/evrone/manifests/role/puppet/master.pp
+      line: 49
+      evaluation_time: 0.000349
+      change_count: 0
+      out_of_sync_count: 0
+      tags:
+        - file
+        - class
+        - "evrone::role::puppet::master"
+        - evrone
+        - role
+        - puppet
+        - master
+        - node
+        - default
+      time: 2013-03-22 20:11:44.037546 +00:00
+      events: []
+      out_of_sync: false
+      changed: false
+      resource_type: File
+      title: /etc/puppet/routes.yaml
+      skipped: false
+      failed: false
+    Schedule[never]: !ruby/object:Puppet::Resource::Status
+      resource: Schedule[never]
+      file:
+      line:
+      change_count: 0
+      out_of_sync_count: 0
+      tags:
+        - schedule
+        - never
+      time: 2013-03-22 20:11:44.066135 +00:00
+      events: []
+      out_of_sync: false
+      changed: false
+      resource_type: Schedule
+      title: never
+      skipped: true
+      failed: false
+    Service[ssh]: !ruby/object:Puppet::Resource::Status
+      resource: Service[ssh]
+      file: /opt/provision/production/vendor/modules/evrone/manifests/profile/sshd.pp
+      line: 18
+      evaluation_time: 0.044776
+      change_count: 0
+      out_of_sync_count: 0
+      tags:
+        - service
+        - ssh
+        - class
+        - "evrone::profile::sshd"
+        - evrone
+        - profile
+        - sshd
+        - "evrone::sys"
+        - sys
+        - "evrone::role"
+        - role
+        - node
+        - default
+      time: 2013-03-22 20:11:44.503115 +00:00
+      events: []
+      out_of_sync: false
+      changed: false
+      resource_type: Service
+      title: ssh
+      skipped: false
+      failed: false
+    Schedule[puppet]: !ruby/object:Puppet::Resource::Status
+      resource: Schedule[puppet]
+      file:
+      line:
+      change_count: 0
+      out_of_sync_count: 0
+      tags:
+        - schedule
+        - puppet
+      time: 2013-03-22 20:11:44.688682 +00:00
+      events: []
+      out_of_sync: false
+      changed: false
+      resource_type: Schedule
+      title: puppet
+      skipped: true
+      failed: false
+    File[Evrone.list]: !ruby/object:Puppet::Resource::Status
+      resource: File[Evrone.list]
+      file: /opt/provision/production/vendor/modules/apt/manifests/source.pp
+      line: 42
+      evaluation_time: 0.001595
+      change_count: 0
+      out_of_sync_count: 1
+      tags:
+        - file
+        - evrone.list
+        - "apt::source"
+        - apt
+        - source
+        - evrone
+        - class
+        - "evrone::repo"
+        - repo
+        - "evrone::role"
+        - role
+        - node
+        - default
+      time: 2013-03-22 20:11:44.140649 +00:00
+      events:
+        - !ruby/object:Puppet::Transaction::Event
+          audited: false
+          property: ensure
+          previous_value: !ruby/sym absent
+          desired_value: !ruby/sym present
+          historical_value:
+          message: "current_value absent, should be present (noop)"
+          name: !ruby/sym file_created
+          status: noop
+          time: 2013-03-22 20:11:44.141108 +00:00
+      out_of_sync: true
+      changed: false
+      resource_type: File
+      title: Evrone.list
+      skipped: false
+      failed: false
+    Package[nginx]: !ruby/object:Puppet::Resource::Status
+      resource: Package[nginx]
+      file: /opt/provision/production/vendor/modules/nginx/manifests/init.pp
+      line: 48
+      evaluation_time: 0.027488
+      change_count: 0
+      out_of_sync_count: 1
+      tags:
+        - package
+        - nginx
+        - class
+        - "evrone::role::puppet::master"
+        - evrone
+        - role
+        - puppet
+        - master
+        - node
+        - default
+      time: 2013-03-22 20:11:44.568194 +00:00
+      events:
+        - !ruby/object:Puppet::Transaction::Event
+          audited: false
+          property: ensure
+          previous_value: !ruby/sym purged
+          desired_value: !ruby/sym present
+          historical_value:
+          message: "current_value purged, should be present (noop)"
+          name: !ruby/sym package_installed
+          status: noop
+          time: 2013-03-22 20:11:44.595311 +00:00
+      out_of_sync: true
+      changed: false
+      resource_type: Package
+      title: nginx
+      skipped: false
+      failed: false
+    File[/etc/puppet/puppetdb.conf]: !ruby/object:Puppet::Resource::Status
+      resource: File[/etc/puppet/puppetdb.conf]
+      file: /opt/provision/production/vendor/modules/evrone/manifests/role/puppet/master.pp
+      line: 49
+      evaluation_time: 0.000387
+      change_count: 0
+      out_of_sync_count: 0
+      tags:
+        - file
+        - class
+        - "evrone::role::puppet::master"
+        - evrone
+        - role
+        - puppet
+        - master
+        - node
+        - default
+      time: 2013-03-22 20:11:44.024177 +00:00
+      events: []
+      out_of_sync: false
+      changed: false
+      resource_type: File
+      title: /etc/puppet/puppetdb.conf
+      skipped: false
+      failed: false
+    File[/etc/service/puppetmaster]: !ruby/object:Puppet::Resource::Status
+      resource: File[/etc/service/puppetmaster]
+      file: /opt/provision/production/vendor/modules/runit/manifests/service/enabled.pp
+      line: 13
+      evaluation_time: 0.001209
+      change_count: 0
+      out_of_sync_count: 1
+      tags:
+        - file
+        - "runit::service::enabled"
+        - runit
+        - service
+        - enabled
+        - puppetmaster
+        - "runit::service"
+        - class
+        - "evrone::role::puppet::master"
+        - evrone
+        - role
+        - puppet
+        - master
+        - node
+        - default
+      time: 2013-03-22 20:11:44.725536 +00:00
+      events:
+        - !ruby/object:Puppet::Transaction::Event
+          audited: false
+          property: ensure
+          previous_value: !ruby/sym absent
+          desired_value: !ruby/sym link
+          historical_value:
+          message: "current_value absent, should be link (noop)"
+          name: !ruby/sym link_created
+          status: noop
+          time: 2013-03-22 20:11:44.725941 +00:00
+      out_of_sync: true
+      changed: false
+      resource_type: File
+      title: /etc/service/puppetmaster
+      skipped: false
+      failed: false
+    File[/etc/nginx/fastcgi_params]: !ruby/object:Puppet::Resource::Status
+      resource: File[/etc/nginx/fastcgi_params]
+      file: /opt/provision/production/vendor/modules/nginx/manifests/init.pp
+      line: 105
+      evaluation_time: 0.000454
+      change_count: 0
+      out_of_sync_count: 0
+      tags:
+        - file
+        - class
+        - nginx
+        - "evrone::role::puppet::master"
+        - evrone
+        - role
+        - puppet
+        - master
+        - node
+        - default
+      time: 2013-03-22 20:11:44.701680 +00:00
+      events: []
+      out_of_sync: false
+      changed: false
+      resource_type: File
+      title: /etc/nginx/fastcgi_params
+      skipped: false
+      failed: false
+  report_format: 3
+  logs:
+    - !ruby/object:Puppet::Util::Log
+      level: !ruby/sym info
+      time: 2013-03-22 20:11:43.453663 +00:00
+      tags:
+        - info
+      message: "Loading facts in /opt/provision/production/vendor/modules/postgresql/lib/facter/postgres_default_version.rb"
+      source: Puppet
+    - !ruby/object:Puppet::Util::Log
+      level: !ruby/sym info
+      time: 2013-03-22 20:11:43.455165 +00:00
+      tags:
+        - info
+      message: "Loading facts in /opt/provision/production/vendor/modules/evrone/lib/facter/virtual.rb"
+      source: Puppet
+    - !ruby/object:Puppet::Util::Log
+      level: !ruby/sym info
+      time: 2013-03-22 20:11:43.457123 +00:00
+      tags:
+        - info
+      message: "Loading facts in /opt/provision/production/vendor/modules/evrone/lib/facter/datacenter.rb"
+      source: Puppet
+    - !ruby/object:Puppet::Util::Log
+      level: !ruby/sym info
+      time: 2013-03-22 20:11:43.458448 +00:00
+      tags:
+        - info
+      message: "Loading facts in /opt/provision/production/vendor/modules/stdlib/lib/facter/facter_dot_d.rb"
+      source: Puppet
+    - !ruby/object:Puppet::Util::Log
+      level: !ruby/sym info
+      time: 2013-03-22 20:11:43.459868 +00:00
+      tags:
+        - info
+      message: "Loading facts in /opt/provision/production/vendor/modules/stdlib/lib/facter/root_home.rb"
+      source: Puppet
+    - !ruby/object:Puppet::Util::Log
+      level: !ruby/sym info
+      time: 2013-03-22 20:11:43.461038 +00:00
+      tags:
+        - info
+      message: "Loading facts in /opt/provision/production/vendor/modules/stdlib/lib/facter/puppet_vardir.rb"
+      source: Puppet
+    - !ruby/object:Puppet::Util::Log
+      level: !ruby/sym info
+      time: 2013-03-22 20:11:43.462241 +00:00
+      tags:
+        - info
+      message: "Loading facts in /opt/provision/production/vendor/modules/stdlib/lib/facter/pe_version.rb"
+      source: Puppet
+    - !ruby/object:Puppet::Util::Log
+      level: !ruby/sym info
+      time: 2013-03-22 20:11:43.463419 +00:00
+      tags:
+        - info
+      message: "Loading facts in /opt/provision/production/vendor/modules/concat/lib/facter/concat_basedir.rb"
+      source: Puppet
+    - !ruby/object:Puppet::Util::Log
+      level: !ruby/sym info
+      time: 2013-03-22 20:11:43.465072 +00:00
+      tags:
+        - info
+      message: "Loading facts in /opt/provision/production/vendor/modules/firewall/lib/facter/ip6tables_version.rb"
+      source: Puppet
+    - !ruby/object:Puppet::Util::Log
+      level: !ruby/sym info
+      time: 2013-03-22 20:11:43.466111 +00:00
+      tags:
+        - info
+      message: "Loading facts in /opt/provision/production/vendor/modules/firewall/lib/facter/iptables_version.rb"
+      source: Puppet
+    - !ruby/object:Puppet::Util::Log
+      level: !ruby/sym info
+      time: 2013-03-22 20:11:43.467183 +00:00
+      tags:
+        - info
+      message: "Loading facts in /opt/provision/production/vendor/modules/nginx/lib/facter/nginx.rb"
+      source: Puppet
+    - !ruby/object:Puppet::Util::Log
+      level: !ruby/sym info
+      time: 2013-03-22 20:11:43.875486 +00:00
+      tags:
+        - info
+      message: "Applying configuration version '1363983102'"
+      source: Puppet
+    - !ruby/object:Puppet::Util::Log
+      line: 14
+      level: !ruby/sym notice
+      file: /opt/provision/production/vendor/modules/runit/manifests/init.pp
+      time: 2013-03-22 20:11:44.013050 +00:00
+      tags:
+        - notice
+        - file
+        - class
+        - runit
+        - "evrone::role::puppet::master"
+        - evrone
+        - role
+        - puppet
+        - master
+        - node
+        - default
+      message: "current_value absent, should be directory (noop)"
+      source: /Stage[main]/Runit/File[/etc/sv]/ensure
+    - !ruby/object:Puppet::Util::Log
+      line: 49
+      level: !ruby/sym notice
+      file: /opt/provision/production/vendor/modules/evrone/manifests/role/puppet/master.pp
+      time: 2013-03-22 20:11:44.019942 +00:00
+      tags:
+        - notice
+        - file
+        - class
+        - "evrone::role::puppet::master"
+        - evrone
+        - role
+        - puppet
+        - master
+        - node
+        - default
+      message: "current_value absent, should be present (noop)"
+      source: "/Stage[main]/Evrone::Role::Puppet::Master/File[/etc/puppet/unicorn.rb]/ensure"
+    - !ruby/object:Puppet::Util::Log
+      line: 49
+      level: !ruby/sym info
+      file: /opt/provision/production/vendor/modules/evrone/manifests/role/puppet/master.pp
+      time: 2013-03-22 20:11:44.020841 +00:00
+      tags:
+        - info
+        - file
+        - class
+        - "evrone::role::puppet::master"
+        - evrone
+        - role
+        - puppet
+        - master
+        - node
+        - default
+      message: "Scheduling refresh of Runit::Service[puppetmaster]"
+      source: "/Stage[main]/Evrone::Role::Puppet::Master/File[/etc/puppet/unicorn.rb]"
+    - !ruby/object:Puppet::Util::Log
+      line: 62
+      level: !ruby/sym notice
+      file: /opt/provision/production/vendor/modules/evrone/manifests/role/puppet/master.pp
+      time: 2013-03-22 20:11:44.022616 +00:00
+      tags:
+        - notice
+        - file
+        - class
+        - "evrone::role::puppet::master"
+        - evrone
+        - role
+        - puppet
+        - master
+        - node
+        - default
+      message: "current_value absent, should be directory (noop)"
+      source: "/Stage[main]/Evrone::Role::Puppet::Master/File[/var/lib/puppet/reports]/ensure"
+    - !ruby/object:Puppet::Util::Log
+      line: 56
+      level: !ruby/sym notice
+      file: /opt/provision/production/vendor/modules/evrone/manifests/role/puppet/master.pp
+      time: 2013-03-22 20:11:44.025364 +00:00
+      tags:
+        - notice
+        - exec
+        - "puppetca:generate"
+        - class
+        - "evrone::role::puppet::master"
+        - evrone
+        - role
+        - puppet
+        - master
+        - node
+        - default
+      message: "current_value notrun, should be 0 24 (noop)"
+      source: "/Stage[main]/Evrone::Role::Puppet::Master/Exec[puppetca:generate]/returns"
+    - !ruby/object:Puppet::Util::Log
+      line: 22
+      level: !ruby/sym notice
+      file: /opt/provision/production/vendor/modules/evrone/manifests/repo.pp
+      time: 2013-03-22 20:11:44.035946 +00:00
+      tags:
+        - notice
+        - cron
+        - apt-update
+        - class
+        - "evrone::repo"
+        - evrone
+        - repo
+        - "evrone::role"
+        - role
+        - node
+        - default
+      message: "current_value absent, should be present (noop)"
+      source: "/Stage[main]/Evrone::Repo/Cron[apt-update]/ensure"
+    - !ruby/object:Puppet::Util::Log
+      line: 49
+      level: !ruby/sym notice
+      file: /opt/provision/production/vendor/modules/evrone/manifests/role/puppet/master.pp
+      time: 2013-03-22 20:11:44.043636 +00:00
+      tags:
+        - notice
+        - file
+        - class
+        - "evrone::role::puppet::master"
+        - evrone
+        - role
+        - puppet
+        - master
+        - node
+        - default
+      message: "current_value {md5}2247589d683c46bfa7c2fc6456b0e7bc, should be {md5}5766f1627f037640f2cd5dd723bce093 (noop)"
+      source: "/Stage[main]/Evrone::Role::Puppet::Master/File[/etc/puppet/puppet.conf]/content"
+    - !ruby/object:Puppet::Util::Log
+      line: 49
+      level: !ruby/sym notice
+      file: /opt/provision/production/vendor/modules/evrone/manifests/role/puppet/master.pp
+      time: 2013-03-22 20:11:44.044895 +00:00
+      tags:
+        - notice
+        - file
+        - class
+        - "evrone::role::puppet::master"
+        - evrone
+        - role
+        - puppet
+        - master
+        - node
+        - default
+      message: "current_value root, should be puppet (noop)"
+      source: "/Stage[main]/Evrone::Role::Puppet::Master/File[/etc/puppet/puppet.conf]/owner"
+    - !ruby/object:Puppet::Util::Log
+      line: 49
+      level: !ruby/sym info
+      file: /opt/provision/production/vendor/modules/evrone/manifests/role/puppet/master.pp
+      time: 2013-03-22 20:11:44.045866 +00:00
+      tags:
+        - info
+        - file
+        - class
+        - "evrone::role::puppet::master"
+        - evrone
+        - role
+        - puppet
+        - master
+        - node
+        - default
+      message: "Scheduling refresh of Runit::Service[puppetmaster]"
+      source: "/Stage[main]/Evrone::Role::Puppet::Master/File[/etc/puppet/puppet.conf]"
+    - !ruby/object:Puppet::Util::Log
+      line: 49
+      level: !ruby/sym info
+      file: /opt/provision/production/vendor/modules/evrone/manifests/role/puppet/master.pp
+      time: 2013-03-22 20:11:44.047006 +00:00
+      tags:
+        - info
+        - file
+        - class
+        - "evrone::role::puppet::master"
+        - evrone
+        - role
+        - puppet
+        - master
+        - node
+        - default
+      message: "Scheduling refresh of Runit::Service[puppetmaster]"
+      source: "/Stage[main]/Evrone::Role::Puppet::Master/File[/etc/puppet/puppet.conf]"
+    - !ruby/object:Puppet::Util::Log
+      line: 14
+      level: !ruby/sym notice
+      file: /opt/provision/production/vendor/modules/runit/manifests/init.pp
+      time: 2013-03-22 20:11:44.049685 +00:00
+      tags:
+        - notice
+        - file
+        - class
+        - runit
+        - "evrone::role::puppet::master"
+        - evrone
+        - role
+        - puppet
+        - master
+        - node
+        - default
+      message: "current_value absent, should be directory (noop)"
+      source: /Stage[main]/Runit/File[/etc/service]/ensure
+    - !ruby/object:Puppet::Util::Log
+      line: 23
+      level: !ruby/sym notice
+      file: /opt/provision/production/vendor/modules/evrone/manifests/sys/admin.pp
+      time: 2013-03-22 20:11:44.060590 +00:00
+      tags:
+        - notice
+        - group
+        - dmexe
+        - "evrone::sys::admin"
+        - evrone
+        - sys
+        - admin
+        - class
+        - "evrone::sys"
+        - "evrone::role"
+        - role
+        - node
+        - default
+      message: "current_value absent, should be present (noop)"
+      source: "/Stage[main]/Evrone::Sys/Evrone::Sys::Admin[dmexe]/Group[dmexe]/ensure"
+    - !ruby/object:Puppet::Util::Log
+      line: 11
+      level: !ruby/sym notice
+      file: /opt/provision/production/vendor/modules/evrone/manifests/profile/sudo.pp
+      time: 2013-03-22 20:11:44.067396 +00:00
+      tags:
+        - notice
+        - file
+        - class
+        - "evrone::profile::sudo"
+        - evrone
+        - profile
+        - sudo
+        - "evrone::sys"
+        - sys
+        - "evrone::role"
+        - role
+        - node
+        - default
+      message: "current_value {md5}683eca72967d971ee3be5cd581069b9a, should be {md5}701fb73bc5a8d8da6ac3458ddf613b39 (noop)"
+      source: "/Stage[main]/Evrone::Profile::Sudo/File[/etc/sudoers]/content"
+    - !ruby/object:Puppet::Util::Log
+      line: 49
+      level: !ruby/sym notice
+      file: /opt/provision/production/vendor/modules/evrone/manifests/role/puppet/master.pp
+      time: 2013-03-22 20:11:44.069464 +00:00
+      tags:
+        - notice
+        - file
+        - class
+        - "evrone::role::puppet::master"
+        - evrone
+        - role
+        - puppet
+        - master
+        - node
+        - default
+      message: "current_value absent, should be present (noop)"
+      source: "/Stage[main]/Evrone::Role::Puppet::Master/File[/etc/puppet/config.ru]/ensure"
+    - !ruby/object:Puppet::Util::Log
+      line: 49
+      level: !ruby/sym info
+      file: /opt/provision/production/vendor/modules/evrone/manifests/role/puppet/master.pp
+      time: 2013-03-22 20:11:44.070254 +00:00
+      tags:
+        - info
+        - file
+        - class
+        - "evrone::role::puppet::master"
+        - evrone
+        - role
+        - puppet
+        - master
+        - node
+        - default
+      message: "Scheduling refresh of Runit::Service[puppetmaster]"
+      source: "/Stage[main]/Evrone::Role::Puppet::Master/File[/etc/puppet/config.ru]"
+    - !ruby/object:Puppet::Util::Log
+      line: 54
+      level: !ruby/sym notice
+      file: /opt/provision/production/vendor/modules/apt/manifests/key.pp
+      time: 2013-03-22 20:11:44.134140 +00:00
+      tags:
+        - notice
+        - exec
+        - "4de625c7ede65a0bdfde3b35a4a8fa72b6c941ec"
+        - "apt::key"
+        - apt
+        - key
+        - "apt::source"
+        - source
+        - evrone
+        - class
+        - "evrone::repo"
+        - repo
+        - "evrone::role"
+        - role
+        - node
+        - default
+      message: "current_value notrun, should be 0 (noop)"
+      source: "/Stage[main]/Evrone::Repo/Apt::Source[Evrone]/Apt::Key[Add key: 1024D/4CFF08F2 from Apt::Source Evrone]/Exec[4de625c7ede65a0bdfde3b35a4a8fa72b6c941ec]/returns"
+    - !ruby/object:Puppet::Util::Log
+      level: !ruby/sym notice
+      time: 2013-03-22 20:11:44.138262 +00:00
+      tags:
+        - notice
+        - "completed_apt::key"
+        - completed_apt
+        - key
+      message: "Would have triggered 'refresh' from 1 events"
+      source: "Apt::Key[Add key: 1024D/4CFF08F2 from Apt::Source Evrone]"
+    - !ruby/object:Puppet::Util::Log
+      line: 42
+      level: !ruby/sym notice
+      file: /opt/provision/production/vendor/modules/apt/manifests/source.pp
+      time: 2013-03-22 20:11:44.141190 +00:00
+      tags:
+        - notice
+        - file
+        - evrone.list
+        - "apt::source"
+        - apt
+        - source
+        - evrone
+        - class
+        - "evrone::repo"
+        - repo
+        - "evrone::role"
+        - role
+        - node
+        - default
+      message: "current_value absent, should be present (noop)"
+      source: "/Stage[main]/Evrone::Repo/Apt::Source[Evrone]/File[Evrone.list]/ensure"
+    - !ruby/object:Puppet::Util::Log
+      line: 42
+      level: !ruby/sym info
+      file: /opt/provision/production/vendor/modules/apt/manifests/source.pp
+      time: 2013-03-22 20:11:44.142400 +00:00
+      tags:
+        - info
+        - file
+        - evrone.list
+        - "apt::source"
+        - apt
+        - source
+        - evrone
+        - class
+        - "evrone::repo"
+        - repo
+        - "evrone::role"
+        - role
+        - node
+        - default
+      message: "Scheduling refresh of Exec[apt_update]"
+      source: "/Stage[main]/Evrone::Repo/Apt::Source[Evrone]/File[Evrone.list]"
+    - !ruby/object:Puppet::Util::Log
+      line: 8
+      level: !ruby/sym notice
+      file: /opt/provision/production/vendor/modules/apt/manifests/update.pp
+      time: 2013-03-22 20:11:44.144026 +00:00
+      tags:
+        - notice
+        - exec
+        - apt_update
+        - class
+        - "apt::update"
+        - apt
+        - update
+        - "apt::source"
+        - source
+        - evrone
+        - "evrone::repo"
+        - repo
+        - "evrone::role"
+        - role
+        - node
+        - default
+      message: "Would have triggered 'refresh' from 1 events"
+      source: "/Stage[main]/Apt::Update/Exec[apt_update]"
+    - !ruby/object:Puppet::Util::Log
+      level: !ruby/sym notice
+      time: 2013-03-22 20:11:44.146618 +00:00
+      tags:
+        - notice
+        - completed_class
+        - "apt::update"
+        - apt
+        - update
+      message: "Would have triggered 'refresh' from 1 events"
+      source: "Class[Apt::Update]"
+    - !ruby/object:Puppet::Util::Log
+      level: !ruby/sym notice
+      time: 2013-03-22 20:11:44.149356 +00:00
+      tags:
+        - notice
+        - "completed_apt::source"
+        - completed_apt
+        - source
+        - evrone
+      message: "Would have triggered 'refresh' from 2 events"
+      source: "Apt::Source[Evrone]"
+    - !ruby/object:Puppet::Util::Log
+      level: !ruby/sym notice
+      time: 2013-03-22 20:11:44.152752 +00:00
+      tags:
+        - notice
+        - completed_class
+        - "evrone::repo"
+        - evrone
+        - repo
+      message: "Would have triggered 'refresh' from 2 events"
+      source: "Class[Evrone::Repo]"
+    - !ruby/object:Puppet::Util::Log
+      line: 17
+      level: !ruby/sym notice
+      file: /opt/provision/production/vendor/modules/evrone/manifests/role/puppet/master.pp
+      time: 2013-03-22 20:11:44.291288 +00:00
+      tags:
+        - notice
+        - package
+        - rake
+        - class
+        - "evrone::role::puppet::master"
+        - evrone
+        - role
+        - puppet
+        - master
+        - node
+        - default
+      message: "current_value absent, should be present (noop)"
+      source: "/Stage[main]/Evrone::Role::Puppet::Master/Package[rake]/ensure"
+    - !ruby/object:Puppet::Util::Log
+      line: 17
+      level: !ruby/sym notice
+      file: /opt/provision/production/vendor/modules/evrone/manifests/sys.pp
+      time: 2013-03-22 20:11:44.341282 +00:00
+      tags:
+        - notice
+        - package
+        - htop
+        - class
+        - "evrone::sys"
+        - evrone
+        - sys
+        - "evrone::role"
+        - role
+        - node
+        - default
+      message: "current_value purged, should be present (noop)"
+      source: "/Stage[main]/Evrone::Sys/Package[htop]/ensure"
+    - !ruby/object:Puppet::Util::Log
+      line: 3
+      level: !ruby/sym notice
+      file: /opt/provision/production/vendor/modules/runit/manifests/init.pp
+      time: 2013-03-22 20:11:44.369557 +00:00
+      tags:
+        - notice
+        - package
+        - runit
+        - class
+        - "evrone::role::puppet::master"
+        - evrone
+        - role
+        - puppet
+        - master
+        - node
+        - default
+      message: "current_value purged, should be present (noop)"
+      source: /Stage[main]/Runit/Package[runit]/ensure
+    - !ruby/object:Puppet::Util::Log
+      line: 17
+      level: !ruby/sym notice
+      file: /opt/provision/production/vendor/modules/evrone/manifests/role/puppet/master.pp
+      time: 2013-03-22 20:11:44.437565 +00:00
+      tags:
+        - notice
+        - package
+        - unicorn
+        - class
+        - "evrone::role::puppet::master"
+        - evrone
+        - role
+        - puppet
+        - master
+        - node
+        - default
+      message: "current_value absent, should be present (noop)"
+      source: "/Stage[main]/Evrone::Role::Puppet::Master/Package[unicorn]/ensure"
+    - !ruby/object:Puppet::Util::Log
+      line: 21
+      level: !ruby/sym notice
+      file: /opt/provision/production/vendor/modules/evrone/manifests/role/puppet/master.pp
+      time: 2013-03-22 20:11:44.465047 +00:00
+      tags:
+        - notice
+        - package
+        - puppetdb-terminus
+        - class
+        - "evrone::role::puppet::master"
+        - evrone
+        - role
+        - puppet
+        - master
+        - node
+        - default
+      message: "current_value purged, should be present (noop)"
+      source: "/Stage[main]/Evrone::Role::Puppet::Master/Package[puppetdb-terminus]/ensure"
+    - !ruby/object:Puppet::Util::Log
+      line: 17
+      level: !ruby/sym notice
+      file: /opt/provision/production/vendor/modules/evrone/manifests/sys.pp
+      time: 2013-03-22 20:11:44.493156 +00:00
+      tags:
+        - notice
+        - package
+        - vim
+        - class
+        - "evrone::sys"
+        - evrone
+        - sys
+        - "evrone::role"
+        - role
+        - node
+        - default
+      message: "current_value purged, should be present (noop)"
+      source: "/Stage[main]/Evrone::Sys/Package[vim]/ensure"
+    - !ruby/object:Puppet::Util::Log
+      line: 13
+      level: !ruby/sym notice
+      file: /opt/provision/production/vendor/modules/evrone/manifests/profile/sshd.pp
+      time: 2013-03-22 20:11:44.499700 +00:00
+      tags:
+        - notice
+        - file
+        - class
+        - "evrone::profile::sshd"
+        - evrone
+        - profile
+        - sshd
+        - "evrone::sys"
+        - sys
+        - "evrone::role"
+        - role
+        - node
+        - default
+      message: "current_value {md5}b951734458b83fbd246ff2b753b61841, should be {md5}f5ea67f41c9f2cc8a0989d95dc480567 (noop)"
+      source: "/Stage[main]/Evrone::Profile::Sshd/File[/etc/ssh/sshd_config]/content"
+    - !ruby/object:Puppet::Util::Log
+      line: 13
+      level: !ruby/sym info
+      file: /opt/provision/production/vendor/modules/evrone/manifests/profile/sshd.pp
+      time: 2013-03-22 20:11:44.501571 +00:00
+      tags:
+        - info
+        - file
+        - class
+        - "evrone::profile::sshd"
+        - evrone
+        - profile
+        - sshd
+        - "evrone::sys"
+        - sys
+        - "evrone::role"
+        - role
+        - node
+        - default
+      message: "Scheduling refresh of Service[ssh]"
+      source: "/Stage[main]/Evrone::Profile::Sshd/File[/etc/ssh/sshd_config]"
+    - !ruby/object:Puppet::Util::Log
+      line: 18
+      level: !ruby/sym notice
+      file: /opt/provision/production/vendor/modules/evrone/manifests/profile/sshd.pp
+      time: 2013-03-22 20:11:44.547894 +00:00
+      tags:
+        - notice
+        - service
+        - ssh
+        - class
+        - "evrone::profile::sshd"
+        - evrone
+        - profile
+        - sshd
+        - "evrone::sys"
+        - sys
+        - "evrone::role"
+        - role
+        - node
+        - default
+      message: "Would have triggered 'refresh' from 1 events"
+      source: "/Stage[main]/Evrone::Profile::Sshd/Service[ssh]"
+    - !ruby/object:Puppet::Util::Log
+      level: !ruby/sym notice
+      time: 2013-03-22 20:11:44.551256 +00:00
+      tags:
+        - notice
+        - completed_class
+        - "evrone::profile::sshd"
+        - evrone
+        - profile
+        - sshd
+      message: "Would have triggered 'refresh' from 2 events"
+      source: "Class[Evrone::Profile::Sshd]"
+    - !ruby/object:Puppet::Util::Log
+      line: 33
+      level: !ruby/sym notice
+      file: /opt/provision/production/vendor/modules/evrone/manifests/sys/admin.pp
+      time: 2013-03-22 20:11:44.554647 +00:00
+      tags:
+        - notice
+        - user
+        - dmexe
+        - "evrone::sys::admin"
+        - evrone
+        - sys
+        - admin
+        - class
+        - "evrone::sys"
+        - "evrone::role"
+        - role
+        - node
+        - default
+      message: "current_value absent, should be present (noop)"
+      source: "/Stage[main]/Evrone::Sys/Evrone::Sys::Admin[dmexe]/User[dmexe]/ensure"
+    - !ruby/object:Puppet::Util::Log
+      line: 50
+      level: !ruby/sym notice
+      file: /opt/provision/production/vendor/modules/evrone/manifests/sys/admin.pp
+      time: 2013-03-22 20:11:44.557007 +00:00
+      tags:
+        - notice
+        - file
+        - "evrone::sys::admin"
+        - evrone
+        - sys
+        - admin
+        - dmexe
+        - class
+        - "evrone::sys"
+        - "evrone::role"
+        - role
+        - node
+        - default
+      message: "current_value absent, should be directory (noop)"
+      source: "/Stage[main]/Evrone::Sys/Evrone::Sys::Admin[dmexe]/File[/home/dmexe]/ensure"
+    - !ruby/object:Puppet::Util::Log
+      line: 41
+      level: !ruby/sym notice
+      file: /opt/provision/production/vendor/modules/evrone/manifests/sys/admin.pp
+      time: 2013-03-22 20:11:44.559424 +00:00
+      tags:
+        - notice
+        - ssh_authorized_key
+        - "evrone::sys::admin"
+        - evrone
+        - sys
+        - admin
+        - dmexe
+        - class
+        - "evrone::sys"
+        - "evrone::role"
+        - role
+        - node
+        - default
+      message: "current_value absent, should be present (noop)"
+      source: "/Stage[main]/Evrone::Sys/Evrone::Sys::Admin[dmexe]/Ssh_authorized_key[dmexe@master.local]/ensure"
+    - !ruby/object:Puppet::Util::Log
+      level: !ruby/sym notice
+      time: 2013-03-22 20:11:44.562055 +00:00
+      tags:
+        - notice
+        - "completed_evrone::sys::admin"
+        - completed_evrone
+        - sys
+        - admin
+        - dmexe
+      message: "Would have triggered 'refresh' from 4 events"
+      source: "Evrone::Sys::Admin[dmexe]"
+    - !ruby/object:Puppet::Util::Log
+      level: !ruby/sym notice
+      time: 2013-03-22 20:11:44.564864 +00:00
+      tags:
+        - notice
+        - completed_class
+        - "evrone::sys"
+        - evrone
+        - sys
+      message: "Would have triggered 'refresh' from 3 events"
+      source: "Class[Evrone::Sys]"
+    - !ruby/object:Puppet::Util::Log
+      line: 48
+      level: !ruby/sym notice
+      file: /opt/provision/production/vendor/modules/nginx/manifests/init.pp
+      time: 2013-03-22 20:11:44.595391 +00:00
+      tags:
+        - notice
+        - package
+        - nginx
+        - class
+        - "evrone::role::puppet::master"
+        - evrone
+        - role
+        - puppet
+        - master
+        - node
+        - default
+      message: "current_value purged, should be present (noop)"
+      source: /Stage[main]/Nginx/Package[nginx]/ensure
+    - !ruby/object:Puppet::Util::Log
+      line: 67
+      level: !ruby/sym notice
+      file: /opt/provision/production/vendor/modules/nginx/manifests/init.pp
+      time: 2013-03-22 20:11:44.596995 +00:00
+      tags:
+        - notice
+        - file
+        - class
+        - nginx
+        - "evrone::role::puppet::master"
+        - evrone
+        - role
+        - puppet
+        - master
+        - node
+        - default
+      message: "current_value absent, should be present (noop)"
+      source: /Stage[main]/Nginx/File[/etc/nginx/nginx.conf]/ensure
+    - !ruby/object:Puppet::Util::Log
+      line: 67
+      level: !ruby/sym info
+      file: /opt/provision/production/vendor/modules/nginx/manifests/init.pp
+      time: 2013-03-22 20:11:44.597250 +00:00
+      tags:
+        - info
+        - file
+        - class
+        - nginx
+        - "evrone::role::puppet::master"
+        - evrone
+        - role
+        - puppet
+        - master
+        - node
+        - default
+      message: "Scheduling refresh of Service[nginx]"
+      source: /Stage[main]/Nginx/File[/etc/nginx/nginx.conf]
+    - !ruby/object:Puppet::Util::Log
+      line: 83
+      level: !ruby/sym notice
+      file: /opt/provision/production/vendor/modules/nginx/manifests/init.pp
+      time: 2013-03-22 20:11:44.599579 +00:00
+      tags:
+        - notice
+        - file
+        - class
+        - nginx
+        - "evrone::role::puppet::master"
+        - evrone
+        - role
+        - puppet
+        - master
+        - node
+        - default
+      message: "current_value absent, should be directory (noop)"
+      source: /Stage[main]/Nginx/File[/etc/nginx/ssl]/ensure
+    - !ruby/object:Puppet::Util::Log
+      line: 91
+      level: !ruby/sym notice
+      file: /opt/provision/production/vendor/modules/nginx/manifests/init.pp
+      time: 2013-03-22 20:11:44.602015 +00:00
+      tags:
+        - notice
+        - file
+        - class
+        - nginx
+        - "evrone::role::puppet::master"
+        - evrone
+        - role
+        - puppet
+        - master
+        - node
+        - default
+      message: "current_value absent, should be directory (noop)"
+      source: /Stage[main]/Nginx/File[/etc/nginx/includes]/ensure
+    - !ruby/object:Puppet::Util::Log
+      line: 99
+      level: !ruby/sym notice
+      file: /opt/provision/production/vendor/modules/nginx/manifests/init.pp
+      time: 2013-03-22 20:11:44.603860 +00:00
+      tags:
+        - notice
+        - file
+        - class
+        - nginx
+        - "evrone::role::puppet::master"
+        - evrone
+        - role
+        - puppet
+        - master
+        - node
+        - default
+      message: "current_value absent, should be directory (noop)"
+      source: /Stage[main]/Nginx/File[/etc/nginx/sites-enabled]/ensure
+    - !ruby/object:Puppet::Util::Log
+      line: 99
+      level: !ruby/sym notice
+      file: /opt/provision/production/vendor/modules/nginx/manifests/init.pp
+      time: 2013-03-22 20:11:44.605627 +00:00
+      tags:
+        - notice
+        - file
+        - class
+        - nginx
+        - "evrone::role::puppet::master"
+        - evrone
+        - role
+        - puppet
+        - master
+        - node
+        - default
+      message: "current_value absent, should be directory (noop)"
+      source: /Stage[main]/Nginx/File[/etc/nginx/sites-available]/ensure
+    - !ruby/object:Puppet::Util::Log
+      line: 30
+      level: !ruby/sym notice
+      file: /opt/provision/production/vendor/modules/nginx/manifests/install_site.pp
+      time: 2013-03-22 20:11:44.607559 +00:00
+      tags:
+        - notice
+        - file
+        - "nginx::install_site"
+        - nginx
+        - install_site
+        - master.local_8140
+        - "nginx::site"
+        - site
+        - class
+        - "evrone::role::puppet::master"
+        - evrone
+        - role
+        - puppet
+        - master
+        - node
+        - default
+      message: "current_value absent, should be present (noop)"
+      source: "/Stage[main]/Evrone::Role::Puppet::Master/Nginx::Site[master.local_8140]/Nginx::Install_site[master.local_8140]/File[/etc/nginx/sites-available/master.local_8140]/ensure"
+    - !ruby/object:Puppet::Util::Log
+      line: 30
+      level: !ruby/sym info
+      file: /opt/provision/production/vendor/modules/nginx/manifests/install_site.pp
+      time: 2013-03-22 20:11:44.609299 +00:00
+      tags:
+        - info
+        - file
+        - "nginx::install_site"
+        - nginx
+        - install_site
+        - master.local_8140
+        - "nginx::site"
+        - site
+        - class
+        - "evrone::role::puppet::master"
+        - evrone
+        - role
+        - puppet
+        - master
+        - node
+        - default
+      message: "Scheduling refresh of Service[nginx]"
+      source: "/Stage[main]/Evrone::Role::Puppet::Master/Nginx::Site[master.local_8140]/Nginx::Install_site[master.local_8140]/File[/etc/nginx/sites-available/master.local_8140]"
+    - !ruby/object:Puppet::Util::Log
+      line: 41
+      level: !ruby/sym notice
+      file: /opt/provision/production/vendor/modules/nginx/manifests/install_site.pp
+      time: 2013-03-22 20:11:44.675603 +00:00
+      tags:
+        - notice
+        - exec
+        - "nginx::install_site"
+        - nginx
+        - install_site
+        - master.local_8140
+        - "nginx::site"
+        - site
+        - class
+        - "evrone::role::puppet::master"
+        - evrone
+        - role
+        - puppet
+        - master
+        - node
+        - default
+      message: "current_value notrun, should be 0 (noop)"
+      source: "/Stage[main]/Evrone::Role::Puppet::Master/Nginx::Site[master.local_8140]/Nginx::Install_site[master.local_8140]/Exec[ln -s /etc/nginx/sites-available/master.local_8140 /etc/nginx/sites-enabled/master.local_8140]/returns"
+    - !ruby/object:Puppet::Util::Log
+      line: 41
+      level: !ruby/sym info
+      file: /opt/provision/production/vendor/modules/nginx/manifests/install_site.pp
+      time: 2013-03-22 20:11:44.677774 +00:00
+      tags:
+        - info
+        - exec
+        - "nginx::install_site"
+        - nginx
+        - install_site
+        - master.local_8140
+        - "nginx::site"
+        - site
+        - class
+        - "evrone::role::puppet::master"
+        - evrone
+        - role
+        - puppet
+        - master
+        - node
+        - default
+      message: "Scheduling refresh of Service[nginx]"
+      source: "/Stage[main]/Evrone::Role::Puppet::Master/Nginx::Site[master.local_8140]/Nginx::Install_site[master.local_8140]/Exec[ln -s /etc/nginx/sites-available/master.local_8140 /etc/nginx/sites-enabled/master.local_8140]"
+    - !ruby/object:Puppet::Util::Log
+      level: !ruby/sym notice
+      time: 2013-03-22 20:11:44.683345 +00:00
+      tags:
+        - notice
+        - "completed_nginx::install_site"
+        - completed_nginx
+        - install_site
+        - master.local_8140
+      message: "Would have triggered 'refresh' from 2 events"
+      source: "Nginx::Install_site[master.local_8140]"
+    - !ruby/object:Puppet::Util::Log
+      level: !ruby/sym notice
+      time: 2013-03-22 20:11:44.687109 +00:00
+      tags:
+        - notice
+        - "completed_nginx::site"
+        - completed_nginx
+        - site
+        - master.local_8140
+      message: "Would have triggered 'refresh' from 1 events"
+      source: "Nginx::Site[master.local_8140]"
+    - !ruby/object:Puppet::Util::Log
+      level: !ruby/sym notice
+      time: 2013-03-22 20:11:44.693006 +00:00
+      tags:
+        - notice
+        - completed_class
+        - "evrone::profile::sudo"
+        - evrone
+        - profile
+        - sudo
+      message: "Would have triggered 'refresh' from 1 events"
+      source: "Class[Evrone::Profile::Sudo]"
+    - !ruby/object:Puppet::Util::Log
+      level: !ruby/sym notice
+      time: 2013-03-22 20:11:44.696221 +00:00
+      tags:
+        - notice
+        - completed_class
+        - runit
+      message: "Would have triggered 'refresh' from 3 events"
+      source: Class[Runit]
+    - !ruby/object:Puppet::Util::Log
+      line: 75
+      level: !ruby/sym notice
+      file: /opt/provision/production/vendor/modules/nginx/manifests/init.pp
+      time: 2013-03-22 20:11:44.703275 +00:00
+      tags:
+        - notice
+        - file
+        - class
+        - nginx
+        - "evrone::role::puppet::master"
+        - evrone
+        - role
+        - puppet
+        - master
+        - node
+        - default
+      message: "current_value absent, should be directory (noop)"
+      source: /Stage[main]/Nginx/File[/etc/nginx/conf.d]/ensure
+    - !ruby/object:Puppet::Util::Log
+      level: !ruby/sym notice
+      time: 2013-03-22 20:11:44.709585 +00:00
+      tags:
+        - notice
+        - "admissible_runit::service"
+        - admissible_runit
+        - service
+        - puppetmaster
+      message: "Would have triggered 'refresh' from 4 events"
+      source: "Runit::Service[puppetmaster]"
+    - !ruby/object:Puppet::Util::Log
+      level: !ruby/sym info
+      time: 2013-03-22 20:11:44.711363 +00:00
+      tags:
+        - info
+        - "admissible_runit::service"
+        - admissible_runit
+        - service
+        - puppetmaster
+      message: "Scheduling refresh of Runit::Service::Enabled[puppetmaster]"
+      source: "Runit::Service[puppetmaster]"
+    - !ruby/object:Puppet::Util::Log
+      level: !ruby/sym info
+      time: 2013-03-22 20:11:44.712337 +00:00
+      tags:
+        - info
+        - "admissible_runit::service"
+        - admissible_runit
+        - service
+        - puppetmaster
+      message: "Scheduling refresh of Runit::Service[puppetmaster/log]"
+      source: "Runit::Service[puppetmaster]"
+    - !ruby/object:Puppet::Util::Log
+      line: 81
+      level: !ruby/sym notice
+      file: /opt/provision/production/vendor/modules/runit/manifests/service.pp
+      time: 2013-03-22 20:11:44.715395 +00:00
+      tags:
+        - notice
+        - file
+        - "runit::service"
+        - runit
+        - service
+        - puppetmaster
+        - class
+        - "evrone::role::puppet::master"
+        - evrone
+        - role
+        - puppet
+        - master
+        - node
+        - default
+      message: "current_value absent, should be directory (noop)"
+      source: "/Stage[main]/Evrone::Role::Puppet::Master/Runit::Service[puppetmaster]/File[/etc/sv/puppetmaster]/ensure"
+    - !ruby/object:Puppet::Util::Log
+      line: 81
+      level: !ruby/sym notice
+      file: /opt/provision/production/vendor/modules/runit/manifests/service.pp
+      time: 2013-03-22 20:11:44.718574 +00:00
+      tags:
+        - notice
+        - file
+        - "runit::service"
+        - runit
+        - service
+        - puppetmaster
+        - class
+        - "evrone::role::puppet::master"
+        - evrone
+        - role
+        - puppet
+        - master
+        - node
+        - default
+      message: "current_value absent, should be present (noop)"
+      source: "/Stage[main]/Evrone::Role::Puppet::Master/Runit::Service[puppetmaster]/File[/etc/sv/puppetmaster/run]/ensure"
+    - !ruby/object:Puppet::Util::Log
+      line: 81
+      level: !ruby/sym info
+      file: /opt/provision/production/vendor/modules/runit/manifests/service.pp
+      time: 2013-03-22 20:11:44.719847 +00:00
+      tags:
+        - info
+        - file
+        - "runit::service"
+        - runit
+        - service
+        - puppetmaster
+        - class
+        - "evrone::role::puppet::master"
+        - evrone
+        - role
+        - puppet
+        - master
+        - node
+        - default
+      message: "Scheduling refresh of Runit::Service::Enabled[puppetmaster]"
+      source: "/Stage[main]/Evrone::Role::Puppet::Master/Runit::Service[puppetmaster]/File[/etc/sv/puppetmaster/run]"
+    - !ruby/object:Puppet::Util::Log
+      level: !ruby/sym notice
+      time: 2013-03-22 20:11:44.723182 +00:00
+      tags:
+        - notice
+        - "admissible_runit::service::enabled"
+        - admissible_runit
+        - service
+        - enabled
+        - puppetmaster
+      message: "Would have triggered 'refresh' from 2 events"
+      source: "Runit::Service::Enabled[puppetmaster]"
+    - !ruby/object:Puppet::Util::Log
+      level: !ruby/sym info
+      time: 2013-03-22 20:11:44.723983 +00:00
+      tags:
+        - info
+        - "admissible_runit::service::enabled"
+        - admissible_runit
+        - service
+        - enabled
+        - puppetmaster
+      message: "Scheduling refresh of Exec[sv restart puppetmaster]"
+      source: "Runit::Service::Enabled[puppetmaster]"
+    - !ruby/object:Puppet::Util::Log
+      line: 13
+      level: !ruby/sym notice
+      file: /opt/provision/production/vendor/modules/runit/manifests/service/enabled.pp
+      time: 2013-03-22 20:11:44.726002 +00:00
+      tags:
+        - notice
+        - file
+        - "runit::service::enabled"
+        - runit
+        - service
+        - enabled
+        - puppetmaster
+        - "runit::service"
+        - class
+        - "evrone::role::puppet::master"
+        - evrone
+        - role
+        - puppet
+        - master
+        - node
+        - default
+      message: "current_value absent, should be link (noop)"
+      source: "/Stage[main]/Evrone::Role::Puppet::Master/Runit::Service[puppetmaster]/Runit::Service::Enabled[puppetmaster]/File[/etc/service/puppetmaster]/ensure"
+    - !ruby/object:Puppet::Util::Log
+      line: 13
+      level: !ruby/sym info
+      file: /opt/provision/production/vendor/modules/runit/manifests/service/enabled.pp
+      time: 2013-03-22 20:11:44.726776 +00:00
+      tags:
+        - info
+        - file
+        - "runit::service::enabled"
+        - runit
+        - service
+        - enabled
+        - puppetmaster
+        - "runit::service"
+        - class
+        - "evrone::role::puppet::master"
+        - evrone
+        - role
+        - puppet
+        - master
+        - node
+        - default
+      message: "Scheduling refresh of Exec[sv restart puppetmaster]"
+      source: "/Stage[main]/Evrone::Role::Puppet::Master/Runit::Service[puppetmaster]/Runit::Service::Enabled[puppetmaster]/File[/etc/service/puppetmaster]"
+    - !ruby/object:Puppet::Util::Log
+      line: 32
+      level: !ruby/sym notice
+      file: /opt/provision/production/vendor/modules/runit/manifests/service/enabled.pp
+      time: 2013-03-22 20:11:44.728720 +00:00
+      tags:
+        - notice
+        - exec
+        - "runit::service::enabled"
+        - runit
+        - service
+        - enabled
+        - puppetmaster
+        - "runit::service"
+        - class
+        - "evrone::role::puppet::master"
+        - evrone
+        - role
+        - puppet
+        - master
+        - node
+        - default
+      message: "Would have triggered 'refresh' from 2 events"
+      source: "/Stage[main]/Evrone::Role::Puppet::Master/Runit::Service[puppetmaster]/Runit::Service::Enabled[puppetmaster]/Exec[sv restart puppetmaster]"
+    - !ruby/object:Puppet::Util::Log
+      line: 81
+      level: !ruby/sym notice
+      file: /opt/provision/production/vendor/modules/runit/manifests/service.pp
+      time: 2013-03-22 20:11:44.730892 +00:00
+      tags:
+        - notice
+        - file
+        - "runit::service"
+        - runit
+        - service
+        - puppetmaster
+        - class
+        - "evrone::role::puppet::master"
+        - evrone
+        - role
+        - puppet
+        - master
+        - node
+        - default
+      message: "current_value absent, should be present (noop)"
+      source: "/Stage[main]/Evrone::Role::Puppet::Master/Runit::Service[puppetmaster]/File[/etc/sv/puppetmaster/finish]/ensure"
+    - !ruby/object:Puppet::Util::Log
+      level: !ruby/sym notice
+      time: 2013-03-22 20:11:44.734034 +00:00
+      tags:
+        - notice
+        - "admissible_runit::service"
+        - admissible_runit
+        - service
+      message: "Would have triggered 'refresh' from 1 events"
+      source: "Runit::Service[puppetmaster/log]"
+    - !ruby/object:Puppet::Util::Log
+      line: 81
+      level: !ruby/sym notice
+      file: /opt/provision/production/vendor/modules/runit/manifests/service.pp
+      time: 2013-03-22 20:11:44.736969 +00:00
+      tags:
+        - notice
+        - file
+        - "runit::service"
+        - runit
+        - service
+        - puppetmaster
+        - class
+        - "evrone::role::puppet::master"
+        - evrone
+        - role
+        - puppet
+        - master
+        - node
+        - default
+      message: "current_value absent, should be directory (noop)"
+      source: "/Stage[main]/Evrone::Role::Puppet::Master/Runit::Service[puppetmaster]/Runit::Service[puppetmaster/log]/File[/etc/sv/puppetmaster/log]/ensure"
+    - !ruby/object:Puppet::Util::Log
+      line: 81
+      level: !ruby/sym notice
+      file: /opt/provision/production/vendor/modules/runit/manifests/service.pp
+      time: 2013-03-22 20:11:44.739449 +00:00
+      tags:
+        - notice
+        - file
+        - "runit::service"
+        - runit
+        - service
+        - puppetmaster
+        - class
+        - "evrone::role::puppet::master"
+        - evrone
+        - role
+        - puppet
+        - master
+        - node
+        - default
+      message: "current_value absent, should be present (noop)"
+      source: "/Stage[main]/Evrone::Role::Puppet::Master/Runit::Service[puppetmaster]/Runit::Service[puppetmaster/log]/File[/etc/sv/puppetmaster/log/run]/ensure"
+    - !ruby/object:Puppet::Util::Log
+      line: 81
+      level: !ruby/sym notice
+      file: /opt/provision/production/vendor/modules/runit/manifests/service.pp
+      time: 2013-03-22 20:11:44.741444 +00:00
+      tags:
+        - notice
+        - file
+        - "runit::service"
+        - runit
+        - service
+        - puppetmaster
+        - class
+        - "evrone::role::puppet::master"
+        - evrone
+        - role
+        - puppet
+        - master
+        - node
+        - default
+      message: "current_value absent, should be present (noop)"
+      source: "/Stage[main]/Evrone::Role::Puppet::Master/Runit::Service[puppetmaster]/Runit::Service[puppetmaster/log]/File[/etc/sv/puppetmaster/log/finish]/ensure"
+    - !ruby/object:Puppet::Util::Log
+      level: !ruby/sym notice
+      time: 2013-03-22 20:11:44.744173 +00:00
+      tags:
+        - notice
+        - "completed_runit::service"
+        - completed_runit
+        - service
+      message: "Would have triggered 'refresh' from 3 events"
+      source: "Runit::Service[puppetmaster/log]"
+    - !ruby/object:Puppet::Util::Log
+      level: !ruby/sym notice
+      time: 2013-03-22 20:11:44.746470 +00:00
+      tags:
+        - notice
+        - "completed_runit::service::enabled"
+        - completed_runit
+        - service
+        - enabled
+        - puppetmaster
+      message: "Would have triggered 'refresh' from 2 events"
+      source: "Runit::Service::Enabled[puppetmaster]"
+    - !ruby/object:Puppet::Util::Log
+      level: !ruby/sym notice
+      time: 2013-03-22 20:11:44.748713 +00:00
+      tags:
+        - notice
+        - "completed_runit::service"
+        - completed_runit
+        - service
+        - puppetmaster
+      message: "Would have triggered 'refresh' from 5 events"
+      source: "Runit::Service[puppetmaster]"
+    - !ruby/object:Puppet::Util::Log
+      level: !ruby/sym notice
+      time: 2013-03-22 20:11:44.751525 +00:00
+      tags:
+        - notice
+        - completed_class
+        - "evrone::role::puppet::master"
+        - evrone
+        - role
+        - puppet
+        - master
+      message: "Would have triggered 'refresh' from 11 events"
+      source: "Class[Evrone::Role::Puppet::Master]"
+    - !ruby/object:Puppet::Util::Log
+      line: 57
+      level: !ruby/sym err
+      file: /opt/provision/production/vendor/modules/nginx/manifests/init.pp
+      time: 2013-03-22 20:11:44.754369 +00:00
+      tags:
+        - err
+        - service
+        - nginx
+        - class
+        - "evrone::role::puppet::master"
+        - evrone
+        - role
+        - puppet
+        - master
+        - node
+        - default
+      message: "Could not evaluate: Could not find init script or upstart conf file for 'nginx'"
+      source: /Stage[main]/Nginx/Service[nginx]
+    - !ruby/object:Puppet::Util::Log
+      line: 57
+      level: !ruby/sym notice
+      file: /opt/provision/production/vendor/modules/nginx/manifests/init.pp
+      time: 2013-03-22 20:11:44.755103 +00:00
+      tags:
+        - notice
+        - service
+        - nginx
+        - class
+        - "evrone::role::puppet::master"
+        - evrone
+        - role
+        - puppet
+        - master
+        - node
+        - default
+      message: "Would have triggered 'refresh' from 3 events"
+      source: /Stage[main]/Nginx/Service[nginx]
+    - !ruby/object:Puppet::Util::Log
+      level: !ruby/sym notice
+      time: 2013-03-22 20:11:44.756744 +00:00
+      tags:
+        - notice
+        - completed_class
+        - nginx
+      message: "Would have triggered 'refresh' from 8 events"
+      source: Class[Nginx]
+    - !ruby/object:Puppet::Util::Log
+      level: !ruby/sym notice
+      time: 2013-03-22 20:11:44.762048 +00:00
+      tags:
+        - notice
+        - completed_stage
+        - main
+      message: "Would have triggered 'refresh' from 8 events"
+      source: Stage[main]
+    - !ruby/object:Puppet::Util::Log
+      level: !ruby/sym info
+      time: 2013-03-22 20:11:44.763653 +00:00
+      tags:
+        - info
+      message: "Creating state file /var/lib/puppet/state/state.yaml"
+      source: Puppet
+    - !ruby/object:Puppet::Util::Log
+      level: !ruby/sym notice
+      time: 2013-03-22 20:11:44.776222 +00:00
+      tags:
+        - notice
+      message: "Finished catalog run in 0.90 seconds"
+      source: Puppet
+  puppet_version: "3.1.1"
+  metrics:
+    changes: !ruby/object:Puppet::Util::Metric
+      values:
+        - - total
+          - Total
+          - 0
+      label: Changes
+      name: changes
+    time: !ruby/object:Puppet::Util::Metric
+      values:
+        - - config_retrieval
+          - "Config retrieval"
+          - 0.936393
+        - - exec
+          - Exec
+          - 0.132033
+        - - package
+          - Package
+          - 0.274741
+        - - user
+          - User
+          - 0.001905
+        - - ssh_authorized_key
+          - "Ssh authorized key"
+          - 0.001458
+        - - service
+          - Service
+          - 0.045911
+        - - total
+          - Total
+          - 1.434854
+        - - cron
+          - Cron
+          - 0.000986
+        - - group
+          - Group
+          - 0.002885
+        - - anchor
+          - Anchor
+          - 0.000577
+        - - filebucket
+          - Filebucket
+          - 0.000167
+        - - file
+          - File
+          - 0.037798
+      label: Time
+      name: time
+    resources: !ruby/object:Puppet::Util::Metric
+      values:
+        - - changed
+          - Changed
+          - 0
+        - - failed_to_restart
+          - "Failed to restart"
+          - 0
+        - - total
+          - Total
+          - 57
+        - - restarted
+          - Restarted
+          - 0
+        - - failed
+          - Failed
+          - 1
+        - - out_of_sync
+          - "Out of sync"
+          - 38
+        - - scheduled
+          - Scheduled
+          - 0
+        - - skipped
+          - Skipped
+          - 6
+      label: Resources
+      name: resources
+    events: !ruby/object:Puppet::Util::Metric
+      values:
+        - - total
+          - Total
+          - 39
+        - - noop
+          - Noop
+          - 39
+        - - failure
+          - Failure
+          - 0
+        - - success
+          - Success
+          - 0
+      label: Events
+      name: events
+  host: master.local
+  time: 2013-03-22 20:11:43.368302 +00:00
+  environment: production
+  configuration_version: 1363983102

@@ -14,6 +14,10 @@ map '/api' do
   run App::Api
 end
 
+map '/reports' do
+  run App::Reports
+end
+
 map '/' do
   run App::Home
 end

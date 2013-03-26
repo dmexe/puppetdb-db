@@ -17,5 +17,12 @@ module App
     get '/tests' do
       slim :tests
     end
+
+    post '/reports/upload' do
+      puts "====="
+      puts request.body.read
+      puts "====="
+    end
+
   end
 end
