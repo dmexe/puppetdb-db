@@ -12,10 +12,8 @@ module App
   autoload :PuppetDB, App.root.join("lib", 'puppetdb')
 end
 
-autoload :NodeReport,        App.root.join("lib", "models", "node_report")
 autoload :Node,              App.root.join("lib", "models", "node")
 autoload :Report,            App.root.join("lib", "models", "report")
-autoload :ReportStats,       App.root.join("lib", "models", "report_stats")
 autoload :ReportMonthly,     App.root.join("lib", "models", "report_monthly")
 autoload :Index,             App.root.join("lib", "models", "index")
 autoload :Storage,           App.root.join("lib", "models", "storage")

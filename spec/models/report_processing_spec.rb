@@ -29,16 +29,12 @@ describe ReportProcessing do
     its(:success) { should eq 1 }
     its(:failed)  { should eq 2 }
     its(:skipped) { should eq 54 }
-
-    its(:to_hash) { should be_key(:success) }
-    its(:to_hash) { should be_key(:failed) }
-    its(:to_hash) { should be_key(:skipped) }
   end
 
   context "#to_hash" do
     subject { processing.to_hash }
 
-    %w{ node time version duration digest events stats }.each do |k|
+    %w{ node time version duration digest events success failed skipped }.each do |k|
       it { should be_key(k.to_sym) }
     end
   end
@@ -68,11 +64,4 @@ describe ReportProcessing::Stats do
   its(:success) { should eq 1 }
   its(:failed)  { should eq 2 }
   its(:skipped) { should eq 3 }
-
-  context "#to_hash" do
-    subject { stats.to_hash }
-    %w{ success failed skipped }.each do |k|
-      it { should be_key(k.to_sym) }
-    end
-  end
 end
