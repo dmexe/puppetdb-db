@@ -24,16 +24,15 @@ class Report
       Index['reports']
     end
 
-    def get(ids)
-      ids = [ids] unless ids.is_a?(Array)
-      keys = ids.map{|i| id_to_key(i) }
+    def get(keys)
+      keys = [keys] unless keys.is_a?(Array)
       (Storage.get(keys) || []).map! do |report|
         new report
       end
     end
 
-    def first(id)
-      get([id]).first
+    def first(key)
+      get([key]).first
     end
   end
 
@@ -44,10 +43,6 @@ class Report
     attributes.each_pair do |k,v|
       self.__send__ "#{k}=", v
     end
-  end
-
-  def id
-    "#{node}:#{digest}"
   end
 
   def node=(val)
@@ -91,7 +86,7 @@ class Report
   end
 
   def valid?
-    node && digest
+    node && digest && true
   end
 
   def to_hash
@@ -103,7 +98,8 @@ class Report
       :digest   => digest,
       :success  => success,
       :failed   => failed,
-      :skipped  => skipped
+      :skipped  => skipped,
+      :events   => events
     }
   end
 
@@ -126,6 +122,4 @@ class Report
   def index
     self.class.index
   end
-
-  class Invalid < Exception ; end
 end

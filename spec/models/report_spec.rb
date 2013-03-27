@@ -21,7 +21,6 @@ describe Report do
   context "a new instance" do
     it { should be_valid }
 
-    its(:id)       { should eq 'example.com:sha' }
     its(:node)     { should eq 'example.com' }
     its(:time)     { should eq time }
     its(:version)  { should eq 123 }
@@ -40,7 +39,7 @@ describe Report do
 
     context "#to_hash" do
       subject { report.to_hash }
-      %w{ node time version duration digest success failed skipped }.each do |k|
+      %w{ node time version duration digest success failed skipped events }.each do |k|
         it { should be_key(k.to_sym) }
       end
 
@@ -86,14 +85,14 @@ describe Report do
     end
 
     context ".get" do
-      subject { Report.get [report.id] }
+      subject { Report.get [report.key] }
       before do
         Report.create attrs
       end
 
-      its(:size)      { should eq 1 }
-      its(:first)     { should be_an_instance_of(Report) }
-      its("first.id") { should eq report.id }
+      its(:size)       { should eq 1 }
+      its(:first)      { should be_an_instance_of(Report) }
+      its("first.key") { should eq report.key }
     end
   end
 end
