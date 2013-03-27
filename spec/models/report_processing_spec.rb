@@ -43,6 +43,11 @@ describe ReportProcessing do
     subject { processing.process_delayed! }
     it { should be }
   end
+
+  context "when broken report" do
+    let(:processing) { described_class.new '' }
+    its(:to_hash) { should be }
+  end
 end
 
 describe ReportProcessing::Resource do

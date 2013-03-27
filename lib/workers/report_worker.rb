@@ -5,15 +5,13 @@ class ReportWorker
 
   sidekiq_options :queue => :puppetdb_reports
 
-  def perform(hash, node_report)
-    events       = client.report hash
-    node_report  = NodeReport.create node_report, events
-    report       = Report.create events
-    report
+  def perform(body)
+    attributes = ReportProcessing.new(body).to_hash
+    report = Report.new attributes
+    report.valid? or raise InvalidReport.new(body.inspect)
+    ReportIndex.add report
+    report.save
   end
 
-  private
-    def client
-      App.puppetdb
-    end
+  class InvalidReport < Exception ; end
 end

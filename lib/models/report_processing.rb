@@ -16,7 +16,7 @@ class ReportProcessing
   end
 
   def body
-    @body ||= YAML.load sanitize(@content)
+    @body ||= (YAML.load(sanitize(@content)) || {})
   end
 
   def digest
@@ -24,12 +24,16 @@ class ReportProcessing
   end
 
   def resources
-    @resources ||= body["resource_statuses"].map do |resource, report|
-      Resource.new report["resource_type"],
-                   report["title"],
-                   report["time"],
-                   extract_message(report),
-                   extract_status(report)
+    if body["resource_statuses"] && body["resource_statuses"].respond_to?(:map)
+      @resources ||= body["resource_statuses"].map do |resource, report|
+        Resource.new report["resource_type"],
+                     report["title"],
+                     report["time"],
+                     extract_message(report),
+                     extract_status(report)
+      end
+    else
+      []
     end
   end
 
@@ -58,10 +62,12 @@ class ReportProcessing
   end
 
   def duration
-    total = body["metrics"]["time"]["values"].find do |val|
-      val[0] == "total"
+    if body["metrics"] && body["metrics"]["time"] && body["metrics"]["time"]["values"]
+      total = body["metrics"]["time"]["values"].find do |val|
+        val[0] == "total"
+      end
+      total[2]
     end
-    total[2]
   end
 
   def to_hash
