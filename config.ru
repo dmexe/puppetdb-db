@@ -14,7 +14,7 @@ map '/api' do
   run App::Api
 end
 
-map '/reports' do
+map '/reports/upload' do
   run App::Reports
 end
 

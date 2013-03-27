@@ -6,8 +6,7 @@ describe App::Reports do
     subject { last_response }
 
     before do
-      mock(ReportProcessing).new("body"){ processing }
-      mock(processing).process_delayed! { true }
+      mock(ReportWorker).perform_async('body') { true }
       post "/reports/upload", "body"
     end
 

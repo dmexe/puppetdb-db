@@ -7,14 +7,6 @@ class ReportProcessing
     @content = content
   end
 
-  def process_delayed!
-    true
-  end
-
-  def proccess!
-    true
-  end
-
   def body
     @body ||= (YAML.load(sanitize(@content)) || {})
   end
