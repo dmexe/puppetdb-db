@@ -1,40 +1,70 @@
 require 'spec_helper'
 
 describe Report do
-  let(:tm)        { (Time.now - 10).utc }
-  let(:attrs)     { report_attrs("timestamp" => tm) }
-  let(:key)       { "reports:abcd" }
-  let(:index_key) { "db:index:reports" }
-  let(:json)      { [attrs].to_json }
-  let(:report)    { Report.new [attrs] }
+  let(:time) { Time.now }
+  let(:attrs) { {
+    :node     => "example.com",
+    :time     => time,
+    :version  => 123,
+    :duration => 1.2,
+    :digest   => 'sha',
+    :success  => 1,
+    :failed   => 2,
+    :skipped  => 3,
+    :events   => [],
+  } }
+  let(:report)    { Report.new attrs }
   subject { report }
 
   cleanup_redis!
 
   context "a new instance" do
-    its(:to_json)         { should eq json }
-    its("timestamp.to_i") { should eq tm.to_i }
-    its(:key)             { should eq key }
-    its("index.key")      { should eq index_key }
-    its(:hash)            { should eq "abcd" }
-    its(:events)          { should eq [attrs] }
+    it { should be_valid }
 
-    it "should get hash from options" do
-      expect(Report.new([attrs], :hash => "xyz").hash).to eq "xyz"
-    end
+    its(:id)       { should eq 'example.com:sha' }
+    its(:node)     { should eq 'example.com' }
+    its(:time)     { should eq time }
+    its(:version)  { should eq 123 }
+    its(:duration) { should eq 1.2 }
+    its(:digest)   { should eq 'sha' }
+    its(:success)  { should eq 1 }
+    its(:failed)   { should eq 2 }
+    its(:skipped)  { should eq 3 }
+    its(:events)   { should eq [] }
 
-    it "should raise error unless hash" do
-      expect {
-        Report.new [attrs.merge("report" => nil)]
-      }.to raise_error(ArgumentError)
-    end
+    its(:to_json)  { should be }
 
     it "should build from string" do
-      expect(Report.new(json).events).to eq [attrs]
+      expect(Report.new(attrs.to_json)).to be
+    end
+
+    context "#to_hash" do
+      subject { report.to_hash }
+      %w{ node time version duration digest success failed skipped }.each do |k|
+        it { should be_key(k.to_sym) }
+      end
+
+    end
+
+    context "validation" do
+      context "#node" do
+        before do
+          report.node = ''
+        end
+        it { should_not be_valid }
+      end
+      context "#digest" do
+        before do
+          report.digest = ''
+        end
+        it { should_not be_valid }
+      end
     end
   end
 
   context "#save" do
+    let(:json) { report.to_json }
+    let(:key) { report.key }
     subject { ->{ report.save } }
 
     it "should store the index" do
@@ -52,28 +82,18 @@ describe Report do
     its("index.key") { should eq 'db:index:reports' }
 
     it ".key" do
-      expect(subject.key "xzy").to eq 'reports:xzy'
-    end
-  end
-
-  context "(find methods)" do
-    let(:tm2) { tm + 10 }
-    let(:attrs2) {
-      attrs.merge("report" => "zxy", "timestamp" => tm2.to_s)
-    }
-
-    before do
-      [attrs,attrs2].each{|i| Report.create([i]) }
+      expect(subject.key "node", 'sha').to eq 'nodes:node:reports:sha'
     end
 
     context ".get" do
-      subject { Report.get(["zxy", 'abcd']).map{|i| i.events } }
-      it { should eq [[attrs2],[attrs]] }
-    end
+      subject { Report.get [report.id] }
+      before do
+        Report.create attrs
+      end
 
-    context ".first" do
-      subject { Report.first("zxy").events }
-      it { should eq [attrs2] }
+      its(:size)      { should eq 1 }
+      its(:first)     { should be_an_instance_of(Report) }
+      its("first.id") { should eq report.id }
     end
   end
 end

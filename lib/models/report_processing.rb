@@ -19,7 +19,7 @@ class ReportProcessing
     @body ||= YAML.load sanitize(@content)
   end
 
-  def hash
+  def digest
     Digest::SHA256.hexdigest(@content)
   end
 
@@ -30,6 +30,14 @@ class ReportProcessing
                    report["time"],
                    extract_message(report),
                    extract_status(report)
+    end
+  end
+
+  def stats
+    @stats ||= begin
+      s = resources.group_by{|i| i.status }.map{|k,v| [k,v.size] }.sort
+      s = Hash[s]
+      Stats.new(s[:success], s[:failed], s[:skipped])
     end
   end
 
@@ -56,14 +64,31 @@ class ReportProcessing
     total[2]
   end
 
+  def to_hash
+    {
+      :node     => host,
+      :time     => time,
+      :version  => version,
+      :duration => duration,
+      :digest   => digest,
+      :events   => resources.map{|i| i.to_hash },
+      :success  => stats.success,
+      :failed   => stats.failed,
+      :skipped  => stats.skipped
+    }
+  end
+
+  class Stats < Struct.new(:success, :failed, :skipped)
+  end
+
   class Resource < Struct.new(:type, :title, :time,
                               :message, :status)
-    def to_json
+    def to_hash
       { :type    => type,
         :title   => title,
         :time    => time.utc,
         :message => message,
-        :status  => status }.to_json
+        :status  => status }
     end
   end
 
@@ -81,7 +106,7 @@ class ReportProcessing
       failed  = report["failed"]
 
       if changed && !failed
-        :changed
+        :success
       elsif failed
         :failed
       else
