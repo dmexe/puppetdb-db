@@ -9,11 +9,11 @@ class ReportMonthly
 
       latest(node, from).each do |report|
         next unless report
-        tm = report.start_time
+        tm = report.time
         tm = Time.utc(tm.year, tm.month, tm.day)
-        rs[tm][:success]  += report.stats.success
-        rs[tm][:failure]  += report.stats.failure
-        rs[tm][:skipped]  += report.stats.skipped
+        rs[tm][:success]  += report.success
+        rs[tm][:failed]   += report.failed
+        rs[tm][:skipped]  += report.skipped
         rs[tm][:duration] += report.duration
         rs[tm][:requests] += 1
       end
@@ -22,7 +22,7 @@ class ReportMonthly
 
     private
       def latest(node, from)
-        NodeReport.latest(:all, node, from: from)
+        ReportIndex.find_reports(:scope => :all, :node => node, :from => from)
       end
 
       def fill_data
@@ -34,7 +34,7 @@ class ReportMonthly
           tm = Time.utc(start.year, start.month, start.day)
           rs[tm] ||= {}
           rs[tm][:success]  ||= 0
-          rs[tm][:failure]  ||= 0
+          rs[tm][:failed]   ||= 0
           rs[tm][:skipped]  ||= 0
           rs[tm][:duration] ||= 0
           rs[tm][:requests] ||= 0
