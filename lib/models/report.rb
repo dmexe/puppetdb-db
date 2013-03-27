@@ -20,10 +20,6 @@ class Report
       key(*id)
     end
 
-    def index
-      Index['reports']
-    end
-
     def get(keys)
       keys = [keys] unless keys.is_a?(Array)
       (Storage.get(keys) || []).map! do |report|
@@ -86,7 +82,15 @@ class Report
   end
 
   def valid?
-    node && digest && true
+    node && digest && time && true
+  end
+
+  def success?
+    success.to_i > 0
+  end
+
+  def failed?
+    failed.to_i > 0
   end
 
   def to_hash
@@ -109,7 +113,6 @@ class Report
 
   def save
     if valid?
-      index.add time, key
       Storage[key].add self
       self
     end
@@ -117,9 +120,5 @@ class Report
 
   def key
     self.class.key node, digest
-  end
-
-  def index
-    self.class.index
   end
 end

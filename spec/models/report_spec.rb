@@ -42,7 +42,20 @@ describe Report do
       %w{ node time version duration digest success failed skipped events }.each do |k|
         it { should be_key(k.to_sym) }
       end
+    end
 
+    it "#success?" do
+      report.success = 1
+      expect(report).to be_success
+      report.success = 0
+      expect(report).to_not be_success
+    end
+
+    it "#failed?" do
+      report.failed = 1
+      expect(report).to be_failed
+      report.failed = 0
+      expect(report).to_not be_failed
     end
 
     context "validation" do
@@ -58,6 +71,12 @@ describe Report do
         end
         it { should_not be_valid }
       end
+      context "#time" do
+        before do
+          report.time = ''
+        end
+        it { should_not be_valid }
+      end
     end
   end
 
@@ -66,10 +85,6 @@ describe Report do
     let(:key) { report.key }
     subject { ->{ report.save } }
 
-    it "should store the index" do
-      should change{ Index['reports'].all }.from([]).to([key])
-    end
-
     it "should store a report" do
       should change{ Storage.first key }.from(nil).to(json)
     end
@@ -77,8 +92,6 @@ describe Report do
 
   context "(class methods)" do
     subject { Report }
-
-    its("index.key") { should eq 'db:index:reports' }
 
     it ".key" do
       expect(subject.key "node", 'sha').to eq 'nodes:node:reports:sha'

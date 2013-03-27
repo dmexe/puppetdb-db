@@ -1,5 +1,6 @@
 require 'sinatra'
 require 'pathname'
+require 'logger'
 
 module App
 
@@ -21,7 +22,7 @@ module App
 
       @redis ||= begin
         url = ENV['REDIS_URL'] || "localhost:6379/0"
-        redis = Redis.new url: "redis://#{url}"
+        redis = Redis.new url: "redis://#{url}" #, :logger => Logger.new(STDOUT)
         Redis::Namespace.new("puppetdb-db:#{env}", :redis => redis)
       end
     end

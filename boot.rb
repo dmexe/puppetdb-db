@@ -20,6 +20,7 @@ autoload :ReportMonthly,     App.root.join("lib", "models", "report_monthly")
 autoload :Index,             App.root.join("lib", "models", "index")
 autoload :Storage,           App.root.join("lib", "models", "storage")
 autoload :ReportProcessing,  App.root.join("lib", "models", "report_processing")
+autoload :ReportIndex,       App.root.join("lib", "models", "report_index")
 
 autoload :NodeReportsWorker, App.root.join("lib", "workers", "node_reports_worker")
 autoload :ReportWorker,      App.root.join("lib", "workers", "report_worker")

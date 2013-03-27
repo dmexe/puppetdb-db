@@ -25,7 +25,7 @@ class Index
     options ||= {}
     params  = {}
     from    = options[:from]  || Time.at(Time.now.to_i - i30_days)
-    to      = options[:to]    || Time.now
+    to      = options[:to]    || Time.now + 10
     order   = options[:order] || :desc
     if options[:limit]
       params[:limit] = [options[:offset] || 0, options[:limit]]
